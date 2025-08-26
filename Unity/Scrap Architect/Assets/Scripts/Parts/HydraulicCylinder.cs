@@ -64,8 +64,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для гидравлического цилиндра
             if (isCylinderActive)
             {
-                UpdateCylinderMovement();
-                UpdateCylinderVisuals();
+                ProcessCylinderLogic();
+                UpdateVisualEffects();
             }
         }
 
@@ -435,6 +435,64 @@ namespace ScrapArchitect.Parts
             Gizmos.color = Color.green;
             Vector3 currentPos = transform.position + transform.forward * cylinderExtension;
             Gizmos.DrawWireSphere(currentPos, cylinderDiameter * 0.5f);
+        }
+
+        /// <summary>
+        /// Обработка логики цилиндра
+        /// </summary>
+        private void ProcessCylinderLogic()
+        {
+            // Обработка движения цилиндра
+            if (isExtending || isRetracting)
+            {
+                float direction = isExtending ? 1f : -1f;
+                cylinderExtension += direction * cylinderSpeed * Time.deltaTime;
+                cylinderExtension = Mathf.Clamp(cylinderExtension, 0f, maxExtension);
+
+                // Проверка достижения цели
+                if ((isExtending && cylinderExtension >= targetExtension) ||
+                    (isRetracting && cylinderExtension <= targetExtension))
+                {
+                    isExtending = false;
+                    isRetracting = false;
+                    cylinderExtension = targetExtension;
+                }
+
+                // Обновление позиции штока
+                if (cylinderRod != null)
+                {
+                    Vector3 newPosition = new Vector3(0, 0, cylinderLength * 0.5f + cylinderExtension);
+                    cylinderRod.localPosition = newPosition;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обновление визуальных эффектов
+        /// </summary>
+        private void UpdateVisualEffects()
+        {
+            // Обновление системы частиц
+            if (hydraulicParticles != null)
+            {
+                var emission = hydraulicParticles.emission;
+                if (isExtending || isRetracting)
+                {
+                    emission.rateOverTime = 25f;
+                }
+                else
+                {
+                    emission.rateOverTime = 0f;
+                }
+            }
+
+            // Обновление цвета в зависимости от состояния
+            if (cylinderBody != null && cylinderRod != null)
+            {
+                Color activeColor = isCylinderActive ? Color.green : Color.gray;
+                cylinderBody.GetComponent<Renderer>().material.color = activeColor;
+                cylinderRod.GetComponent<Renderer>().material.color = activeColor;
+            }
         }
     }
 }
