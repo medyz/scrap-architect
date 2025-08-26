@@ -295,6 +295,28 @@ namespace ScrapArchitect.UI
         
         #endregion
         
+        #region Tooltip Methods
+        
+        /// <summary>
+        /// Показать информацию о детали
+        /// </summary>
+        public void ShowPartInfo(string partName, string tooltipText)
+        {
+            // TODO: Реализовать систему подсказок
+            Debug.Log($"Part Info: {partName} - {tooltipText}");
+        }
+        
+        /// <summary>
+        /// Скрыть информацию о детали
+        /// </summary>
+        public void HidePartInfo()
+        {
+            // TODO: Скрыть подсказку
+            Debug.Log("Hide part info");
+        }
+        
+        #endregion
+        
         #region Game Control Methods
         
         /// <summary>
