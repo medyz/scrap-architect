@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 namespace ScrapArchitect.Physics
@@ -47,11 +48,11 @@ namespace ScrapArchitect.Physics
         private PartAttacher partAttacher;
         
         // Events
-        public System.Action<PartController> OnPartSelected;
-        public System.Action<PartController> OnPartDeselected;
-        public System.Action<PartController, PartController> OnPartConnected;
-        public System.Action<PartController, PartController> OnPartDisconnected;
-        public System.Action<PartController> OnPartDestroyed;
+        public Action<PartController> OnPartSelected;
+        public Action<PartController> OnPartDeselected;
+        public Action<PartController, PartController> OnPartConnected;
+        public Action<PartController, PartController> OnPartDisconnected;
+        public Action<PartController> OnPartDestroyed;
         
         private void Awake()
         {
