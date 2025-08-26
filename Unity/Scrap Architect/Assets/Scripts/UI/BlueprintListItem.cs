@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.IO;
 using ScrapArchitect.System;
 
 namespace ScrapArchitect.UI
