@@ -62,10 +62,10 @@ namespace ScrapArchitect.Parts
         protected override void OnPartSpecificAction()
         {
             // Логика специфичная для лазерного резака
-            if (isLaserActive)
+            if (laserActive)
             {
-                UpdateLaserOperation();
-                UpdateLaserVisuals();
+                // Вся логика лазера уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
