@@ -436,7 +436,7 @@ namespace ScrapArchitect.Parts
                 laserLine.SetPosition(1, endPos);
                 
                 // Цвет лазера в зависимости от мощности
-                Color laserColor = Color.Lerp(Color.red, Color.orange, currentPower / laserPower);
+                Color laserColor = Color.Lerp(Color.red, new Color(1f, 0.5f, 0f), currentPower / laserPower);
                 laserLine.startColor = laserColor;
                 laserLine.endColor = laserColor;
             }
@@ -490,7 +490,7 @@ namespace ScrapArchitect.Parts
             Gizmos.DrawRay(transform.position, transform.forward * laserRange);
             
             // Отображение зоны действия
-            Gizmos.color = Color.Lerp(Color.red, Color.orange, currentPower / laserPower);
+            Gizmos.color = Color.Lerp(Color.red, new Color(1f, 0.5f, 0f), currentPower / laserPower);
             Gizmos.DrawWireSphere(transform.position, 0.1f);
         }
     }
