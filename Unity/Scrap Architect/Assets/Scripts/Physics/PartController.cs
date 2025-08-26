@@ -426,7 +426,7 @@ namespace ScrapArchitect.Physics
         /// <summary>
         /// Получение урона
         /// </summary>
-        public void TakeDamage(float damage)
+        public virtual void TakeDamage(float damage)
         {
             currentHealth -= damage;
             
