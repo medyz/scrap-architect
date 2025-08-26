@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using ScrapArchitect.Physics;
 using ScrapArchitect.Parts;
 using ScrapArchitect.Core;
@@ -42,9 +43,9 @@ namespace ScrapArchitect.Controls
         private bool isFollowingVehicle = true;
         
         // События
-        public System.Action<float> OnThrottleChanged;
-        public System.Action<float> OnSteeringChanged;
-        public System.Action<bool> OnEngineStateChanged;
+        public Action<float> OnThrottleChanged;
+        public Action<float> OnSteeringChanged;
+        public Action<bool> OnEngineStateChanged;
         
         private void Start()
         {
