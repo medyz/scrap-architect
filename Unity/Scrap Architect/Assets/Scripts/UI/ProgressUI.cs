@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using ScrapArchitect.Gameplay;
 
 namespace ScrapArchitect.UI
@@ -328,7 +329,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация прогресс-бара
         /// </summary>
-        private System.Collections.IEnumerator AnimateProgressBar(float fromValue, float toValue)
+        private IEnumerator AnimateProgressBar(float fromValue, float toValue)
         {
             float elapsed = 0f;
             
@@ -346,7 +347,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация повышения уровня
         /// </summary>
-        private System.Collections.IEnumerator AnimateLevelUp()
+        private IEnumerator AnimateLevelUp()
         {
             Color originalColor = levelText.color;
             Vector3 originalScale = levelText.transform.localScale;
