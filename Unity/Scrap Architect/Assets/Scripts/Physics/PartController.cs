@@ -257,6 +257,12 @@ namespace ScrapArchitect.Physics
                 isDragging = true;
                 rb.isKinematic = true;
                 
+                // Интеграция с PartAttacher
+                if (partAttacher != null)
+                {
+                    partAttacher.StartDragging();
+                }
+                
                 Debug.Log($"Started dragging {partName}");
             }
         }
@@ -269,6 +275,12 @@ namespace ScrapArchitect.Physics
             if (isDragging)
             {
                 isDragging = false;
+                
+                // Интеграция с PartAttacher
+                if (partAttacher != null)
+                {
+                    partAttacher.StopDragging();
+                }
                 
                 // Проверяем режим игры
                 if (Core.GameManager.Instance != null && 
@@ -460,30 +472,6 @@ namespace ScrapArchitect.Physics
         }
         
         #region Snap Points Integration
-        
-        /// <summary>
-        /// Начать перетаскивание детали
-        /// </summary>
-        public void StartDragging()
-        {
-            isDragging = true;
-            if (partAttacher != null)
-            {
-                partAttacher.StartDragging();
-            }
-        }
-        
-        /// <summary>
-        /// Остановить перетаскивание детали
-        /// </summary>
-        public void StopDragging()
-        {
-            isDragging = false;
-            if (partAttacher != null)
-            {
-                partAttacher.StopDragging();
-            }
-        }
         
         /// <summary>
         /// Обновить позицию при перетаскивании
