@@ -18,7 +18,7 @@ namespace ScrapArchitect.Parts
         public float trackWidth = 0.3f;
         public float trackLength = 1.0f;
         public float trackHeight = 0.2f;
-        public int trackSegments = 8;
+        public int trackSegmentsCount = 8;
 
         [Header("Track Materials")]
         public Material trackMaterial;
@@ -112,10 +112,10 @@ namespace ScrapArchitect.Parts
         private void CreateTrackComponents()
         {
             // Создание колес гусеницы
-            trackWheels = new WheelCollider[trackSegments];
-            trackSegments = new Transform[trackSegments];
+            trackWheels = new WheelCollider[trackSegmentsCount];
+            trackSegments = new Transform[trackSegmentsCount];
 
-            for (int i = 0; i < trackSegments; i++)
+            for (int i = 0; i < trackSegmentsCount; i++)
             {
                 // Создание колеса
                 GameObject wheelObj = new GameObject($"TrackWheel_{i}");
