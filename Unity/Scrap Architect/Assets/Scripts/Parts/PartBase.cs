@@ -72,9 +72,9 @@ namespace ScrapArchitect.Parts
             OnPartDestroyed += OnPartDestroyedHandler;
             
             // Устанавливаем материал по умолчанию
-            if (defaultMaterial != null && rend != null)
+            if (defaultMaterial != null && Renderer != null)
             {
-                rend.material = defaultMaterial;
+                Renderer.material = defaultMaterial;
             }
             
             Debug.Log($"PartBase {partName} initialized");

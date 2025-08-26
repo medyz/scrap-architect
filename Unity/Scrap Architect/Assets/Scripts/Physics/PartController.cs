@@ -47,6 +47,11 @@ namespace ScrapArchitect.Physics
         private Renderer rend;
         private PartAttacher partAttacher;
         
+        /// <summary>
+        /// Публичное свойство для доступа к рендереру
+        /// </summary>
+        public Renderer Renderer => rend;
+        
         // Events
         public Action<PartController> OnPartSelected;
         public Action<PartController> OnPartDeselected;
