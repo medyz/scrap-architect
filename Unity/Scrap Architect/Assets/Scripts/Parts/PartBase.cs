@@ -26,6 +26,15 @@ namespace ScrapArchitect.Parts
         public AudioClip disconnectSound;
         public AudioClip damageSound;
         public AudioClip destroySound;
+        public AudioClip stressSound;
+        public AudioClip breakSound;
+        public AudioClip activateSound;
+        public AudioClip deactivateSound;
+        public AudioClip useSound;
+        public AudioClip impactSound;
+        public AudioClip seatSound;
+        public AudioClip engineStartSound;
+        public AudioClip hornSound;
         
         [Header("Effects")]
         public GameObject connectEffect;
@@ -207,6 +216,37 @@ namespace ScrapArchitect.Parts
             if (defaultMaterial != null && rend != null)
             {
                 rend.material = defaultMaterial;
+            }
+        }
+
+        /// <summary>
+        /// Воспроизвести звук по имени
+        /// </summary>
+        protected void PlaySound(string soundName)
+        {
+            if (audioSource == null) return;
+
+            AudioClip clipToPlay = soundName switch
+            {
+                "connect" => connectSound,
+                "disconnect" => disconnectSound,
+                "destroy" => destroySound,
+                "damage" => damageSound,
+                "stress" => stressSound,
+                "break" => breakSound,
+                "activate" => activateSound,
+                "deactivate" => deactivateSound,
+                "use" => useSound,
+                "impact" => impactSound,
+                "seat" => seatSound,
+                "engine_start" => engineStartSound,
+                "horn" => hornSound,
+                _ => null
+            };
+
+            if (clipToPlay != null)
+            {
+                audioSource.PlayOneShot(clipToPlay);
             }
         }
         
