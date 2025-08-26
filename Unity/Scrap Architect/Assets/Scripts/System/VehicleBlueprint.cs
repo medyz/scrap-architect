@@ -400,7 +400,7 @@ namespace ScrapArchitect.System
         /// </summary>
         private PartType ParsePartType(string partTypeString)
         {
-            if (System.Enum.TryParse(partTypeString, out PartType partType))
+            if (Enum.TryParse(partTypeString, out PartType partType))
             {
                 return partType;
             }
@@ -432,7 +432,7 @@ namespace ScrapArchitect.System
                         if (snapData.ContainsKey("type"))
                         {
                             string typeString = snapData["type"].ToString();
-                            if (System.Enum.TryParse(typeString, out SnapPoint.SnapPointType snapType))
+                            if (Enum.TryParse(typeString, out SnapPoint.SnapPointType snapType))
                             {
                                 snapPoint.snapType = snapType;
                             }
@@ -482,7 +482,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("blockType"))
             {
                 string blockTypeString = partData.customProperties["blockType"].ToString();
-                if (System.Enum.TryParse(blockTypeString, out Block.BlockType blockType))
+                if (Enum.TryParse(blockTypeString, out Block.BlockType blockType))
                 {
                     block.blockType = blockType;
                 }
