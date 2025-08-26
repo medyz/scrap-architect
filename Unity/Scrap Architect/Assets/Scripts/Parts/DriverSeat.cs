@@ -63,7 +63,7 @@ namespace ScrapArchitect.Parts
             
             // Настройка физических свойств
             mass = GetMass(seatType);
-            health = GetHealth(seatType);
+            currentHealth = GetHealth(seatType);
             strength = GetStrength(seatType);
             
             // Настройка визуальных элементов
