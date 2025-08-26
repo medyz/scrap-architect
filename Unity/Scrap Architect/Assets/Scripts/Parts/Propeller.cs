@@ -53,6 +53,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для пропеллера
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для пропеллера
+            if (isPropellerActive)
+            {
+                UpdatePropellerRotation();
+                UpdatePropellerVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа пропеллера
         /// </summary>
         private void ConfigurePropellerType()

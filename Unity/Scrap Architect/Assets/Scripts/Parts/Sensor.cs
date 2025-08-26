@@ -57,6 +57,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для сенсора
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для сенсора
+            if (isSensorActive)
+            {
+                UpdateSensorReading();
+                UpdateSensorVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа датчика
         /// </summary>
         private void ConfigureSensorType()

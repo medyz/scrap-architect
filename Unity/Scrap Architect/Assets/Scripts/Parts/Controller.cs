@@ -76,6 +76,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для контроллера
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для контроллера
+            if (controllerActive && isInitialized)
+            {
+                ProcessControllerLogic();
+                UpdateControllerVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа контроллера
         /// </summary>
         private void ConfigureControllerType()

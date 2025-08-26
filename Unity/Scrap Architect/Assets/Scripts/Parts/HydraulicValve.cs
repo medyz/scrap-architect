@@ -56,6 +56,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для гидравлического клапана
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для гидравлического клапана
+            if (isValveActive)
+            {
+                UpdateValveOperation();
+                UpdateValveVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа клапана
         /// </summary>
         private void ConfigureValveType()

@@ -59,6 +59,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для сварочного аппарата
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для сварочного аппарата
+            if (isWeldingActive)
+            {
+                UpdateWeldingOperation();
+                UpdateWeldingVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа сварочного аппарата
         /// </summary>
         private void ConfigureWeldingType()

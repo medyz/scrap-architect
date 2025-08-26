@@ -60,6 +60,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для логического элемента
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для логического элемента
+            if (isGateActive)
+            {
+                ProcessLogicOperation();
+                UpdateGateVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа логического элемента
         /// </summary>
         private void ConfigureGateType()

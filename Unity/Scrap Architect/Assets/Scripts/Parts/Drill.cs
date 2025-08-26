@@ -61,6 +61,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для дрели
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для дрели
+            if (isDrillActive)
+            {
+                UpdateDrillOperation();
+                UpdateDrillVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа дрели
         /// </summary>
         private void ConfigureDrillType()

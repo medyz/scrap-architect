@@ -58,6 +58,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для реактивного двигателя
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для реактивного двигателя
+            if (isEngineActive)
+            {
+                UpdateEngineOperation();
+                UpdateEngineVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа двигателя
         /// </summary>
         private void ConfigureEngineType()

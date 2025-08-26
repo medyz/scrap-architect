@@ -51,6 +51,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для гусеницы
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для гусеницы
+            if (isTrackActive)
+            {
+                UpdateTrackMovement();
+                UpdateTrackVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа гусениц
         /// </summary>
         private void ConfigureTrackType()

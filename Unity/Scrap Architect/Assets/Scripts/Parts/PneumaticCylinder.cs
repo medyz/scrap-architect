@@ -57,6 +57,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для пневматического цилиндра
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для пневматического цилиндра
+            if (isCylinderActive)
+            {
+                UpdateCylinderMovement();
+                UpdateCylinderVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа цилиндра
         /// </summary>
         private void ConfigureCylinderType()

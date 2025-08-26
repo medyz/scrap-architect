@@ -73,6 +73,19 @@ namespace ScrapArchitect.Parts
             
             Debug.Log($"Tool initialized: {partName} (Type: {toolType})");
         }
+
+        /// <summary>
+        /// Специфичное действие для инструмента
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для инструмента
+            if (isActive)
+            {
+                UpdateToolOperation();
+                UpdateToolVisuals();
+            }
+        }
         
         private void SetupToolCapabilities()
         {

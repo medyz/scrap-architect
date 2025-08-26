@@ -57,6 +57,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для лазерного резака
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для лазерного резака
+            if (isLaserActive)
+            {
+                UpdateLaserOperation();
+                UpdateLaserVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа лазера
         /// </summary>
         private void ConfigureLaserType()

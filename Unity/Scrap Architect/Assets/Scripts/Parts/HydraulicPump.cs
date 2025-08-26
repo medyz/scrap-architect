@@ -59,6 +59,19 @@ namespace ScrapArchitect.Parts
         }
 
         /// <summary>
+        /// Специфичное действие для гидравлического насоса
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для гидравлического насоса
+            if (isPumpActive)
+            {
+                UpdatePumpOperation();
+                UpdatePumpVisuals();
+            }
+        }
+
+        /// <summary>
         /// Настройка типа насоса
         /// </summary>
         private void ConfigurePumpType()
