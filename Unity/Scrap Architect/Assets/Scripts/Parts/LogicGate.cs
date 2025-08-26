@@ -65,7 +65,7 @@ namespace ScrapArchitect.Parts
         protected override void OnPartSpecificAction()
         {
             // Логика специфичная для логического элемента
-            if (isGateActive)
+            if (gateActive)
             {
                 ProcessLogicOperation();
                 UpdateGateVisuals();
