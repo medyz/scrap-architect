@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using ScrapArchitect.Physics;
 using ScrapArchitect.Parts;
 
@@ -185,11 +185,11 @@ namespace ScrapArchitect.Gameplay
         public List<string> tags;
         
         // Events
-        public System.Action<Contract> OnContractStarted;
-        public System.Action<Contract> OnContractCompleted;
-        public System.Action<Contract> OnContractFailed;
-        public System.Action<Contract, ContractObjective> OnObjectiveCompleted;
-        public System.Action<Contract> OnContractExpired;
+        public Action<Contract> OnContractStarted;
+        public Action<Contract> OnContractCompleted;
+        public Action<Contract> OnContractFailed;
+        public Action<Contract, ContractObjective> OnObjectiveCompleted;
+        public Action<Contract> OnContractExpired;
         
         public Contract()
         {
