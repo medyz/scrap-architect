@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace ScrapArchitect.Economy
 {
@@ -32,11 +32,11 @@ namespace ScrapArchitect.Economy
         private Dictionary<string, float> activeSales = new Dictionary<string, float>();
         
         // Events
-        public System.Action<int> OnScrapChanged;
-        public System.Action<string, int> OnItemPurchased;
-        public System.Action<string> OnItemUnlocked;
-        public System.Action<string, float> OnSaleStarted;
-        public System.Action<string> OnSaleEnded;
+        public Action<int> OnScrapChanged;
+        public Action<string, int> OnItemPurchased;
+        public Action<string> OnItemUnlocked;
+        public Action<string, float> OnSaleStarted;
+        public Action<string> OnSaleEnded;
         
         private void Start()
         {
