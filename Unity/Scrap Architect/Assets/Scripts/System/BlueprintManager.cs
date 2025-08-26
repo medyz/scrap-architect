@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using ScrapArchitect.Physics;
+using ScrapArchitect.UI;
 
 namespace ScrapArchitect.System
 {
