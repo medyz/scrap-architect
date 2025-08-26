@@ -67,8 +67,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для логического элемента
             if (gateActive)
             {
-                ProcessLogicOperation();
-                UpdateGateVisuals();
+                ProcessLogic();
+                UpdateVisualIndicators();
             }
         }
 
