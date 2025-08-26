@@ -127,16 +127,21 @@ Assets/
 
 ## 📊 Статус разработки
 
-### ✅ Завершенные системы (60% Фазы 1):
+### ✅ Завершенные системы (85% Фазы 1):
 - **Core System** - GameManager, базовая архитектура
 - **Physics System** - PartController, SnapPoint, PartAttacher
 - **UI System** - UIManager, BuildModeUI, TestModeUI, ShopManager
-- **Parts System** - 25+ базовых деталей (блоки, колеса, двигатели, соединения, сиденья, инструменты)
+- **Parts System** - 62 детали (блоки, колеса, двигатели, соединения, сиденья, инструменты, гусеницы, пропеллеры, реактивные двигатели, пневматические и гидравлические системы, электронные системы, специальные инструменты)
 - **Controls System** - CameraController, PartManipulator, GameController, InputManager
 - **Level System** - TestPolygon, VehicleController
 - **Gameplay System** - Contract, ContractManager
 - **System** - VehicleBlueprint, BlueprintManager
 - **Economy System** - EconomyManager, ShopManager, ShopItem
+- **Progress System** - PlayerProgress, ProgressUI, ProgressIntegration
+- **Advanced Propulsion** - Track, Propeller, JetEngine
+- **Pneumatic & Hydraulic** - PneumaticCylinder, HydraulicPump, HydraulicCylinder, HydraulicValve
+- **Electronic Systems** - Sensor, Controller, LogicGate
+- **Special Tools** - LaserCutter, WeldingMachine, Drill
 
 ### 🚧 В разработке:
 - Система уровней игрока и прогрессии
