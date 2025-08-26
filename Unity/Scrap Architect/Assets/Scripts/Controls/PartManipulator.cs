@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using ScrapArchitect.Physics;
 using ScrapArchitect.Core;
 using System.Collections.Generic;
@@ -38,9 +39,9 @@ namespace ScrapArchitect.Controls
         private CameraController cameraController;
         
         // События
-        public System.Action<PartController> OnPartSelected;
-        public System.Action<PartController> OnPartDeselected;
-        public System.Action<PartController> OnPartDeleted;
+        public Action<PartController> OnPartSelected;
+        public Action<PartController> OnPartDeselected;
+        public Action<PartController> OnPartDeleted;
         
         private void Start()
         {
