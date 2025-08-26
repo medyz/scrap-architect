@@ -1,7 +1,7 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace ScrapArchitect.Gameplay
 {
@@ -41,12 +41,12 @@ namespace ScrapArchitect.Gameplay
         private float lastRefreshTime;
         
         // Events
-        public System.Action<Contract> OnContractAccepted;
-        public System.Action<Contract> OnContractCompleted;
-        public System.Action<Contract> OnContractFailed;
-        public System.Action<Contract, ContractObjective> OnObjectiveCompleted;
-        public System.Action<List<Contract>> OnAvailableContractsUpdated;
-        public System.Action<List<Contract>> OnActiveContractsUpdated;
+        public Action<Contract> OnContractAccepted;
+        public Action<Contract> OnContractCompleted;
+        public Action<Contract> OnContractFailed;
+        public Action<Contract, ContractObjective> OnObjectiveCompleted;
+        public Action<List<Contract>> OnAvailableContractsUpdated;
+        public Action<List<Contract>> OnActiveContractsUpdated;
         
         private void Start()
         {
