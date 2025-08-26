@@ -65,8 +65,8 @@ namespace ScrapArchitect.Parts
             
             // Настройка физических свойств
             mass = GetMass(toolType);
-            health = GetHealth(toolType);
-            strength = GetStrength(toolType);
+            currentHealth = GetHealth(toolType);
+            maxHealth = GetHealth(toolType);
             
             // Настройка возможностей инструмента
             SetupToolCapabilities();
