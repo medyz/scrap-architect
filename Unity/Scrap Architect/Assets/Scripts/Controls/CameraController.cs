@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using ScrapArchitect.Core;
 
 namespace ScrapArchitect.Controls
@@ -221,7 +222,7 @@ namespace ScrapArchitect.Controls
         /// <summary>
         /// Корутина для плавного перемещения камеры
         /// </summary>
-        private System.Collections.IEnumerator MoveToPositionCoroutine(Vector3 targetPosition, float duration)
+        private IEnumerator MoveToPositionCoroutine(Vector3 targetPosition, float duration)
         {
             Vector3 startPosition = transform.position;
             float elapsed = 0f;
