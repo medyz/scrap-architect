@@ -142,7 +142,7 @@ namespace ScrapArchitect.UI
                 
                 if (objectiveItem != null)
                 {
-                    bool isCompleted = objective.IsCompleted();
+                    bool isCompleted = objective.isCompleted;
                     objectiveItem.Initialize(objective, isCompleted);
                 }
             }

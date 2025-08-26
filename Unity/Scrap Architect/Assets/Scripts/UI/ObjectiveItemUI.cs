@@ -60,7 +60,7 @@ namespace ScrapArchitect.UI
             // Прогресс
             if (progressText != null)
             {
-                float progress = objective.GetProgress();
+                float progress = objective.currentValue;
                 float targetValue = objective.targetValue;
                 
                 if (targetValue > 1f)
@@ -76,7 +76,7 @@ namespace ScrapArchitect.UI
             // Слайдер прогресса
             if (progressSlider != null)
             {
-                progressSlider.value = objective.GetProgress() / objective.targetValue;
+                progressSlider.value = objective.GetProgressPercentage();
             }
             
             UpdateVisuals();
@@ -95,7 +95,7 @@ namespace ScrapArchitect.UI
             {
                 targetColor = completeColor;
             }
-            else if (objective.IsFailed())
+            else if (objective.isCompleted == false && objective.currentValue > 0)
             {
                 targetColor = failedColor;
             }
@@ -114,7 +114,7 @@ namespace ScrapArchitect.UI
             
             if (crossIcon != null)
             {
-                crossIcon.gameObject.SetActive(objective.IsFailed());
+                crossIcon.gameObject.SetActive(objective.isCompleted == false && objective.currentValue > 0);
             }
         }
         
@@ -125,7 +125,7 @@ namespace ScrapArchitect.UI
         {
             if (objective != null)
             {
-                isCompleted = objective.IsCompleted();
+                isCompleted = objective.isCompleted;
                 UpdateDisplay();
             }
         }
@@ -151,7 +151,7 @@ namespace ScrapArchitect.UI
         /// </summary>
         public bool IsFailed()
         {
-            return objective != null && objective.IsFailed();
+            return objective != null && objective.isCompleted == false && objective.currentValue > 0;
         }
     }
 }
