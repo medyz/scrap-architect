@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 namespace ScrapArchitect.UI
 {
@@ -94,7 +95,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация меню паузы
         /// </summary>
-        private System.Collections.IEnumerator AnimatePauseMenu()
+        private IEnumerator AnimatePauseMenu()
         {
             // Анимация заголовка
             if (pauseTitleText != null)
@@ -109,7 +110,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация заголовка
         /// </summary>
-        private System.Collections.IEnumerator AnimateTitle()
+        private IEnumerator AnimateTitle()
         {
             if (pauseTitleText == null) yield break;
             
@@ -142,7 +143,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация кнопок
         /// </summary>
-        private System.Collections.IEnumerator AnimateButtons()
+        private IEnumerator AnimateButtons()
         {
             Button[] buttons = { resumeButton, settingsButton, mainMenuButton, quitButton };
             
@@ -159,7 +160,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация кнопки
         /// </summary>
-        private System.Collections.IEnumerator AnimateButton(Button button)
+        private IEnumerator AnimateButton(Button button)
         {
             if (button == null) yield break;
             

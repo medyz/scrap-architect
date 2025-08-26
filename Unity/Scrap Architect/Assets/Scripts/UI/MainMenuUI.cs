@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 
 namespace ScrapArchitect.UI
 {
@@ -146,7 +147,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация главного меню
         /// </summary>
-        private System.Collections.IEnumerator AnimateMainMenu()
+        private IEnumerator AnimateMainMenu()
         {
             // Анимация заголовка
             if (gameTitleText != null)
@@ -164,7 +165,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация заголовка
         /// </summary>
-        private System.Collections.IEnumerator AnimateTitle()
+        private IEnumerator AnimateTitle()
         {
             if (gameTitleText == null) yield break;
             
@@ -196,7 +197,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация кнопок
         /// </summary>
-        private System.Collections.IEnumerator AnimateButtons()
+        private IEnumerator AnimateButtons()
         {
             Button[] buttons = { playButton, settingsButton, creditsButton, quitButton };
             
@@ -213,7 +214,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация кнопки
         /// </summary>
-        private System.Collections.IEnumerator AnimateButton(Button button)
+        private IEnumerator AnimateButton(Button button)
         {
             if (button == null) yield break;
             
@@ -248,7 +249,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация декоративных элементов
         /// </summary>
-        private System.Collections.IEnumerator AnimateDecorations()
+        private IEnumerator AnimateDecorations()
         {
             if (decorativeElements == null) yield break;
             
@@ -264,7 +265,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация декоративного элемента
         /// </summary>
-        private System.Collections.IEnumerator AnimateDecoration(GameObject element)
+        private IEnumerator AnimateDecoration(GameObject element)
         {
             if (element == null) yield break;
             

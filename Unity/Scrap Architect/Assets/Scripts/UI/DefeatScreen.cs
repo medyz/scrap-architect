@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using ScrapArchitect.Gameplay;
 
 namespace ScrapArchitect.UI
@@ -150,7 +151,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация поражения
         /// </summary>
-        private System.Collections.IEnumerator AnimateFailure()
+        private IEnumerator AnimateFailure()
         {
             yield return new WaitForSecondsRealtime(failureAnimationDelay);
             
@@ -170,7 +171,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация текста поражения
         /// </summary>
-        private System.Collections.IEnumerator AnimateFailureText(TextMeshProUGUI text)
+        private IEnumerator AnimateFailureText(TextMeshProUGUI text)
         {
             if (text == null) yield break;
             

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using ScrapArchitect.Gameplay;
 
 namespace ScrapArchitect.UI
@@ -178,7 +179,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация наград
         /// </summary>
-        private System.Collections.IEnumerator AnimateRewards()
+        private IEnumerator AnimateRewards()
         {
             yield return new WaitForSecondsRealtime(rewardAnimationDelay);
             
@@ -201,7 +202,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация текста награды
         /// </summary>
-        private System.Collections.IEnumerator AnimateRewardText(TextMeshProUGUI rewardText)
+        private IEnumerator AnimateRewardText(TextMeshProUGUI rewardText)
         {
             if (rewardText == null) yield break;
             
@@ -233,7 +234,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация иконок наград
         /// </summary>
-        private System.Collections.IEnumerator AnimateRewardIcons()
+        private IEnumerator AnimateRewardIcons()
         {
             if (rewardIcons == null) yield break;
             
@@ -250,7 +251,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Анимация иконки награды
         /// </summary>
-        private System.Collections.IEnumerator AnimateRewardIcon(GameObject icon)
+        private IEnumerator AnimateRewardIcon(GameObject icon)
         {
             if (icon == null) yield break;
             
