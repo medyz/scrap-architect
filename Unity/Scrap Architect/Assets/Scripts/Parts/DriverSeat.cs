@@ -315,7 +315,7 @@ namespace ScrapArchitect.Parts
             }
             
             Motor[] newMotors = new Motor[connectedMotors.Length + 1];
-            System.Array.Copy(connectedMotors, newMotors, connectedMotors.Length);
+            Array.Copy(connectedMotors, newMotors, connectedMotors.Length);
             newMotors[connectedMotors.Length] = motor;
             connectedMotors = newMotors;
             
@@ -334,8 +334,8 @@ namespace ScrapArchitect.Parts
                 if (connectedMotors[i] == motor)
                 {
                     Motor[] newMotors = new Motor[connectedMotors.Length - 1];
-                    System.Array.Copy(connectedMotors, 0, newMotors, 0, i);
-                    System.Array.Copy(connectedMotors, i + 1, newMotors, i, connectedMotors.Length - i - 1);
+                    Array.Copy(connectedMotors, 0, newMotors, 0, i);
+                    Array.Copy(connectedMotors, i + 1, newMotors, i, connectedMotors.Length - i - 1);
                     connectedMotors = newMotors;
                     break;
                 }
@@ -352,7 +352,7 @@ namespace ScrapArchitect.Parts
             }
             
             Wheel[] newWheels = new Wheel[connectedWheels.Length + 1];
-            System.Array.Copy(connectedWheels, newWheels, connectedWheels.Length);
+            Array.Copy(connectedWheels, newWheels, connectedWheels.Length);
             newWheels[connectedWheels.Length] = wheel;
             connectedWheels = newWheels;
             
@@ -371,8 +371,8 @@ namespace ScrapArchitect.Parts
                 if (connectedWheels[i] == wheel)
                 {
                     Wheel[] newWheels = new Wheel[connectedWheels.Length - 1];
-                    System.Array.Copy(connectedWheels, 0, newWheels, 0, i);
-                    System.Array.Copy(connectedWheels, i + 1, newWheels, i, connectedWheels.Length - i - 1);
+                    Array.Copy(connectedWheels, 0, newWheels, 0, i);
+                    Array.Copy(connectedWheels, i + 1, newWheels, i, connectedWheels.Length - i - 1);
                     connectedWheels = newWheels;
                     break;
                 }
