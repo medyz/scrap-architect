@@ -81,7 +81,7 @@ namespace ScrapArchitect.Gameplay
 
             // Обновить статистику
             playerProgress.UpdateStats("ContractsCompleted");
-            playerProgress.UpdateStats("ScrapEarned", contract.reward.scrapAmount);
+            playerProgress.UpdateStats("ScrapEarned", contract.reward.scrapReward);
 
             // Проверить достижения
             CheckContractAchievements();

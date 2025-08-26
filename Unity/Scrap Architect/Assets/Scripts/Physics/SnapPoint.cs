@@ -126,10 +126,7 @@ namespace ScrapArchitect.Physics
             PlaySnapSound();
             
             // Уведомить родительские детали о соединении
-            if (parentPart != null && otherSnapPoint.parentPart != null)
-            {
-                parentPart.OnConnect(otherSnapPoint.parentPart);
-            }
+            // TODO: Добавить события соединения в PartController
             
             Debug.Log($"Snap points connected: {parentPart?.partName} -> {otherSnapPoint.parentPart?.partName}");
             return true;
@@ -147,10 +144,7 @@ namespace ScrapArchitect.Physics
             connectedSnapPoint.isOccupied = false;
             
             // Уведомить родительские детали о разъединении
-            if (parentPart != null && connectedSnapPoint.parentPart != null)
-            {
-                parentPart.OnDisconnect(connectedSnapPoint.parentPart);
-            }
+            // TODO: Добавить события разъединения в PartController
             
             // Воспроизвести звук отвязки
             PlayUnsnapSound();

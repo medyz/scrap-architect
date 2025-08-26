@@ -136,7 +136,7 @@ namespace ScrapArchitect.Gameplay
         /// </summary>
         private ContractType GetRandomContractType()
         {
-            ContractType[] types = (ContractType[])System.Enum.GetValues(typeof(ContractType));
+            ContractType[] types = (ContractType[])Enum.GetValues(typeof(ContractType));
             return types[UnityEngine.Random.Range(0, types.Length)];
         }
         

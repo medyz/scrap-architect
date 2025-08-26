@@ -13,7 +13,7 @@ namespace ScrapArchitect.Parts
         public float drillSpeed = 1000f;
         public float drillTorque = 50f;
         public float drillRange = 1f;
-        public bool drillActive = false;
+        public bool isDrillActive = false;
 
         [Header("Drill Physics")]
         public LayerMask drillableLayers = -1;

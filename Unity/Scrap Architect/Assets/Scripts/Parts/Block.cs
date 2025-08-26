@@ -1,4 +1,5 @@
 using UnityEngine;
+using ScrapArchitect.Physics;
 
 namespace ScrapArchitect.Parts
 {
@@ -17,8 +18,11 @@ namespace ScrapArchitect.Parts
         public Color metalColor = new Color(0.7f, 0.7f, 0.7f);
         public Color plasticColor = new Color(0.2f, 0.6f, 0.8f);
         
+        private Renderer rend;
+        
         private void Start()
         {
+            rend = GetComponent<Renderer>();
             InitializeBlock();
         }
         

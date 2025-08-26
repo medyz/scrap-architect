@@ -55,7 +55,7 @@ namespace ScrapArchitect.Parts
             
             // Настройка физических свойств
             mass = GetMass(connectionType);
-            health = GetHealth(connectionType);
+            currentHealth = GetHealth(connectionType);
             strength = GetStrength(connectionType);
             
             Debug.Log($"Connection initialized: {partName} (Type: {connectionType})");

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using ScrapArchitect.Physics;
 using ScrapArchitect.Core;
+using ScrapArchitect.Parts;
 using System.Collections.Generic;
 
 namespace ScrapArchitect.Controls
@@ -321,7 +322,7 @@ namespace ScrapArchitect.Controls
                 return;
             
             // Ищем ближайшие детали для соединения
-            Collider[] nearbyColliders = Physics.OverlapSphere(selectedPart.transform.position, snapDistance);
+            Collider[] nearbyColliders = UnityEngine.Physics.OverlapSphere(selectedPart.transform.position, snapDistance);
             
             foreach (var collider in nearbyColliders)
             {

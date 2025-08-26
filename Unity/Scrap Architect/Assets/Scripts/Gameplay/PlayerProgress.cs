@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using ScrapArchitect.Economy;
 
 namespace ScrapArchitect.Gameplay
 {

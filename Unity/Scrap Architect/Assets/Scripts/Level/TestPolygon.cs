@@ -206,10 +206,10 @@ namespace ScrapArchitect.Level
         /// </summary>
         private void CreateRandomObstacle()
         {
-            float x = Random.Range(-polygonSize.x/3, polygonSize.x/3);
-            float z = Random.Range(-polygonSize.z/3, polygonSize.z/3);
-            float height = Random.Range(1f, 3f);
-            float width = Random.Range(1f, 3f);
+            float x = UnityEngine.Random.Range(-polygonSize.x/3, polygonSize.x/3);
+            float z = UnityEngine.Random.Range(-polygonSize.z/3, polygonSize.z/3);
+            float height = UnityEngine.Random.Range(1f, 3f);
+            float width = UnityEngine.Random.Range(1f, 3f);
             
             GameObject obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
             obstacle.name = $"Obstacle_{obstacles.Count}";
