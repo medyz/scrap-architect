@@ -308,6 +308,23 @@ namespace ScrapArchitect.Controls
         }
         
         /// <summary>
+        /// Установить цель для следования камеры
+        /// </summary>
+        public void SetFollowVehicle(GameObject vehicle)
+        {
+            if (vehicle != null)
+            {
+                vehicleCenter = vehicle.transform;
+                SetFollowVehicle(true);
+            }
+            else
+            {
+                vehicleCenter = null;
+                SetFollowVehicle(false);
+            }
+        }
+        
+        /// <summary>
         /// Обработчик выбора детали
         /// </summary>
         private void OnPartSelected(PartController part)
