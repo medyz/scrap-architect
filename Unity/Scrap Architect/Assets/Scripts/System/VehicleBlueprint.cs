@@ -151,8 +151,8 @@ namespace ScrapArchitect.System
                     if (wheel != null)
                     {
                         partData.customProperties["wheelType"] = wheel.wheelType.ToString();
-                        partData.customProperties["radius"] = wheel.radius;
-                        partData.customProperties["width"] = wheel.width;
+                        partData.customProperties["radius"] = wheel.wheelRadius;
+                        partData.customProperties["width"] = wheel.wheelWidth;
                     }
                     break;
                     
