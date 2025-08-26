@@ -289,7 +289,17 @@ namespace ScrapArchitect.Parts
             {
                 if (motor != null)
                 {
-                    motor.SetGear(gear);
+                    // Применяем мощность к колесам в зависимости от передачи
+                    float throttle = gear switch
+                    {
+                        1 => 0.2f,  // Первая передача - низкая мощность
+                        2 => 0.4f,  // Вторая передача
+                        3 => 0.6f,  // Третья передача
+                        4 => 0.8f,  // Четвертая передача
+                        5 => 1.0f,  // Пятая передача - полная мощность
+                        _ => 0.0f   // Нейтраль
+                    };
+                    motor.ApplyPowerToWheels(throttle);
                 }
             }
             
