@@ -62,7 +62,7 @@ namespace ScrapArchitect.Parts
         protected override void OnPartSpecificAction()
         {
             // Логика специфичная для сенсора
-            if (isSensorActive)
+            if (sensorActive)
             {
                 UpdateSensorReading();
                 UpdateSensorVisuals();
