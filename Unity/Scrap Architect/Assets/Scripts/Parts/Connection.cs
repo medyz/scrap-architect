@@ -283,8 +283,8 @@ namespace ScrapArchitect.Parts
             // Уничтожить соединение
             DestroyJoint();
             
-            // Уведомить о поломке
-            OnPartDamaged(health);
+            // Уведомить о поломке через базовый метод
+            TakeDamage(health);
         }
         
         public void ToggleMotor(bool enabled)
