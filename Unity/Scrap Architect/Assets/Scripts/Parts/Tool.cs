@@ -27,7 +27,7 @@ namespace ScrapArchitect.Parts
         public GameObject impactEffect;
         public Material normalMaterial;
         public Material activeMaterial;
-        public Material damagedMaterial;
+        public new Material damagedMaterial;
         
         [Header("Audio Settings")]
         public AudioClip activateSound;
