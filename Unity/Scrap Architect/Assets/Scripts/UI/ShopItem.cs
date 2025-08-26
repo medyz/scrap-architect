@@ -337,7 +337,7 @@ namespace ScrapArchitect.UI
                      itemID.Contains("Drill") || itemID.Contains("Welder") || itemID.Contains("Magnet") ||
                      itemID.Contains("Vacuum") || itemID.Contains("Sprayer"))
             {
-                return Color.orange;
+                return new Color(1f, 0.5f, 0f); // Orange
             }
             
             return Color.white;
