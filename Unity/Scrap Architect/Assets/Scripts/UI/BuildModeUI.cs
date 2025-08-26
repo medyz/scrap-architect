@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using ScrapArchitect.Core;
 using ScrapArchitect.Parts;
+using ScrapArchitect.Physics;
 
 namespace ScrapArchitect.UI
 {
