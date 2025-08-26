@@ -516,7 +516,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("motorType"))
             {
                 string motorTypeString = partData.customProperties["motorType"].ToString();
-                if (Enum.TryParse(motorTypeString, out Motor.MotorType motorType))
+                if (Enum.TryParse(motorTypeString, out MotorType motorType))
                 {
                     motor.motorType = motorType;
                 }
@@ -533,7 +533,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("seatType"))
             {
                 string seatTypeString = partData.customProperties["seatType"].ToString();
-                if (Enum.TryParse(seatTypeString, out DriverSeat.SeatType seatType))
+                if (Enum.TryParse(seatTypeString, out SeatType seatType))
                 {
                     seat.seatType = seatType;
                 }
@@ -550,7 +550,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("toolType"))
             {
                 string toolTypeString = partData.customProperties["toolType"].ToString();
-                if (Enum.TryParse(toolTypeString, out Tool.ToolType toolType))
+                if (Enum.TryParse(toolTypeString, out ToolType toolType))
                 {
                     tool.toolType = toolType;
                 }
