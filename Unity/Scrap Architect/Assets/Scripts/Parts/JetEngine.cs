@@ -65,8 +65,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для реактивного двигателя
             if (isEngineActive)
             {
-                UpdateEngineOperation();
-                UpdateEngineVisuals();
+                // Вся логика двигателя уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
