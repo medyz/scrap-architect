@@ -82,8 +82,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для инструмента
             if (isActive)
             {
-                UpdateToolOperation();
-                UpdateToolVisuals();
+                // Логика инструмента обрабатывается в методах Activate(), Deactivate() и Use()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
         
