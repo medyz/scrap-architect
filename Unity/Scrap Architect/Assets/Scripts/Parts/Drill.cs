@@ -570,7 +570,7 @@ namespace ScrapArchitect.Parts
 
         private void OnDrawGizmosSelected()
         {
-            if (!drillActive) return;
+            if (!isDrillActive) return;
 
             // Отображение направления сверления в редакторе
             Gizmos.color = Color.gray;
