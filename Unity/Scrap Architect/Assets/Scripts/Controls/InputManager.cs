@@ -376,7 +376,7 @@ namespace ScrapArchitect.Controls
         /// </summary>
         private void TakeScreenshot()
         {
-            string fileName = $"Screenshot_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png";
+            string fileName = $"Screenshot_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png";
             ScreenCapture.CaptureScreenshotAsTexture();
             
             Debug.Log($"Screenshot saved: {fileName}");

@@ -28,6 +28,7 @@ namespace ScrapArchitect.Parts
         private WheelCollider[] trackWheels;
         private Transform[] trackSegments;
         private bool isTrackActive = false;
+        private ParticleSystem trackParticles;
 
         public enum TrackType
         {
@@ -58,8 +59,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для гусеницы
             if (isTrackActive)
             {
-                UpdateTrackMovement();
-                UpdateTrackVisuals();
+                ProcessTrackMovement();
+                UpdateTrackVisualIndicators();
             }
         }
 
@@ -334,6 +335,64 @@ namespace ScrapArchitect.Parts
                         DestroyImmediate(wheel.gameObject);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Обработка движения гусеницы
+        /// </summary>
+        private void ProcessTrackMovement()
+        {
+            if (trackWheels == null || !isTrackActive) return;
+
+            // Обновление движения колес гусеницы
+            for (int i = 0; i < trackWheels.Length; i++)
+            {
+                if (trackWheels[i] != null)
+                {
+                    // Применение крутящего момента к колесам
+                    trackWheels[i].motorTorque = trackTorque * (isTrackActive ? 1f : 0f);
+                    
+                    // Обновление визуальных сегментов гусеницы
+                    if (trackSegments != null && i < trackSegments.Length && trackSegments[i] != null)
+                    {
+                        // Вращение сегмента гусеницы
+                        trackSegments[i].Rotate(Vector3.forward, trackWheels[i].rpm * 6f * Time.deltaTime);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обновление визуальных индикаторов гусеницы
+        /// </summary>
+        private void UpdateTrackVisualIndicators()
+        {
+            if (!isTrackActive) return;
+
+            // Обновление цвета сегментов гусеницы в зависимости от состояния
+            if (trackSegments != null)
+            {
+                Color trackColor = isTrackActive ? Color.green : Color.gray;
+                
+                for (int i = 0; i < trackSegments.Length; i++)
+                {
+                    if (trackSegments[i] != null)
+                    {
+                        Renderer segmentRenderer = trackSegments[i].GetComponent<Renderer>();
+                        if (segmentRenderer != null)
+                        {
+                            segmentRenderer.material.color = trackColor;
+                        }
+                    }
+                }
+            }
+
+            // Обновление системы частиц (если есть)
+            if (trackParticles != null)
+            {
+                var emission = trackParticles.emission;
+                emission.rateOverTime = isTrackActive ? 10f : 0f;
             }
         }
     }

@@ -27,6 +27,9 @@ namespace ScrapArchitect.Parts
         public GameObject stressEffect;
         public GameObject breakEffect;
         
+        [Header("Physical Properties")]
+        public float strength = 100f;
+        
         private Joint joint;
         private bool isStressed = false;
         private bool isBroken = false;

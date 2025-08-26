@@ -83,8 +83,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для контроллера
             if (controllerActive && isInitialized)
             {
-                ProcessControllerLogic();
-                UpdateControllerVisuals();
+                ProcessLogic();
+                UpdateVisualIndicators();
             }
         }
 

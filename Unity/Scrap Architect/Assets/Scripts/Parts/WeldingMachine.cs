@@ -64,10 +64,10 @@ namespace ScrapArchitect.Parts
         protected override void OnPartSpecificAction()
         {
             // Логика специфичная для сварочного аппарата
-            if (isWeldingActive)
+            if (weldingActive)
             {
-                UpdateWeldingOperation();
-                UpdateWeldingVisuals();
+                UpdateWeldingProcess();
+                UpdateVisualEffects();
             }
         }
 
@@ -431,7 +431,7 @@ namespace ScrapArchitect.Parts
             if (currentPower > 0f)
             {
                 // Проверка попадания сварочной дуги
-                if (Physics.Raycast(transform.position, transform.forward, out weldingHit, weldingRange, weldableLayers))
+                if (UnityEngine.Physics.Raycast(transform.position, transform.forward, out weldingHit, weldingRange, weldableLayers))
                 {
                     if (!isWelding)
                     {

@@ -26,9 +26,9 @@ namespace ScrapArchitect.UI
         [Header("Visual Settings")]
         public Color easyColor = Color.green;
         public Color mediumColor = Color.yellow;
-        public Color hardColor = Color.orange;
+        public Color hardColor = new Color(1f, 0.5f, 0f); // Orange
         public Color expertColor = Color.red;
-        public Color masterColor = Color.purple;
+        public Color masterColor = Color.magenta;
         
         public Color normalColor = Color.white;
         public Color selectedColor = Color.cyan;

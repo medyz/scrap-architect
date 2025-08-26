@@ -369,7 +369,7 @@ namespace ScrapArchitect.Level
         private void UpdateScore()
         {
             // Базовый счет за время
-            float timeScore = Mathf.Max(0, timeLimit - currentTime) * timeMultiplier;
+            float timeScore = Mathf.Max(0, timeLimit - currentTime) * speedMultiplier;
             
             // Счет за расстояние
             float distanceScore = CalculateDistanceScore();
