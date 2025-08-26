@@ -60,8 +60,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для пропеллера
             if (isPropellerActive)
             {
-                UpdatePropellerRotation();
-                UpdatePropellerVisuals();
+                // Вся логика пропеллера уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
