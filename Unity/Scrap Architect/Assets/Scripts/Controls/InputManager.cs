@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using ScrapArchitect.Core;
 using ScrapArchitect.UI;
 
@@ -36,11 +37,11 @@ namespace ScrapArchitect.Controls
         private bool isUIVisible = true;
         
         // События
-        public System.Action OnPauseToggle;
-        public System.Action OnBuildModeToggle;
-        public System.Action OnTestModeToggle;
-        public System.Action OnSandboxModeToggle;
-        public System.Action OnMainMenuRequest;
+        public Action OnPauseToggle;
+        public Action OnBuildModeToggle;
+        public Action OnTestModeToggle;
+        public Action OnSandboxModeToggle;
+        public Action OnMainMenuRequest;
         
         private void Start()
         {
