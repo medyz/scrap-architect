@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 namespace ScrapArchitect.UI
 {
@@ -29,7 +30,7 @@ namespace ScrapArchitect.UI
         private bool isSelected = false;
         
         // Events
-        public System.Action<PartData> OnPartSelected;
+        public Action<PartData> OnPartSelected;
         
         private void Awake()
         {
