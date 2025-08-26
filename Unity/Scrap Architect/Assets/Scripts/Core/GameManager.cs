@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace ScrapArchitect.Core
 {
@@ -25,9 +26,9 @@ namespace ScrapArchitect.Core
         public static GameManager Instance { get; private set; }
         
         // Events
-        public System.Action<GameState> OnGameStateChanged;
-        public System.Action<GameMode> OnGameModeChanged;
-        public System.Action<bool> OnPauseChanged;
+        public Action<GameState> OnGameStateChanged;
+        public Action<GameMode> OnGameModeChanged;
+        public Action<bool> OnPauseChanged;
         
         private void Awake()
         {
