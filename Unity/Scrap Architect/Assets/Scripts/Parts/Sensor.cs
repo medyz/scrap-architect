@@ -430,7 +430,7 @@ namespace ScrapArchitect.Parts
         /// </summary>
         private void UpdateDistanceSensor()
         {
-            if (Physics.Raycast(transform.position, transform.forward, out sensorHit, sensorRange, sensorLayerMask))
+            if (UnityEngine.Physics.Raycast(transform.position, transform.forward, out sensorHit, sensorRange, sensorLayerMask))
             {
                 sensorValue = sensorHit.distance;
                 sensorTriggered = true;
@@ -447,7 +447,7 @@ namespace ScrapArchitect.Parts
         /// </summary>
         private void UpdateProximitySensor()
         {
-            if (Physics.Raycast(transform.position, transform.forward, out sensorHit, sensorRange, sensorLayerMask))
+            if (UnityEngine.Physics.Raycast(transform.position, transform.forward, out sensorHit, sensorRange, sensorLayerMask))
             {
                 sensorValue = sensorHit.distance;
                 sensorTriggered = sensorValue <= sensorRange * 0.5f;
@@ -465,7 +465,7 @@ namespace ScrapArchitect.Parts
         private void UpdatePressureSensor()
         {
             // Симуляция давления на основе близости объектов
-            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, sensorRange, sensorLayerMask);
+            Collider[] nearbyColliders = UnityEngine.Physics.OverlapSphere(transform.position, sensorRange, sensorLayerMask);
             float pressure = 0f;
             
             foreach (Collider col in nearbyColliders)
@@ -511,7 +511,7 @@ namespace ScrapArchitect.Parts
         private void UpdateMotionSensor()
         {
             // Симуляция движения на основе близости движущихся объектов
-            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, sensorRange, sensorLayerMask);
+            Collider[] nearbyColliders = UnityEngine.Physics.OverlapSphere(transform.position, sensorRange, sensorLayerMask);
             bool motionDetected = false;
             
             foreach (Collider col in nearbyColliders)
