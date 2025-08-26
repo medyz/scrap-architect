@@ -468,7 +468,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость контроллера
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return controllerType switch
             {
@@ -483,7 +483,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес контроллера
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return controllerType switch
             {

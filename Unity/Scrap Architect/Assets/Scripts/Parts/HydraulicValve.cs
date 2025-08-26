@@ -341,7 +341,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость клапана
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return valveType switch
             {
@@ -356,7 +356,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес клапана
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return valveType switch
             {

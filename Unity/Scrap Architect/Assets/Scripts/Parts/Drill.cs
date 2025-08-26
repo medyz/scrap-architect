@@ -356,7 +356,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость дрели
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return drillType switch
             {
@@ -371,7 +371,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес дрели
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return drillType switch
             {

@@ -345,7 +345,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость насоса
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return pumpType switch
             {
@@ -360,7 +360,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес насоса
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return pumpType switch
             {

@@ -350,7 +350,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость сварочного аппарата
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return weldingType switch
             {
@@ -365,7 +365,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес сварочного аппарата
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return weldingType switch
             {

@@ -406,7 +406,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость логического элемента
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return gateType switch
             {
@@ -425,7 +425,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес логического элемента
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return gateType switch
             {

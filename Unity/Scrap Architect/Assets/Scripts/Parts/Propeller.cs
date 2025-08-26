@@ -271,7 +271,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость пропеллера
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return propellerType switch
             {
@@ -286,7 +286,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес пропеллера
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return propellerType switch
             {

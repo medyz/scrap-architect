@@ -341,7 +341,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость цилиндра
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return cylinderType switch
             {
@@ -356,7 +356,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес цилиндра
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return cylinderType switch
             {

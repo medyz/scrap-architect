@@ -317,7 +317,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость двигателя
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return engineType switch
             {
@@ -332,7 +332,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес двигателя
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return engineType switch
             {

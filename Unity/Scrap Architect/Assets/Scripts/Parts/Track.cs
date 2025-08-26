@@ -282,7 +282,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость гусениц
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return trackType switch
             {
@@ -297,7 +297,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес гусениц
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return trackType switch
             {

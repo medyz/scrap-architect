@@ -322,7 +322,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить стоимость датчика
         /// </summary>
-        public override int GetPartCost()
+        public int GetPartCost()
         {
             return sensorType switch
             {
@@ -339,7 +339,7 @@ namespace ScrapArchitect.Parts
         /// <summary>
         /// Получить вес датчика
         /// </summary>
-        public override float GetPartWeight()
+        public float GetPartWeight()
         {
             return sensorType switch
             {
