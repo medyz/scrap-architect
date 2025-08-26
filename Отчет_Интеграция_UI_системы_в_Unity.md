@@ -29,13 +29,13 @@
 ## План интеграции в Unity
 
 ### 1. Настройка базовой структуры
-- [ ] Создать Canvas (Screen Space - Overlay)
-- [ ] Добавить EventSystem
-- [ ] Настроить UIManager GameObject
-- [ ] Создать папки для организации UI элементов
+- [x] Создать Canvas (Screen Space - Overlay)
+- [x] Добавить EventSystem
+- [x] Настроить UIManager GameObject
+- [x] Создать папки для организации UI элементов
 
 ### 2. Создание префабов UI панелей
-- [ ] MainMenuUI префаб
+- [x] MainMenuUI префаб
 - [ ] ContractSelectionUI префаб
 - [ ] GameplayUI префаб
 - [ ] VictoryScreen префаб
@@ -94,4 +94,4 @@
 ---
 **Дата начала:** Текущая дата  
 **Статус:** В процессе  
-**Прогресс:** 0% (0/6 этапов)
+**Прогресс:** 17% (1/6 этапов)
