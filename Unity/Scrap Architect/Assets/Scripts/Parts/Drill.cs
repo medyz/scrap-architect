@@ -68,8 +68,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для дрели
             if (isDrillActive)
             {
-                UpdateDrillOperation();
-                UpdateDrillVisuals();
+                UpdateDrillingProcess();
+                UpdateVisualEffects();
             }
         }
 
