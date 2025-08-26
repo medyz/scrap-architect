@@ -64,8 +64,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для пневматического цилиндра
             if (isCylinderActive)
             {
-                UpdateCylinderMovement();
-                UpdateCylinderVisuals();
+                // Вся логика цилиндра уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
