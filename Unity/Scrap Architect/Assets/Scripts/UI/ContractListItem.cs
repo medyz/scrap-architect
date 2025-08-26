@@ -32,7 +32,7 @@ namespace ScrapArchitect.UI
         
         public Color normalColor = Color.white;
         public Color selectedColor = Color.cyan;
-        public Color hoverColor = Color.lightBlue;
+        public Color hoverColor = new Color(0.5f, 0.8f, 1f); // Light blue
         
         [Header("Audio Settings")]
         public AudioClip buttonClickSound;
