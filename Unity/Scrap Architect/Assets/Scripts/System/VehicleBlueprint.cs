@@ -499,7 +499,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("wheelType"))
             {
                 string wheelTypeString = partData.customProperties["wheelType"].ToString();
-                if (Enum.TryParse(wheelTypeString, out Wheel.WheelType wheelType))
+                if (Enum.TryParse(wheelTypeString, out WheelType wheelType))
                 {
                     wheel.wheelType = wheelType;
                 }
