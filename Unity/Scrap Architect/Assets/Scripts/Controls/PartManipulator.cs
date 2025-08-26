@@ -174,7 +174,7 @@ namespace ScrapArchitect.Controls
             Ray ray = cameraController.GetScreenRay(Input.mousePosition);
             RaycastHit hit;
             
-            if (Physics.Raycast(ray, out hit, 100f, selectableLayers))
+            if (UnityEngine.Physics.Raycast(ray, out hit, 100f, selectableLayers))
             {
                 return hit.collider.GetComponent<PartController>();
             }
