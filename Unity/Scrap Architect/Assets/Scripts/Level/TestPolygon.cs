@@ -530,7 +530,7 @@ namespace ScrapArchitect.Level
     /// <summary>
     /// Цель тестирования
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class TestGoal
     {
         public GoalType goalType;

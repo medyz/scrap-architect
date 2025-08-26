@@ -571,7 +571,7 @@ namespace ScrapArchitect.Physics
     /// <summary>
     /// Точка соединения
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ConnectionPoint
     {
         public int id;

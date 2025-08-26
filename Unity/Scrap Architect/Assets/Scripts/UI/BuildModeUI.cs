@@ -424,7 +424,7 @@ namespace ScrapArchitect.UI
     /// <summary>
     /// Данные детали для UI
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class PartData
     {
         public string partName;

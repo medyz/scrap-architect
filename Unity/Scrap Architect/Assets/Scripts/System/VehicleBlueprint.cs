@@ -9,7 +9,7 @@ namespace ScrapArchitect.System
     /// <summary>
     /// Структура данных для сохранения информации о детали
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class PartData
     {
         public string partID;
@@ -31,7 +31,7 @@ namespace ScrapArchitect.System
     /// <summary>
     /// Структура данных для сохранения соединений между деталями
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ConnectionData
     {
         public int part1Index;
@@ -50,7 +50,7 @@ namespace ScrapArchitect.System
     /// <summary>
     /// Основной класс для сохранения и загрузки конструкций
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class VehicleBlueprint
     {
         [Header("Blueprint Info")]

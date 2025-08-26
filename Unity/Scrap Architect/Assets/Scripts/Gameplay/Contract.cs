@@ -48,7 +48,7 @@ namespace ScrapArchitect.Gameplay
     /// <summary>
     /// Цель контракта
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ContractObjective
     {
         public string objectiveID;
@@ -115,7 +115,7 @@ namespace ScrapArchitect.Gameplay
     /// <summary>
     /// Награда за контракт
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ContractReward
     {
         public int scrapReward;          // Награда в скрапе
@@ -143,7 +143,7 @@ namespace ScrapArchitect.Gameplay
     /// <summary>
     /// Основной класс контракта
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class Contract
     {
         [Header("Contract Info")]

@@ -346,7 +346,7 @@ namespace ScrapArchitect.Gameplay
     /// <summary>
     /// Класс достижения
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class Achievement
     {
         public string id;
@@ -368,7 +368,7 @@ namespace ScrapArchitect.Gameplay
     /// <summary>
     /// Статистика игрока
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class PlayerStats
     {
         private Dictionary<string, int> stats = new Dictionary<string, int>();

@@ -256,7 +256,7 @@ namespace ScrapArchitect.Parts
     /// <summary>
     /// Данные для сохранения детали
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class PartData
     {
         public string partID;
