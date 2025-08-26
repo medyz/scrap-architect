@@ -533,7 +533,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("seatType"))
             {
                 string seatTypeString = partData.customProperties["seatType"].ToString();
-                if (Enum.TryParse(seatTypeString, out SeatType seatType))
+                if (Enum.TryParse(seatTypeString, out DriverSeat.SeatType seatType))
                 {
                     seat.seatType = seatType;
                 }
