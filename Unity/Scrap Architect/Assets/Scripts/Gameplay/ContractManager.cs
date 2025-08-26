@@ -79,7 +79,18 @@ namespace ScrapArchitect.Gameplay
         /// </summary>
         private void GenerateInitialContracts()
         {
-            for (int i = 0; i < maxAvailableContracts; i++)
+            // Добавляем конкретные контракты из плана
+            List<Contract> specificContracts = SpecificContracts.GetAllSpecificContracts();
+            foreach (var contract in specificContracts)
+            {
+                if (availableContracts.Count < maxAvailableContracts)
+                {
+                    availableContracts.Add(contract);
+                }
+            }
+            
+            // Добавляем случайные контракты для заполнения
+            while (availableContracts.Count < maxAvailableContracts)
             {
                 Contract contract = GenerateRandomContract();
                 if (contract != null)
@@ -89,7 +100,7 @@ namespace ScrapArchitect.Gameplay
             }
             
             OnAvailableContractsUpdated?.Invoke(availableContracts);
-            Debug.Log($"Generated {availableContracts.Count} initial contracts");
+            Debug.Log($"Generated {availableContracts.Count} initial contracts (including {specificContracts.Count} specific contracts)");
         }
         
         /// <summary>
@@ -638,6 +649,117 @@ namespace ScrapArchitect.Gameplay
             {
                 AudioSource.PlayClipAtPoint(objectiveCompletedSound, Camera.main.transform.position);
             }
+        }
+        
+        #endregion
+        
+        #region Specific Contracts Methods
+        
+        /// <summary>
+        /// Получить конкретные контракты
+        /// </summary>
+        public List<Contract> GetSpecificContracts()
+        {
+            return SpecificContracts.GetAllSpecificContracts();
+        }
+        
+        /// <summary>
+        /// Получить конкретные контракты по сложности
+        /// </summary>
+        public List<Contract> GetSpecificContractsByDifficulty(ContractDifficulty difficulty)
+        {
+            return SpecificContracts.GetContractsByDifficulty(difficulty);
+        }
+        
+        /// <summary>
+        /// Получить конкретные контракты по типу
+        /// </summary>
+        public List<Contract> GetSpecificContractsByType(ContractType type)
+        {
+            return SpecificContracts.GetContractsByType(type);
+        }
+        
+        /// <summary>
+        /// Получить конкретные контракты по тегу
+        /// </summary>
+        public List<Contract> GetSpecificContractsByTag(string tag)
+        {
+            return SpecificContracts.GetContractsByTag(tag);
+        }
+        
+        /// <summary>
+        /// Добавить конкретный контракт в доступные
+        /// </summary>
+        public bool AddSpecificContract(string contractTitle)
+        {
+            List<Contract> specificContracts = SpecificContracts.GetAllSpecificContracts();
+            Contract targetContract = specificContracts.Find(c => c.title == contractTitle);
+            
+            if (targetContract != null && !availableContracts.Contains(targetContract))
+            {
+                availableContracts.Add(targetContract);
+                OnAvailableContractsUpdated?.Invoke(availableContracts);
+                Debug.Log($"Added specific contract: {contractTitle}");
+                return true;
+            }
+            
+            return false;
+        }
+        
+        /// <summary>
+        /// Получить контракт "Доставка арбузов"
+        /// </summary>
+        public Contract GetWatermelonDeliveryContract()
+        {
+            return SpecificContracts.CreateWatermelonDeliveryContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Покраска забора"
+        /// </summary>
+        public Contract GetFencePaintingContract()
+        {
+            return SpecificContracts.CreateFencePaintingContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Уборка двора"
+        /// </summary>
+        public Contract GetYardCleaningContract()
+        {
+            return SpecificContracts.CreateYardCleaningContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Гонка на газонокосилках"
+        /// </summary>
+        public Contract GetLawnmowerRaceContract()
+        {
+            return SpecificContracts.CreateLawnmowerRaceContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Сбор цветов"
+        /// </summary>
+        public Contract GetFlowerCollectionContract()
+        {
+            return SpecificContracts.CreateFlowerCollectionContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Перевозка яиц"
+        /// </summary>
+        public Contract GetEggTransportContract()
+        {
+            return SpecificContracts.CreateEggTransportContract();
+        }
+        
+        /// <summary>
+        /// Получить контракт "Победа над соседом"
+        /// </summary>
+        public Contract GetNeighborVictoryContract()
+        {
+            return SpecificContracts.CreateNeighborVictoryContract();
         }
         
         #endregion
