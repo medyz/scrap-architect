@@ -162,7 +162,7 @@ namespace ScrapArchitect.System
                     {
                         partData.customProperties["motorType"] = motor.motorType.ToString();
                         partData.customProperties["power"] = motor.power;
-                        partData.customProperties["fuelLevel"] = motor.GetFuelLevel();
+                        partData.customProperties["fuelLevel"] = motor.currentFuel;
                     }
                     break;
                     
