@@ -121,7 +121,7 @@ namespace ScrapArchitect.Parts
                 // Создание колеса
                 GameObject wheelObj = new GameObject($"TrackWheel_{i}");
                 wheelObj.transform.SetParent(transform);
-                wheelObj.transform.localPosition = new Vector3(0, 0, (i - trackSegments/2f) * trackLength / trackSegments);
+                wheelObj.transform.localPosition = new Vector3(0, 0, (i - trackSegmentsCount/2f) * trackLength / trackSegmentsCount);
 
                 WheelCollider wheel = wheelObj.AddComponent<WheelCollider>();
                 wheel.radius = trackHeight / 2f;
@@ -153,7 +153,7 @@ namespace ScrapArchitect.Parts
                 segmentObj.name = $"TrackSegment_{i}";
                 segmentObj.transform.SetParent(transform);
                 segmentObj.transform.localPosition = wheelObj.transform.localPosition;
-                segmentObj.transform.localScale = new Vector3(trackWidth, trackHeight, trackLength / trackSegments);
+                segmentObj.transform.localScale = new Vector3(trackWidth, trackHeight, trackLength / trackSegmentsCount);
 
                 // Применение материала
                 if (trackMaterial != null)
