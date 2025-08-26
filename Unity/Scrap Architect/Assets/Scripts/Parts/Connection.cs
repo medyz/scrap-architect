@@ -61,6 +61,18 @@ namespace ScrapArchitect.Parts
             Debug.Log($"Connection initialized: {partName} (Type: {connectionType})");
         }
         
+        /// <summary>
+        /// Специфичное действие для соединения
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для соединений
+            if (joint != null && canBreak)
+            {
+                UpdateJointStress();
+            }
+        }
+        
         public void OnConnect(PartController otherPart)
         {
             CreateJoint(otherPart);

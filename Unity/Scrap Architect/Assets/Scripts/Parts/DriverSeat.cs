@@ -72,6 +72,28 @@ namespace ScrapArchitect.Parts
             Debug.Log($"DriverSeat initialized: {partName} (Type: {seatType})");
         }
         
+        /// <summary>
+        /// Специфичное действие для сиденья водителя
+        /// </summary>
+        protected override void OnPartSpecificAction()
+        {
+            // Логика специфичная для сиденья водителя
+            if (isOccupied)
+            {
+                // Проверка состояния водителя и управление
+                UpdateDriverControls();
+            }
+        }
+        
+        /// <summary>
+        /// Обновление управления водителя
+        /// </summary>
+        private void UpdateDriverControls()
+        {
+            // Здесь можно добавить логику управления
+            // например, проверка состояния двигателей, колес и т.д.
+        }
+        
         private void SetupVisualElements()
         {
             // Настройка материалов в зависимости от типа сиденья
