@@ -174,7 +174,7 @@ namespace ScrapArchitect.Parts
             connectedWheels.Clear();
             
             // Ищем все колеса в радиусе соединения
-            Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, 2f);
+            Collider[] nearbyColliders = UnityEngine.Physics.OverlapSphere(transform.position, 2f);
             
             foreach (var collider in nearbyColliders)
             {
