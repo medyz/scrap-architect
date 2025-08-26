@@ -69,20 +69,14 @@ namespace ScrapArchitect.Gameplay
         /// <summary>
         /// Обработчик завершения контракта
         /// </summary>
-        private void OnContractCompleted(Contract contract, float rating)
+        private void OnContractCompleted(Contract contract)
         {
             if (playerProgress == null) return;
 
             // Опыт за завершение контракта
             int xpReward = contractCompletionXP;
             
-            // Бонус за идеальное выполнение
-            if (rating >= 0.9f)
-            {
-                xpReward += contractPerfectXP;
-                playerProgress.CheckAchievement("PerfectContract", true);
-            }
-
+            // Базовый опыт за завершение
             playerProgress.AddExperience(xpReward);
 
             // Обновить статистику
@@ -92,7 +86,7 @@ namespace ScrapArchitect.Gameplay
             // Проверить достижения
             CheckContractAchievements();
 
-            Debug.Log($"Contract completed! XP gained: {xpReward}, Rating: {rating:P0}");
+            Debug.Log($"Contract completed! XP gained: {xpReward}");
         }
 
         /// <summary>
