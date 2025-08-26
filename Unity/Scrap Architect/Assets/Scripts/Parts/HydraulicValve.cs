@@ -212,7 +212,7 @@ namespace ScrapArchitect.Parts
             colorOverLifetime.enabled = true;
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f), new GradientColorKey(Color.orange, 1.0f) },
+                new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f), new GradientColorKey(new Color(1f, 0.5f, 0f), 1.0f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) }
             );
             colorOverLifetime.color = gradient;
