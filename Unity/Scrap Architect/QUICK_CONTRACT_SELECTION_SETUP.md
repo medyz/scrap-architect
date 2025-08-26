@@ -1,6 +1,6 @@
 # Быстрая настройка ContractSelectionUI
 
-## 🚀 Быстрый старт (5 минут)
+## 🚀 Быстрый старт (15 минут)
 
 ### 1. Создание панели
 ```
@@ -21,11 +21,18 @@ ContractSelectionPanel/
 ├── ContractsScrollView/
 │   ├── Viewport/
 │   │   └── ContractsContainer/
-├── InfoPanel/
+├── ContractDetailsPanel/
 │   ├── ContractTitleText (TextMeshPro)
 │   ├── ContractDescriptionText (TextMeshPro)
+│   ├── ContractDifficultyText (TextMeshPro)
 │   ├── ContractRewardText (TextMeshPro)
-│   └── AcceptContractButton (Button)
+│   ├── ContractClientText (TextMeshPro)
+│   ├── ContractObjectivesText (TextMeshPro)
+│   ├── AcceptContractButton (Button)
+│   └── CloseDetailsButton (Button)
+├── InfoPanel/
+│   ├── AvailableContractsText (TextMeshPro)
+│   └── ActiveContractsText (TextMeshPro)
 └── ControlButtonsContainer/
     ├── BackButton (Button)
     └── RefreshButton (Button)
@@ -37,36 +44,52 @@ ContractSelectionPanel/
 - **ContractSelectionPanel**: Vertical Layout Group
 - **FiltersPanel**: Horizontal Layout Group
 - **ContractsContainer**: Vertical Layout Group
+- **ContractDetailsPanel**: Vertical Layout Group
 - **ControlButtonsContainer**: Horizontal Layout Group
 
-#### Размеры
+#### Размеры текста
 - **TitleText**: Font Size 48, Color #ECF0F1
 - **Filters**: Font Size 16, Color #ECF0F1
+- **Contract Details**: Font Size 18, Color #ECF0F1
 - **Buttons**: Font Size 18, Color #ECF0F1
 
-#### Anchors
+#### Размеры элементов
 - **ContractSelectionPanel**: Stretch (0,0,1,1)
-- **HeaderContainer**: Top Center, Height 80
-- **FiltersPanel**: Top Center, Height 60
+- **HeaderContainer**: Height 80, Top Center
+- **FiltersPanel**: Height 60, Top Center
 - **ContractsScrollView**: Stretch, занимает центр
-- **InfoPanel**: Right Center, Width 400
-- **ControlButtonsContainer**: Bottom Center, Height 60
+- **ContractDetailsPanel**: Width 400, Right Center
+- **ControlButtonsContainer**: Height 60, Bottom Center
 
 ### 4. Подключение к скрипту
 В ContractSelectionUI подключить все поля в Inspector:
-- Title Text → TitleText
-- Difficulty Filter → DifficultyFilter
-- Type Filter → TypeFilter
-- Clear Filters Button → ClearFiltersButton
-- Contracts Container → ContractsContainer
-- Contract Title Text → ContractTitleText
-- Contract Description Text → ContractDescriptionText
-- Contract Reward Text → ContractRewardText
-- Accept Contract Button → AcceptContractButton
-- Back Button → BackButton
-- Refresh Button → RefreshButton
+- **Contracts Container** → ContractsContainer
+- **Back Button** → BackButton
+- **Refresh Button** → RefreshButton
+- **Contract Details Panel** → ContractDetailsPanel
+- **Contract Title Text** → ContractTitleText
+- **Contract Description Text** → ContractDescriptionText
+- **Contract Difficulty Text** → ContractDifficultyText
+- **Contract Reward Text** → ContractRewardText
+- **Contract Client Text** → ContractClientText
+- **Contract Objectives Text** → ContractObjectivesText
+- **Accept Contract Button** → AcceptContractButton
+- **Close Details Button** → CloseDetailsButton
+- **Difficulty Filter** → DifficultyFilter
+- **Type Filter** → TypeFilter
+- **Clear Filters Button** → ClearFiltersButton
+- **Available Contracts Text** → AvailableContractsText
+- **Active Contracts Text** → ActiveContractsText
 
-### 5. Создание префаба
+### 5. Настройка кнопок
+Для каждой кнопки:
+- **BackButton**: "НАЗАД"
+- **RefreshButton**: "ОБНОВИТЬ"
+- **AcceptContractButton**: "ПРИНЯТЬ КОНТРАКТ"
+- **CloseDetailsButton**: "ЗАКРЫТЬ"
+- **ClearFiltersButton**: "Очистить фильтры"
+
+### 6. Создание префаба
 1. Перетащить в Prefabs/UI/Panels/
 2. Удалить из сцены
 3. Подключить к UIManager
@@ -85,3 +108,4 @@ ContractSelectionUI создан и готов к использованию!
 1. Создать ContractItemUI префаб
 2. Настроить динамическое создание контрактов
 3. Интегрировать с ContractManager
+4. Протестировать фильтры и навигацию
