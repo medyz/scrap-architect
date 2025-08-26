@@ -284,7 +284,7 @@ namespace ScrapArchitect.Parts
             DestroyJoint();
             
             // Уведомить о поломке через базовый метод
-            TakeDamage(health);
+            TakeDamage(currentHealth);
         }
         
         public void ToggleMotor(bool enabled)
