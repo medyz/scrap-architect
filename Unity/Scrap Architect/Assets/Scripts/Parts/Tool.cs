@@ -223,7 +223,7 @@ namespace ScrapArchitect.Parts
             }
             
             // Поиск объектов в радиусе действия
-            nearbyObjects = Physics.OverlapSphere(targetPosition, range, targetLayers);
+            nearbyObjects = UnityEngine.Physics.OverlapSphere(targetPosition, range, targetLayers);
             
             foreach (Collider obj in nearbyObjects)
             {
