@@ -482,7 +482,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("blockType"))
             {
                 string blockTypeString = partData.customProperties["blockType"].ToString();
-                if (Enum.TryParse(blockTypeString, out Block.BlockType blockType))
+                if (Enum.TryParse(blockTypeString, out BlockType blockType))
                 {
                     block.blockType = blockType;
                 }
@@ -499,7 +499,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("wheelType"))
             {
                 string wheelTypeString = partData.customProperties["wheelType"].ToString();
-                if (System.Enum.TryParse(wheelTypeString, out Wheel.WheelType wheelType))
+                if (Enum.TryParse(wheelTypeString, out Wheel.WheelType wheelType))
                 {
                     wheel.wheelType = wheelType;
                 }
@@ -516,7 +516,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("motorType"))
             {
                 string motorTypeString = partData.customProperties["motorType"].ToString();
-                if (System.Enum.TryParse(motorTypeString, out Motor.MotorType motorType))
+                if (Enum.TryParse(motorTypeString, out Motor.MotorType motorType))
                 {
                     motor.motorType = motorType;
                 }
@@ -533,7 +533,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("seatType"))
             {
                 string seatTypeString = partData.customProperties["seatType"].ToString();
-                if (System.Enum.TryParse(seatTypeString, out DriverSeat.SeatType seatType))
+                if (Enum.TryParse(seatTypeString, out DriverSeat.SeatType seatType))
                 {
                     seat.seatType = seatType;
                 }
@@ -550,7 +550,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("toolType"))
             {
                 string toolTypeString = partData.customProperties["toolType"].ToString();
-                if (System.Enum.TryParse(toolTypeString, out Tool.ToolType toolType))
+                if (Enum.TryParse(toolTypeString, out Tool.ToolType toolType))
                 {
                     tool.toolType = toolType;
                 }
