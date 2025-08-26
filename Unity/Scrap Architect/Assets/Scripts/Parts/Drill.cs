@@ -347,7 +347,7 @@ namespace ScrapArchitect.Parts
             info += $"\nДальность: {drillRange}м";
             info += $"\nТемпература: {temperature:F1}°C";
             info += $"\nПрогресс: {drillProgress:P0}";
-            info += $"\nСтатус: {(drillActive ? "Активна" : "Неактивна")}";
+            info += $"\nСтатус: {(isDrillActive ? "Активна" : "Неактивна")}";
             return info;
         }
 
@@ -398,7 +398,7 @@ namespace ScrapArchitect.Parts
 
         private void Update()
         {
-            if (!isInitialized || !drillActive) return;
+            if (!isInitialized || !isDrillActive) return;
 
             // Обновление температуры
             UpdateTemperature();
