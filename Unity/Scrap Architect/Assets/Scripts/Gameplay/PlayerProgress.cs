@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace ScrapArchitect.Gameplay
 {
@@ -38,10 +38,10 @@ namespace ScrapArchitect.Gameplay
         private PlayerStats playerStats = new PlayerStats();
 
         // Events
-        public System.Action<int> OnLevelUp;
-        public System.Action<int> OnExperienceGained;
-        public System.Action<string> OnAchievementUnlocked;
-        public System.Action<int> OnScrapRewarded;
+        public Action<int> OnLevelUp;
+        public Action<int> OnExperienceGained;
+        public Action<string> OnAchievementUnlocked;
+        public Action<int> OnScrapRewarded;
 
         private void Start()
         {
