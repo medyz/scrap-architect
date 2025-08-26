@@ -5,6 +5,7 @@ Write-Host ""
 # Проверка Unity Hub
 Write-Host "1. Проверка Unity Hub..." -ForegroundColor Yellow
 $unityHubPaths = @(
+    "${env:ProgramFiles}\Unity Hub\Unity Hub.exe",
     "${env:ProgramFiles}\Unity\Hub\Editor\Unity Hub.exe",
     "${env:ProgramFiles(x86)}\Unity\Hub\Editor\Unity Hub.exe",
     "${env:LOCALAPPDATA}\Programs\Unity Hub\Unity Hub.exe"
