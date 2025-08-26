@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using ScrapArchitect.Core;
 
 namespace ScrapArchitect.UI
@@ -41,9 +42,9 @@ namespace ScrapArchitect.UI
         public static UIManager Instance { get; private set; }
         
         // Events
-        public System.Action OnPauseButtonClicked;
-        public System.Action OnSettingsButtonClicked;
-        public System.Action OnResumeButtonClicked;
+        public Action OnPauseButtonClicked;
+        public Action OnSettingsButtonClicked;
+        public Action OnResumeButtonClicked;
         
         private void Awake()
         {
