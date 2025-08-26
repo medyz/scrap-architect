@@ -692,11 +692,11 @@ namespace ScrapArchitect.Parts
                     {
                         if (outputStates[i])
                         {
-                            motor.SetMotorPower(outputValues[i]);
+                            motor.ApplyPowerToWheels(outputValues[i]);
                         }
                         else
                         {
-                            motor.SetMotorPower(0f);
+                            motor.ApplyPowerToWheels(0f);
                         }
                     }
                     else if (device is PneumaticCylinder cylinder)
