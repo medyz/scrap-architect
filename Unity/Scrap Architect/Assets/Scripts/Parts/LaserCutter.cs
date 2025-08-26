@@ -422,7 +422,7 @@ namespace ScrapArchitect.Parts
                 Vector3 endPos = startPos + transform.forward * laserRange;
                 
                 // Проверка попадания лазера
-                if (Physics.Raycast(startPos, transform.forward, out laserHit, laserRange, cuttableLayers))
+                if (UnityEngine.Physics.Raycast(startPos, transform.forward, out laserHit, laserRange, cuttableLayers))
                 {
                     endPos = laserHit.point;
                     isCutting = true;
