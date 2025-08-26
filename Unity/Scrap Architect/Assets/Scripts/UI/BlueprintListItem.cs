@@ -300,7 +300,7 @@ namespace ScrapArchitect.UI
         /// </summary>
         private string GetExportPath()
         {
-            string fileName = $"{blueprint.blueprintName}_{System.DateTime.Now:yyyyMMdd_HHmmss}.json";
+            string fileName = $"{blueprint.blueprintName}_{DateTime.Now:yyyyMMdd_HHmmss}.json";
             string exportPath = System.IO.Path.Combine(Application.persistentDataPath, "Exports", fileName);
             
             // Создать папку если не существует
