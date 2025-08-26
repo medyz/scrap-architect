@@ -31,6 +31,8 @@ namespace ScrapArchitect.Physics
         public float snapDistance = 0.5f;
         public float snapAngle = 15f;
         public LayerMask snapLayerMask = -1;
+        public bool useSnapPoints = true;
+        public bool autoSnap = true;
         
         [Header("State")]
         public bool isSelected = false;
@@ -42,6 +44,7 @@ namespace ScrapArchitect.Physics
         private Rigidbody rb;
         private Collider col;
         private Renderer rend;
+        private PartAttacher partAttacher;
         
         // Events
         public System.Action<PartController> OnPartSelected;
@@ -82,6 +85,7 @@ namespace ScrapArchitect.Physics
             rb = GetComponent<Rigidbody>();
             col = GetComponent<Collider>();
             rend = GetComponent<Renderer>();
+            partAttacher = GetComponent<PartAttacher>();
             
             if (rb == null)
             {
@@ -93,6 +97,12 @@ namespace ScrapArchitect.Physics
             {
                 Debug.LogError($"Collider not found on {gameObject.name}");
                 return;
+            }
+            
+            // Добавить PartAttacher если его нет
+            if (partAttacher == null && useSnapPoints)
+            {
+                partAttacher = gameObject.AddComponent<PartAttacher>();
             }
         }
         
@@ -447,6 +457,115 @@ namespace ScrapArchitect.Physics
         {
             return $"Name: {partName}\nType: {partType}\nHealth: {currentHealth}/{maxHealth}\nConnections: {connectedJoints.Count}/{maxConnections}";
         }
+        
+        #region Snap Points Integration
+        
+        /// <summary>
+        /// Начать перетаскивание детали
+        /// </summary>
+        public void StartDragging()
+        {
+            isDragging = true;
+            if (partAttacher != null)
+            {
+                partAttacher.StartDragging();
+            }
+        }
+        
+        /// <summary>
+        /// Остановить перетаскивание детали
+        /// </summary>
+        public void StopDragging()
+        {
+            isDragging = false;
+            if (partAttacher != null)
+            {
+                partAttacher.StopDragging();
+            }
+        }
+        
+        /// <summary>
+        /// Обновить позицию при перетаскивании
+        /// </summary>
+        public void UpdateDragPosition(Vector3 position, Quaternion rotation)
+        {
+            if (partAttacher != null)
+            {
+                partAttacher.UpdateDragPosition(position, rotation);
+            }
+        }
+        
+        /// <summary>
+        /// Попытаться привязать к snap-point
+        /// </summary>
+        public bool TryAttachToSnapPoint(SnapPoint snapPoint)
+        {
+            if (partAttacher != null)
+            {
+                return partAttacher.TryAttachToSnapPoint(snapPoint);
+            }
+            return false;
+        }
+        
+        /// <summary>
+        /// Отвязать от snap-point
+        /// </summary>
+        public void DetachFromSnapPoint(SnapPoint snapPoint)
+        {
+            if (partAttacher != null)
+            {
+                partAttacher.DetachFromSnapPoint(snapPoint);
+            }
+        }
+        
+        /// <summary>
+        /// Отвязать все соединения
+        /// </summary>
+        public void DetachAll()
+        {
+            if (partAttacher != null)
+            {
+                partAttacher.DetachAll();
+            }
+        }
+        
+        /// <summary>
+        /// Получить snap-points детали
+        /// </summary>
+        public SnapPoint[] GetSnapPoints()
+        {
+            if (partAttacher != null)
+            {
+                return partAttacher.GetSnapPoints();
+            }
+            return new SnapPoint[0];
+        }
+        
+        /// <summary>
+        /// Получить количество подключенных snap-points
+        /// </summary>
+        public int GetConnectedSnapPointsCount()
+        {
+            if (partAttacher != null)
+            {
+                return partAttacher.GetConnectedSnapPointsCount();
+            }
+            return 0;
+        }
+        
+        /// <summary>
+        /// Проверить, можно ли привязать к snap-point
+        /// </summary>
+        public bool CanAttachTo(SnapPoint snapPoint)
+        {
+            if (partAttacher != null)
+            {
+                return partAttacher.CanAttachTo(snapPoint);
+            }
+            return false;
+        }
+        
+        #endregion
     }
     
     /// <summary>
