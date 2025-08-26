@@ -466,7 +466,7 @@ namespace ScrapArchitect.Physics
         /// <summary>
         /// Получение информации о детали
         /// </summary>
-        public string GetPartInfo()
+        public virtual string GetPartInfo()
         {
             return $"Name: {partName}\nType: {partType}\nHealth: {currentHealth}/{maxHealth}\nConnections: {connectedJoints.Count}/{maxConnections}";
         }
