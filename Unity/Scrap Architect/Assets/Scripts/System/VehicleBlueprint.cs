@@ -142,7 +142,7 @@ namespace ScrapArchitect.System
                     if (block != null)
                     {
                         partData.customProperties["blockType"] = block.blockType.ToString();
-                        partData.customProperties["material"] = block.material.ToString();
+                        partData.customProperties["strength"] = block.strength;
                     }
                     break;
                     
