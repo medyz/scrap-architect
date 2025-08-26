@@ -210,7 +210,7 @@ namespace ScrapArchitect.Physics
         /// <summary>
         /// Выбор детали
         /// </summary>
-        public void Select()
+        public virtual void Select()
         {
             if (!isSelected)
             {
@@ -230,7 +230,7 @@ namespace ScrapArchitect.Physics
         /// <summary>
         /// Отмена выбора детали
         /// </summary>
-        public void Deselect()
+        public virtual void Deselect()
         {
             if (isSelected)
             {
