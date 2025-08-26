@@ -4,11 +4,11 @@
 
 ✅ **Уже установлено:**
 - Unity Hub: `C:\Program Files\Unity Hub\Unity Hub.exe`
+- Visual Studio 2022 Community: `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe`
 - Git: версия 2.50.1.windows.1
 
 ❌ **Требует установки:**
-- Unity Editor 2022.3.15f1 LTS
-- Visual Studio 2022 Community
+- Unity Editor 2022.3.62f1 LTS
 - .NET SDK
 
 ---
@@ -20,7 +20,7 @@
 1. **Запустите Unity Hub**
 2. **Перейдите в раздел "Installs"**
 3. **Нажмите "Install Editor"**
-4. **Выберите версию:** Unity 2022.3.15f1 LTS
+4. **Выберите версию:** Unity 2022.3.62f1 LTS (рекомендуется)
 5. **Выберите модули:**
    - ✅ Microsoft Visual Studio Community 2022
    - ✅ Windows Build Support
@@ -30,6 +30,9 @@
 
 ### 2. Установка Visual Studio 2022
 
+✅ **Уже установлено!** Visual Studio 2022 Community найден в системе.
+
+Если нужно переустановить или добавить компоненты:
 1. **Скачайте Visual Studio 2022 Community:**
    - Перейдите на [visualstudio.microsoft.com](https://visualstudio.microsoft.com/)
    - Нажмите "Download Visual Studio"
@@ -79,7 +82,7 @@
 2. **Выберите "3D Core"**
 3. **Название:** `Scrap Architect`
 4. **Расположение:** `C:\Users\meduz\Desktop\Scrap Architect\Unity`
-5. **Unity версия:** 2022.3.15f1
+5. **Unity версия:** 2022.3.62f1
 
 ---
 

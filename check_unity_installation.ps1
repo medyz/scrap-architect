@@ -29,6 +29,7 @@ if (-not $unityHubFound) {
 Write-Host ""
 Write-Host "2. Проверка Unity Editor..." -ForegroundColor Yellow
 $unityPaths = @(
+    "${env:ProgramFiles}\Unity\Hub\Editor\2022.3.62f1\Editor\Unity.exe",
     "${env:ProgramFiles}\Unity\Hub\Editor\2022.3.15f1\Editor\Unity.exe",
     "${env:ProgramFiles}\Unity\Hub\Editor\2022.3.20f1\Editor\Unity.exe"
 )
@@ -52,7 +53,10 @@ Write-Host ""
 Write-Host "3. Проверка Visual Studio..." -ForegroundColor Yellow
 $vsPaths = @(
     "${env:ProgramFiles}\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe",
-    "${env:ProgramFiles}\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe"
+    "${env:ProgramFiles}\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe",
+    "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe",
+    "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe",
+    "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2022\Visual Studio 2022.lnk"
 )
 
 $vsFound = $false
