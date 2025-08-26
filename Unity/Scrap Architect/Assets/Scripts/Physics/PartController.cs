@@ -54,7 +54,7 @@ namespace ScrapArchitect.Physics
         public Action<PartController, PartController> OnPartDisconnected;
         public Action<PartController> OnPartDestroyed;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             InitializeComponents();
             InitializePart();
