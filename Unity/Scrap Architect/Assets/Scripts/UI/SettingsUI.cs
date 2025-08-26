@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 namespace ScrapArchitect.UI
 {
@@ -92,7 +93,7 @@ namespace ScrapArchitect.UI
             if (qualityDropdown != null)
             {
                 qualityDropdown.ClearOptions();
-                qualityDropdown.AddOptions(new System.Collections.Generic.List<string> { "Низкое", "Среднее", "Высокое", "Ультра" });
+                qualityDropdown.AddOptions(new List<string> { "Низкое", "Среднее", "Высокое", "Ультра" });
                 qualityDropdown.value = PlayerPrefs.GetInt("QualityLevel", QualitySettings.GetQualityLevel());
                 qualityDropdown.onValueChanged.AddListener(OnQualityChanged);
             }
@@ -135,7 +136,7 @@ namespace ScrapArchitect.UI
             resolutionDropdown.ClearOptions();
             
             Resolution[] resolutions = Screen.resolutions;
-            System.Collections.Generic.List<string> options = new System.Collections.Generic.List<string>();
+            List<string> options = new List<string>();
             
             for (int i = 0; i < resolutions.Length; i++)
             {
@@ -203,7 +204,7 @@ namespace ScrapArchitect.UI
             if (languageDropdown != null)
             {
                 languageDropdown.ClearOptions();
-                languageDropdown.AddOptions(new System.Collections.Generic.List<string> { "Русский", "English" });
+                languageDropdown.AddOptions(new List<string> { "Русский", "English" });
                 languageDropdown.value = PlayerPrefs.GetInt("Language", 0);
                 languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
             }
