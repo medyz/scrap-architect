@@ -249,7 +249,7 @@ namespace ScrapArchitect.Parts
         /// </summary>
         public void ActivateDrill()
         {
-            drillActive = true;
+            isDrillActive = true;
             Debug.Log($"Drill activated: {drillType}");
         }
 
@@ -258,7 +258,7 @@ namespace ScrapArchitect.Parts
         /// </summary>
         public void DeactivateDrill()
         {
-            drillActive = false;
+            isDrillActive = false;
             currentPower = 0f;
             currentSpeed = 0f;
             isDrilling = false;
@@ -279,7 +279,7 @@ namespace ScrapArchitect.Parts
         /// </summary>
         public void SetDrillPower(float power)
         {
-            if (!drillActive) return;
+            if (!isDrillActive) return;
             
             currentPower = Mathf.Clamp(power, 0f, drillPower);
             currentSpeed = (currentPower / drillPower) * drillSpeed;
