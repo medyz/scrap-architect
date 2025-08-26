@@ -109,7 +109,7 @@ namespace ScrapArchitect.Physics
         /// <summary>
         /// Инициализация детали
         /// </summary>
-        private void InitializePart()
+        protected virtual void InitializePart()
         {
             // Настройка Rigidbody
             rb.mass = mass;
