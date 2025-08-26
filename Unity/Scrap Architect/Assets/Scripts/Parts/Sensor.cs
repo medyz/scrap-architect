@@ -64,8 +64,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для сенсора
             if (sensorActive)
             {
-                UpdateSensorReading();
-                UpdateSensorVisuals();
+                UpdateSensorValue();
+                // Визуальные эффекты обновляются в методе Update()
             }
         }
 
