@@ -405,6 +405,30 @@ namespace ScrapArchitect.Gameplay
         }
         
         /// <summary>
+        /// Получить прошедшее время
+        /// </summary>
+        public float GetElapsedTime()
+        {
+            if (status != ContractStatus.Active && status != ContractStatus.Completed)
+                return 0f;
+            
+            return Time.time - startTime;
+        }
+        
+        /// <summary>
+        /// Получить время завершения (для завершенных контрактов)
+        /// </summary>
+        public float GetCompletionTime()
+        {
+            if (status != ContractStatus.Completed)
+                return 0f;
+            
+            // Для завершенных контрактов возвращаем время выполнения
+            // Это можно расширить, добавив поле completionTime
+            return GetElapsedTime();
+        }
+        
+        /// <summary>
         /// Получить информацию о контракте
         /// </summary>
         public string GetContractInfo()
