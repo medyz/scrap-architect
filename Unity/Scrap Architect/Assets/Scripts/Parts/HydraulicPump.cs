@@ -66,8 +66,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для гидравлического насоса
             if (isPumpActive)
             {
-                UpdatePumpOperation();
-                UpdatePumpVisuals();
+                // Вся логика насоса уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
