@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using ScrapArchitect.Physics;
 using ScrapArchitect.Parts;
 using ScrapArchitect.Controls;
@@ -37,11 +38,11 @@ namespace ScrapArchitect.Level
         private bool hasStarted = false;
         
         // События
-        public System.Action<float> OnSpeedChanged;
-        public System.Action<float> OnHealthChanged;
-        public System.Action<bool> OnVehicleStateChanged;
-        public System.Action OnVehicleBroken;
-        public System.Action OnVehicleStarted;
+        public Action<float> OnSpeedChanged;
+        public Action<float> OnHealthChanged;
+        public Action<bool> OnVehicleStateChanged;
+        public Action OnVehicleBroken;
+        public Action OnVehicleStarted;
         
         private void Start()
         {
