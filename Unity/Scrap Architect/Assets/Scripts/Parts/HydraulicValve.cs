@@ -63,8 +63,8 @@ namespace ScrapArchitect.Parts
             // Логика специфичная для гидравлического клапана
             if (isValveActive)
             {
-                UpdateValveOperation();
-                UpdateValveVisuals();
+                // Вся логика клапана уже обрабатывается в методе Update()
+                // Дополнительная логика может быть добавлена здесь при необходимости
             }
         }
 
