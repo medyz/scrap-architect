@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using ScrapArchitect.Core;
 using ScrapArchitect.UI;
 using System.Collections.Generic;
@@ -40,11 +41,11 @@ namespace ScrapArchitect.Level
         private float currentScore = 0f;
         
         // События
-        public System.Action<float> OnTimeChanged;
-        public System.Action<float> OnScoreChanged;
-        public System.Action<bool> OnTestStateChanged;
-        public System.Action OnTestCompleted;
-        public System.Action OnTestFailed;
+        public Action<float> OnTimeChanged;
+        public Action<float> OnScoreChanged;
+        public Action<bool> OnTestStateChanged;
+        public Action OnTestCompleted;
+        public Action OnTestFailed;
         
         private void Start()
         {
