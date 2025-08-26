@@ -316,16 +316,16 @@ namespace ScrapArchitect.Parts
             Debug.Log($"Tool refueled: {partName} - {currentFuel}%");
         }
         
-        public void Repair(float amount)
+        public override void Repair(float amount)
         {
-            health = Mathf.Min(health + amount, GetHealth(toolType));
+            currentHealth = Mathf.Min(currentHealth + amount, GetHealth(toolType));
             
-            if (health >= GetHealth(toolType) * 0.8f && damagedMaterial != null)
+            if (currentHealth >= GetHealth(toolType) * 0.8f && damagedMaterial != null)
             {
                 GetComponent<Renderer>().material = normalMaterial;
             }
             
-            Debug.Log($"Tool repaired: {partName} - {health}%");
+            Debug.Log($"Tool repaired: {partName} - {currentHealth}%");
         }
         
         public bool IsActivated()
