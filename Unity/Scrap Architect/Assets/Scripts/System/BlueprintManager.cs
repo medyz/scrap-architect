@@ -1,7 +1,7 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using ScrapArchitect.Physics;
 
 namespace ScrapArchitect.System
@@ -35,10 +35,10 @@ namespace ScrapArchitect.System
         private string blueprintPath;
         
         // Events
-        public System.Action<VehicleBlueprint> OnBlueprintSaved;
-        public System.Action<VehicleBlueprint> OnBlueprintLoaded;
-        public System.Action<VehicleBlueprint> OnBlueprintDeleted;
-        public System.Action<List<VehicleBlueprint>> OnBlueprintListUpdated;
+        public Action<VehicleBlueprint> OnBlueprintSaved;
+        public Action<VehicleBlueprint> OnBlueprintLoaded;
+        public Action<VehicleBlueprint> OnBlueprintDeleted;
+        public Action<List<VehicleBlueprint>> OnBlueprintListUpdated;
         
         private void Start()
         {
