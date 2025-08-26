@@ -1,50 +1,47 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System;
-using ScrapArchitect.Core;
+using System.Collections.Generic;
+using ScrapArchitect.Gameplay;
 
 namespace ScrapArchitect.UI
 {
     /// <summary>
-    /// Основной менеджер UI - управляет всеми интерфейсами в игре
+    /// Центральный менеджер интерфейса - управляет всеми UI экранами
     /// </summary>
     public class UIManager : MonoBehaviour
     {
-        [Header("UI Panels")]
-        public GameObject mainMenuPanel;
-        public GameObject buildModePanel;
-        public GameObject testModePanel;
-        public GameObject pausePanel;
-        public GameObject settingsPanel;
-        public GameObject infoPanel;
-        
-        [Header("Build Mode UI")]
-        public BuildModeUI buildModeUI;
-        
-        [Header("Test Mode UI")]
-        public TestModeUI testModeUI;
-        
-        [Header("Common UI")]
-        public TextMeshProUGUI gameTimeText;
-        public TextMeshProUGUI playerLevelText;
-        public TextMeshProUGUI moneyText;
-        public Button pauseButton;
-        public Button settingsButton;
-        
-        [Header("Info Panel")]
-        public GameObject partInfoPanel;
-        public TextMeshProUGUI partNameText;
-        public TextMeshProUGUI partInfoText;
-        public Button closeInfoButton;
-        
         // Singleton pattern
         public static UIManager Instance { get; private set; }
         
+        [Header("UI Panels")]
+        public MainMenuUI mainMenuPanel;
+        public ContractSelectionUI contractSelectionPanel;
+        public GameplayUI gameplayPanel;
+        public VictoryScreen victoryPanel;
+        public DefeatScreen defeatPanel;
+        public SettingsUI settingsPanel;
+        public PauseMenu pausePanel;
+        public LoadingScreen loadingPanel;
+        
+        [Header("Audio")]
+        public AudioClip buttonClickSound;
+        public AudioClip panelOpenSound;
+        public AudioClip panelCloseSound;
+        
+        [Header("Animation Settings")]
+        public float panelAnimationDuration = 0.3f;
+        public AnimationCurve panelAnimationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        
+        private UIBase currentActivePanel;
+        private Stack<UIBase> panelHistory = new Stack<UIBase>();
+        
         // Events
-        public Action OnPauseButtonClicked;
-        public Action OnSettingsButtonClicked;
-        public Action OnResumeButtonClicked;
+        public Action<UIBase> OnPanelOpened;
+        public Action<UIBase> OnPanelClosed;
+        public Action OnGameStarted;
+        public Action OnGamePaused;
+        public Action OnGameResumed;
+        public Action OnGameQuit;
         
         private void Awake()
         {
@@ -53,7 +50,7 @@ namespace ScrapArchitect.UI
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
-                InitializeUI();
+                InitializeUIManager();
             }
             else
             {
@@ -63,145 +60,38 @@ namespace ScrapArchitect.UI
         
         private void Start()
         {
-            // Подписываемся на события GameManager
-            if (Core.GameManager.Instance != null)
-            {
-                Core.GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
-                Core.GameManager.Instance.OnGameModeChanged += OnGameModeChanged;
-                Core.GameManager.Instance.OnPauseChanged += OnPauseChanged;
-            }
-            
-            // Настраиваем кнопки
-            SetupButtons();
-            
-            // Показываем главное меню
+            // Показать главное меню при запуске
             ShowMainMenu();
         }
         
-        private void OnDestroy()
-        {
-            // Отписываемся от событий
-            if (Core.GameManager.Instance != null)
-            {
-                Core.GameManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-                Core.GameManager.Instance.OnGameModeChanged -= OnGameModeChanged;
-                Core.GameManager.Instance.OnPauseChanged -= OnPauseChanged;
-            }
-        }
-        
         /// <summary>
-        /// Инициализация UI
+        /// Инициализация UI менеджера
         /// </summary>
-        private void InitializeUI()
+        private void InitializeUIManager()
         {
-            // Скрываем все панели
-            HideAllPanels();
+            // Инициализируем все панели
+            InitializePanel(mainMenuPanel);
+            InitializePanel(contractSelectionPanel);
+            InitializePanel(gameplayPanel);
+            InitializePanel(victoryPanel);
+            InitializePanel(defeatPanel);
+            InitializePanel(settingsPanel);
+            InitializePanel(pausePanel);
+            InitializePanel(loadingPanel);
             
             Debug.Log("UIManager initialized");
         }
         
         /// <summary>
-        /// Настройка кнопок
+        /// Инициализация панели
         /// </summary>
-        private void SetupButtons()
+        private void InitializePanel(UIBase panel)
         {
-            if (pauseButton != null)
+            if (panel != null)
             {
-                pauseButton.onClick.AddListener(OnPauseButtonClick);
+                panel.Initialize(this);
+                panel.gameObject.SetActive(false);
             }
-            
-            if (settingsButton != null)
-            {
-                settingsButton.onClick.AddListener(OnSettingsButtonClick);
-            }
-            
-            if (closeInfoButton != null)
-            {
-                closeInfoButton.onClick.AddListener(HidePartInfo);
-            }
-        }
-        
-        /// <summary>
-        /// Обработка изменения состояния игры
-        /// </summary>
-        private void OnGameStateChanged(GameState newState)
-        {
-            switch (newState)
-            {
-                case GameState.MainMenu:
-                    ShowMainMenu();
-                    break;
-                    
-                case GameState.Building:
-                    ShowBuildMode();
-                    break;
-                    
-                case GameState.Testing:
-                    ShowTestMode();
-                    break;
-                    
-                case GameState.Playing:
-                    ShowGameUI();
-                    break;
-                    
-                case GameState.Paused:
-                    ShowPauseMenu();
-                    break;
-            }
-        }
-        
-        /// <summary>
-        /// Обработка изменения режима игры
-        /// </summary>
-        private void OnGameModeChanged(GameMode newMode)
-        {
-            switch (newMode)
-            {
-                case GameMode.Build:
-                    if (buildModeUI != null)
-                    {
-                        buildModeUI.Show();
-                    }
-                    break;
-                    
-                case GameMode.Test:
-                    if (testModeUI != null)
-                    {
-                        testModeUI.Show();
-                    }
-                    break;
-            }
-        }
-        
-        /// <summary>
-        /// Обработка изменения паузы
-        /// </summary>
-        private void OnPauseChanged(bool isPaused)
-        {
-            if (isPaused)
-            {
-                ShowPauseMenu();
-            }
-            else
-            {
-                HidePauseMenu();
-            }
-        }
-        
-        /// <summary>
-        /// Скрытие всех панелей
-        /// </summary>
-        private void HideAllPanels()
-        {
-            if (mainMenuPanel != null) mainMenuPanel.SetActive(false);
-            if (buildModePanel != null) buildModePanel.SetActive(false);
-            if (testModePanel != null) testModePanel.SetActive(false);
-            if (pausePanel != null) pausePanel.SetActive(false);
-            if (settingsPanel != null) settingsPanel.SetActive(false);
-            if (infoPanel != null) infoPanel.SetActive(false);
-            
-            if (buildModeUI != null) buildModeUI.Hide();
-            if (testModeUI != null) testModeUI.Hide();
         }
         
         /// <summary>
@@ -209,77 +99,40 @@ namespace ScrapArchitect.UI
         /// </summary>
         public void ShowMainMenu()
         {
-            HideAllPanels();
-            if (mainMenuPanel != null)
-            {
-                mainMenuPanel.SetActive(true);
-            }
+            ShowPanel(mainMenuPanel);
         }
         
         /// <summary>
-        /// Показать режим строительства
+        /// Показать выбор контрактов
         /// </summary>
-        public void ShowBuildMode()
+        public void ShowContractSelection()
         {
-            HideAllPanels();
-            if (buildModePanel != null)
-            {
-                buildModePanel.SetActive(true);
-            }
-            if (buildModeUI != null)
-            {
-                buildModeUI.Show();
-            }
+            ShowPanel(contractSelectionPanel);
         }
         
         /// <summary>
-        /// Показать режим тестирования
+        /// Показать игровой интерфейс
         /// </summary>
-        public void ShowTestMode()
+        public void ShowGameplayUI()
         {
-            HideAllPanels();
-            if (testModePanel != null)
-            {
-                testModePanel.SetActive(true);
-            }
-            if (testModeUI != null)
-            {
-                testModeUI.Show();
-            }
+            ShowPanel(gameplayPanel);
+            OnGameStarted?.Invoke();
         }
         
         /// <summary>
-        /// Показать игровой UI
+        /// Показать экран победы
         /// </summary>
-        public void ShowGameUI()
+        public void ShowVictoryScreen()
         {
-            // Показываем общий UI для игры
-            if (gameTimeText != null) gameTimeText.gameObject.SetActive(true);
-            if (playerLevelText != null) playerLevelText.gameObject.SetActive(true);
-            if (moneyText != null) moneyText.gameObject.SetActive(true);
-            if (pauseButton != null) pauseButton.gameObject.SetActive(true);
+            ShowPanel(victoryPanel);
         }
         
         /// <summary>
-        /// Показать меню паузы
+        /// Показать экран поражения
         /// </summary>
-        public void ShowPauseMenu()
+        public void ShowDefeatScreen()
         {
-            if (pausePanel != null)
-            {
-                pausePanel.SetActive(true);
-            }
-        }
-        
-        /// <summary>
-        /// Скрыть меню паузы
-        /// </summary>
-        public void HidePauseMenu()
-        {
-            if (pausePanel != null)
-            {
-                pausePanel.SetActive(false);
-            }
+            ShowPanel(defeatPanel);
         }
         
         /// <summary>
@@ -287,145 +140,195 @@ namespace ScrapArchitect.UI
         /// </summary>
         public void ShowSettings()
         {
-            if (settingsPanel != null)
-            {
-                settingsPanel.SetActive(true);
-            }
+            ShowPanel(settingsPanel);
         }
         
         /// <summary>
-        /// Скрыть настройки
+        /// Показать меню паузы
         /// </summary>
-        public void HideSettings()
+        public void ShowPauseMenu()
         {
-            if (settingsPanel != null)
-            {
-                settingsPanel.SetActive(false);
-            }
+            ShowPanel(pausePanel);
+            OnGamePaused?.Invoke();
         }
         
         /// <summary>
-        /// Показать информацию о детали
+        /// Скрыть меню паузы
         /// </summary>
-        public void ShowPartInfo(string partName, string partInfo)
+        public void HidePauseMenu()
         {
-            if (partInfoPanel != null)
-            {
-                partInfoPanel.SetActive(true);
-                
-                if (partNameText != null)
-                {
-                    partNameText.text = partName;
-                }
-                
-                if (partInfoText != null)
-                {
-                    partInfoText.text = partInfo;
-                }
-            }
+            HideCurrentPanel();
+            OnGameResumed?.Invoke();
         }
         
         /// <summary>
-        /// Скрыть информацию о детали
+        /// Показать экран загрузки
         /// </summary>
-        public void HidePartInfo()
+        public void ShowLoadingScreen()
         {
-            if (partInfoPanel != null)
-            {
-                partInfoPanel.SetActive(false);
-            }
+            ShowPanel(loadingPanel);
         }
         
         /// <summary>
-        /// Обновить игровое время
+        /// Скрыть экран загрузки
         /// </summary>
-        public void UpdateGameTime(float time)
+        public void HideLoadingScreen()
         {
-            if (gameTimeText != null)
-            {
-                int minutes = Mathf.FloorToInt(time / 60f);
-                int seconds = Mathf.FloorToInt(time % 60f);
-                gameTimeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-            }
+            HideCurrentPanel();
         }
         
         /// <summary>
-        /// Обновить уровень игрока
+        /// Показать панель
         /// </summary>
-        public void UpdatePlayerLevel(int level)
+        public void ShowPanel(UIBase panel)
         {
-            if (playerLevelText != null)
-            {
-                playerLevelText.text = $"Level: {level}";
-            }
-        }
-        
-        /// <summary>
-        /// Обновить деньги игрока
-        /// </summary>
-        public void UpdateMoney(float money)
-        {
-            if (moneyText != null)
-            {
-                moneyText.text = $"Money: ${money:F0}";
-            }
-        }
-        
-        /// <summary>
-        /// Обработчик нажатия кнопки паузы
-        /// </summary>
-        private void OnPauseButtonClick()
-        {
-            OnPauseButtonClicked?.Invoke();
+            if (panel == null) return;
             
-            if (Core.GameManager.Instance != null)
+            // Скрыть текущую панель
+            if (currentActivePanel != null)
             {
-                Core.GameManager.Instance.TogglePause();
+                currentActivePanel.Hide();
+                panelHistory.Push(currentActivePanel);
             }
-        }
-        
-        /// <summary>
-        /// Обработчик нажатия кнопки настроек
-        /// </summary>
-        private void OnSettingsButtonClick()
-        {
-            OnSettingsButtonClicked?.Invoke();
-            ShowSettings();
-        }
-        
-        /// <summary>
-        /// Обработчик нажатия кнопки возобновления
-        /// </summary>
-        public void OnResumeButtonClick()
-        {
-            OnResumeButtonClicked?.Invoke();
             
-            if (Core.GameManager.Instance != null)
+            // Показать новую панель
+            currentActivePanel = panel;
+            panel.Show();
+            
+            OnPanelOpened?.Invoke(panel);
+            PlayPanelOpenSound();
+        }
+        
+        /// <summary>
+        /// Скрыть текущую панель
+        /// </summary>
+        public void HideCurrentPanel()
+        {
+            if (currentActivePanel != null)
             {
-                Core.GameManager.Instance.TogglePause();
+                currentActivePanel.Hide();
+                OnPanelClosed?.Invoke(currentActivePanel);
+                PlayPanelCloseSound();
+                
+                // Восстановить предыдущую панель
+                if (panelHistory.Count > 0)
+                {
+                    currentActivePanel = panelHistory.Pop();
+                    currentActivePanel.Show();
+                }
+                else
+                {
+                    currentActivePanel = null;
+                }
             }
         }
         
         /// <summary>
-        /// Обработчик нажатия кнопки выхода в главное меню
+        /// Вернуться к предыдущей панели
         /// </summary>
-        public void OnMainMenuButtonClick()
+        public void GoBack()
         {
-            if (Core.GameManager.Instance != null)
+            if (panelHistory.Count > 0)
             {
-                Core.GameManager.Instance.ReturnToMainMenu();
+                HideCurrentPanel();
             }
         }
         
         /// <summary>
-        /// Обработчик нажатия кнопки выхода из игры
+        /// Очистить историю панелей
         /// </summary>
-        public void OnQuitButtonClick()
+        public void ClearPanelHistory()
         {
-            if (Core.GameManager.Instance != null)
+            panelHistory.Clear();
+        }
+        
+        /// <summary>
+        /// Получить текущую активную панель
+        /// </summary>
+        public UIBase GetCurrentPanel()
+        {
+            return currentActivePanel;
+        }
+        
+        /// <summary>
+        /// Проверить, активна ли панель
+        /// </summary>
+        public bool IsPanelActive<T>() where T : UIBase
+        {
+            return currentActivePanel is T;
+        }
+        
+        #region Audio Methods
+        
+        /// <summary>
+        /// Воспроизвести звук клика кнопки
+        /// </summary>
+        public void PlayButtonClickSound()
+        {
+            if (buttonClickSound != null)
             {
-                Core.GameManager.Instance.QuitGame();
+                AudioSource.PlayClipAtPoint(buttonClickSound, Camera.main.transform.position);
             }
         }
+        
+        /// <summary>
+        /// Воспроизвести звук открытия панели
+        /// </summary>
+        private void PlayPanelOpenSound()
+        {
+            if (panelOpenSound != null)
+            {
+                AudioSource.PlayClipAtPoint(panelOpenSound, Camera.main.transform.position);
+            }
+        }
+        
+        /// <summary>
+        /// Воспроизвести звук закрытия панели
+        /// </summary>
+        private void PlayPanelCloseSound()
+        {
+            if (panelCloseSound != null)
+            {
+                AudioSource.PlayClipAtPoint(panelCloseSound, Camera.main.transform.position);
+            }
+        }
+        
+        #endregion
+        
+        #region Game Control Methods
+        
+        /// <summary>
+        /// Начать новую игру
+        /// </summary>
+        public void StartNewGame()
+        {
+            ShowLoadingScreen();
+            // Здесь будет логика загрузки игры
+            Invoke(nameof(LoadGame), 1f);
+        }
+        
+        /// <summary>
+        /// Загрузить игру
+        /// </summary>
+        private void LoadGame()
+        {
+            HideLoadingScreen();
+            ShowContractSelection();
+        }
+        
+        /// <summary>
+        /// Выйти из игры
+        /// </summary>
+        public void QuitGame()
+        {
+            OnGameQuit?.Invoke();
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+        }
+        
+        #endregion
     }
 }
