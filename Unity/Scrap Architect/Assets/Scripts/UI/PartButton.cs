@@ -246,13 +246,4 @@ namespace ScrapArchitect.UI
         }
     }
     
-    /// <summary>
-    /// Состояния кнопки
-    /// </summary>
-    public enum ButtonState
-    {
-        Normal,
-        Hover,
-        Selected
-    }
 }
