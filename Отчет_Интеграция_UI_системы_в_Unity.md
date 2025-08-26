@@ -38,7 +38,7 @@
 - [x] MainMenuUI префаб ✅
 - [x] ContractSelectionUI префаб ✅
 - [x] GameplayUI префаб ✅
-- [ ] VictoryScreen префаб
+- [x] VictoryScreen префаб ✅
 - [ ] DefeatScreen префаб
 - [ ] SettingsUI префаб
 - [ ] PauseMenu префаб
@@ -94,4 +94,4 @@
 ---
 **Дата начала:** Текущая дата  
 **Статус:** В процессе  
-**Прогресс:** 67% (4/6 этапов)
+**Прогресс:** 83% (5/6 этапов)
