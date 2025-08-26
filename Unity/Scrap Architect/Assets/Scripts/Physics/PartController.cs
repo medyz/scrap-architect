@@ -437,6 +437,15 @@ namespace ScrapArchitect.Physics
         }
         
         /// <summary>
+        /// Ремонт детали
+        /// </summary>
+        public virtual void Repair(float amount)
+        {
+            currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+            Debug.Log($"Part {partName} repaired: {currentHealth}/{maxHealth}");
+        }
+        
+        /// <summary>
         /// Уничтожение детали
         /// </summary>
         public void DestroyPart()
