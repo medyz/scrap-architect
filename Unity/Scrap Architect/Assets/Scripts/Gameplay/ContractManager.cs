@@ -10,6 +10,9 @@ namespace ScrapArchitect.Gameplay
     /// </summary>
     public class ContractManager : MonoBehaviour
     {
+        // Singleton pattern
+        public static ContractManager Instance { get; private set; }
+        
         [Header("Contract Settings")]
         public int maxActiveContracts = 3;
         public int maxAvailableContracts = 10;
@@ -48,9 +51,23 @@ namespace ScrapArchitect.Gameplay
         public Action<List<Contract>> OnAvailableContractsUpdated;
         public Action<List<Contract>> OnActiveContractsUpdated;
         
+        private void Awake()
+        {
+            // Singleton pattern
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+                InitializeContractManager();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        
         private void Start()
         {
-            InitializeContractManager();
             GenerateInitialContracts();
         }
         
