@@ -61,15 +61,13 @@ namespace ScrapArchitect.Parts
             Debug.Log($"Connection initialized: {partName} (Type: {connectionType})");
         }
         
-        public override void OnConnect(PartController otherPart)
+        public void OnConnect(PartController otherPart)
         {
-            base.OnConnect(otherPart);
             CreateJoint(otherPart);
         }
         
-        public override void OnDisconnect(PartController otherPart)
+        public void OnDisconnect(PartController otherPart)
         {
-            base.OnDisconnect(otherPart);
             DestroyJoint();
         }
         

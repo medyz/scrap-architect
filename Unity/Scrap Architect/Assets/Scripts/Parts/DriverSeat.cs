@@ -98,10 +98,8 @@ namespace ScrapArchitect.Parts
             }
         }
         
-        public override void OnConnect(PartController otherPart)
+        public void OnConnect(PartController otherPart)
         {
-            base.OnConnect(otherPart);
-            
             // Автоматическое подключение к двигателям и колесам
             if (autoConnectToMotors)
             {
@@ -122,10 +120,8 @@ namespace ScrapArchitect.Parts
             }
         }
         
-        public override void OnDisconnect(PartController otherPart)
+        public void OnDisconnect(PartController otherPart)
         {
-            base.OnDisconnect(otherPart);
-            
             // Отключение от двигателей и колес
             Motor motor = otherPart.GetComponent<Motor>();
             if (motor != null)
