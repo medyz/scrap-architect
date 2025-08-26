@@ -32,7 +32,7 @@ namespace ScrapArchitect.UI
         [Header("Visual Settings")]
         public Color progressBarColor = Color.green;
         public Color levelUpColor = Color.yellow;
-        public Color achievementColor = Color.orange;
+        public Color achievementColor = new Color(1f, 0.5f, 0f); // Orange
 
         [Header("Animation Settings")]
         public float animationDuration = 0.5f;
