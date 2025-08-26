@@ -455,7 +455,7 @@ namespace ScrapArchitect.Parts
             if (currentPower > 0f)
             {
                 // Проверка попадания сверла
-                if (Physics.Raycast(transform.position, transform.forward, out drillHit, drillRange, drillableLayers))
+                if (UnityEngine.Physics.Raycast(transform.position, transform.forward, out drillHit, drillRange, drillableLayers))
                 {
                     if (!isDrilling)
                     {
