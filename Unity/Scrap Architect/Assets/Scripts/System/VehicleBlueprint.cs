@@ -550,7 +550,7 @@ namespace ScrapArchitect.System
             if (partData.customProperties.ContainsKey("toolType"))
             {
                 string toolTypeString = partData.customProperties["toolType"].ToString();
-                if (Enum.TryParse(toolTypeString, out ToolType toolType))
+                if (Enum.TryParse(toolTypeString, out Tool.ToolType toolType))
                 {
                     tool.toolType = toolType;
                 }
