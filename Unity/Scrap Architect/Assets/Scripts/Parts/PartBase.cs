@@ -185,9 +185,9 @@ namespace ScrapArchitect.Parts
             }
             
             // Изменяем материал при повреждении
-            if (damagedMaterial != null && rend != null && currentHealth < maxHealth * 0.5f)
+            if (damagedMaterial != null && Renderer != null && currentHealth < maxHealth * 0.5f)
             {
-                rend.material = damagedMaterial;
+                Renderer.material = damagedMaterial;
             }
         }
         
@@ -199,9 +199,9 @@ namespace ScrapArchitect.Parts
             base.Select();
             
             // Изменяем материал при выборе
-            if (selectedMaterial != null && rend != null)
+            if (selectedMaterial != null && Renderer != null)
             {
-                rend.material = selectedMaterial;
+                Renderer.material = selectedMaterial;
             }
         }
         
@@ -213,9 +213,9 @@ namespace ScrapArchitect.Parts
             base.Deselect();
             
             // Возвращаем материал по умолчанию
-            if (defaultMaterial != null && rend != null)
+            if (defaultMaterial != null && Renderer != null)
             {
-                rend.material = defaultMaterial;
+                Renderer.material = defaultMaterial;
             }
         }
 
