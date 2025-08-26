@@ -188,7 +188,7 @@ namespace ScrapArchitect.UI
         {
             if (currentContract == null) return;
             
-            float progress = currentContract.GetOverallProgress();
+            float progress = currentContract.GetProgress();
             
             if (overallProgressSlider != null)
             {
