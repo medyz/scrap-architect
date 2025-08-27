@@ -5,6 +5,63 @@ namespace ScrapArchitect.Garage.Editor
 {
     public class PlayerDebugger : EditorWindow
     {
+        [MenuItem("Scrap Architect/Garage/Create Player in Current Scene")]
+        public static void CreatePlayerInCurrentScene()
+        {
+            Debug.Log("=== СОЗДАНИЕ ИГРОКА В ТЕКУЩЕЙ СЦЕНЕ ===");
+            
+            // Проверяем, есть ли уже игрок
+            GameObject existingPlayer = GameObject.Find("Player");
+            if (existingPlayer != null)
+            {
+                Debug.LogWarning("⚠️ Игрок уже существует в сцене!");
+                return;
+            }
+            
+            // Создаем игрока
+            GameObject player = new GameObject("Player");
+            player.transform.position = new Vector3(0, 1f, 0);
+            
+            // Добавляем CharacterController
+            CharacterController controller = player.AddComponent<CharacterController>();
+            controller.height = 2f;
+            controller.radius = 0.5f;
+            controller.center = Vector3.zero;
+            
+            // Добавляем камеру
+            GameObject camera = new GameObject("PlayerCamera");
+            camera.transform.SetParent(player.transform);
+            camera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            camera.transform.localRotation = Quaternion.identity;
+            
+            Camera cam = camera.AddComponent<Camera>();
+            cam.fieldOfView = 60f;
+            cam.nearClipPlane = 0.1f;
+            cam.farClipPlane = 1000f;
+            cam.tag = "MainCamera";
+            
+            // Добавляем GarageManager
+            GarageManager garageManager = player.AddComponent<GarageManager>();
+            garageManager.playerCamera = cam;
+            garageManager.walkSpeed = 5f;
+            garageManager.runSpeed = 8f;
+            garageManager.mouseSensitivity = 2f;
+            
+            // Блокируем курсор
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            // Выбираем игрока в иерархии
+            Selection.activeGameObject = player;
+            
+            Debug.Log("✅ Игрок успешно создан в текущей сцене!");
+            Debug.Log("✅ CharacterController добавлен");
+            Debug.Log("✅ Камера создана и настроена");
+            Debug.Log("✅ GarageManager добавлен");
+            Debug.Log("✅ Курсор заблокирован");
+            Debug.Log("=== СОЗДАНИЕ ЗАВЕРШЕНО ===");
+        }
+        
         [MenuItem("Scrap Architect/Garage/Debug Player Movement")]
         public static void DebugPlayerMovement()
         {
@@ -15,6 +72,7 @@ namespace ScrapArchitect.Garage.Editor
             if (player == null)
             {
                 Debug.LogError("❌ Игрок не найден!");
+                Debug.Log("💡 Используйте 'Create Player in Current Scene' для создания игрока");
                 return;
             }
             
@@ -76,6 +134,8 @@ namespace ScrapArchitect.Garage.Editor
             if (player == null)
             {
                 Debug.LogError("❌ Игрок не найден!");
+                Debug.Log("💡 Создаем игрока...");
+                CreatePlayerInCurrentScene();
                 return;
             }
             

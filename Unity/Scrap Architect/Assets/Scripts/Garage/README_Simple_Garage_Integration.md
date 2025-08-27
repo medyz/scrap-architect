@@ -77,6 +77,18 @@ Scrap Architect → Garage → Cleanup Materials
 - Освобождает память
 - Удаляет неиспользуемые ассеты
 
+### **Создание игрока в текущей сцене:**
+```
+Scrap Architect → Garage → Create Player in Current Scene
+```
+**Что делает:**
+- Создает игрока с полной настройкой
+- Добавляет CharacterController
+- Создает камеру и настраивает её
+- Добавляет GarageManager
+- Блокирует курсор
+- Выбирает игрока в иерархии
+
 ### **Диагностика персонажа:**
 ```
 Scrap Architect → Garage → Debug Player Movement
