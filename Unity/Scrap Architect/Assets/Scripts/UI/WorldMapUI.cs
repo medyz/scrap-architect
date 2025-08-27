@@ -282,15 +282,15 @@ namespace ScrapArchitect.UI
                 // Разные цвета для разных статусов
                 if (!marker.location.isUnlocked)
                 {
-                    marker.markerImage.color = UIColors.Disabled;
+                    marker.markerImage.color = Color.gray; // Заблокированные локации
                 }
                 else if (marker.location.availableContracts.Count > 0)
                 {
-                    marker.markerImage.color = UIColors.Primary;
+                    marker.markerImage.color = Color.green; // Доступные локации с контрактами
                 }
                 else
                 {
-                    marker.markerImage.color = UIColors.Secondary;
+                    marker.markerImage.color = Color.blue; // Доступные локации без контрактов
                 }
             }
         }
