@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System;
 using System.IO;
 
 namespace ScrapArchitect.UI
@@ -76,7 +77,7 @@ namespace ScrapArchitect.UI
                 
                 Debug.Log($"✓ Created: {prefabPath}");
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.LogError($"✗ Error creating {name}: {e.Message}");
             }

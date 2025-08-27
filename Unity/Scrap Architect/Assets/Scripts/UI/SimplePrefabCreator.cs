@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System;
 using System.IO;
 
 namespace ScrapArchitect.UI
@@ -54,7 +55,7 @@ namespace ScrapArchitect.UI
                 
                 Debug.Log("All missing UI panels created successfully!");
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.LogError($"Error creating panels: {e.Message}");
             }
@@ -116,7 +117,7 @@ namespace ScrapArchitect.UI
                 
                 Debug.Log($"Created {panelName} prefab: {prefabPath}");
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.LogError($"Error creating {panelName}: {e.Message}");
             }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+using System;
+using System.IO;
 
 namespace ScrapArchitect.UI
 {
@@ -21,7 +23,7 @@ namespace ScrapArchitect.UI
             }
             
             // Проверяем наличие ошибок
-            var logs = System.IO.File.ReadAllLines(Application.dataPath + "/../Logs/Packages-Update.log");
+            var logs = File.ReadAllLines(Application.dataPath + "/../Logs/Packages-Update.log");
             bool hasErrors = false;
             
             foreach (var line in logs)
