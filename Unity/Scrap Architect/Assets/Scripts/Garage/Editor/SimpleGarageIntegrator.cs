@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using System;
 
 namespace ScrapArchitect.Garage.Editor
 {
@@ -82,9 +83,9 @@ namespace ScrapArchitect.Garage.Editor
             {
                 // Ищем стены по имени
                 walls = GameObject.FindGameObjectsWithTag("Untagged");
-                walls = System.Array.FindAll(walls, obj => obj.name.ToLower().Contains("wall") || 
-                                                          obj.name.ToLower().Contains("exterior") ||
-                                                          obj.name.ToLower().Contains("garage"));
+                walls = Array.FindAll(walls, obj => obj.name.ToLower().Contains("wall") || 
+                                                   obj.name.ToLower().Contains("exterior") ||
+                                                   obj.name.ToLower().Contains("garage"));
             }
             
             foreach (GameObject wall in walls)
