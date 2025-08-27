@@ -36,6 +36,19 @@ namespace ScrapArchitect.UI
         {
             SetupButtons();
             SetupTexts();
+            SetupBackground();
+            
+            // Принудительно обновляем тексты кнопок
+            Invoke(nameof(ForceUpdateButtonTexts), 0.1f);
+        }
+        
+        /// <summary>
+        /// Принудительное обновление текстов кнопок
+        /// </summary>
+        private void ForceUpdateButtonTexts()
+        {
+            Debug.Log("ForceUpdateButtonTexts: Updating button texts...");
+            SetupButtonTexts();
         }
         
         /// <summary>
@@ -43,29 +56,56 @@ namespace ScrapArchitect.UI
         /// </summary>
         private void SetupButtons()
         {
+            Debug.Log("SetupButtons: Setting up button listeners...");
+            
             if (playButton != null)
             {
                 playButton.onClick.AddListener(OnPlayButtonClick);
+                Debug.Log("SetupButtons: Play button listener added");
+            }
+            else
+            {
+                Debug.LogWarning("SetupButtons: Play button is null!");
             }
             
             if (worldMapButton != null)
             {
                 worldMapButton.onClick.AddListener(OnWorldMapButtonClick);
+                Debug.Log("SetupButtons: World Map button listener added");
+            }
+            else
+            {
+                Debug.LogWarning("SetupButtons: World Map button is null!");
             }
             
             if (settingsButton != null)
             {
                 settingsButton.onClick.AddListener(OnSettingsButtonClick);
+                Debug.Log("SetupButtons: Settings button listener added");
+            }
+            else
+            {
+                Debug.LogWarning("SetupButtons: Settings button is null!");
             }
             
             if (creditsButton != null)
             {
                 creditsButton.onClick.AddListener(OnCreditsButtonClick);
+                Debug.Log("SetupButtons: Credits button listener added");
+            }
+            else
+            {
+                Debug.LogWarning("SetupButtons: Credits button is null!");
             }
             
             if (quitButton != null)
             {
                 quitButton.onClick.AddListener(OnQuitButtonClick);
+                Debug.Log("SetupButtons: Quit button listener added");
+            }
+            else
+            {
+                Debug.LogWarning("SetupButtons: Quit button is null!");
             }
         }
         
@@ -88,6 +128,128 @@ namespace ScrapArchitect.UI
             {
                 versionText.text = $"Версия {Application.version}";
             }
+            
+            // Настройка кнопок для лучшей читаемости
+            SetupButtonTexts();
+        }
+        
+        /// <summary>
+        /// Настройка текстов кнопок
+        /// </summary>
+        private void SetupButtonTexts()
+        {
+            if (playButton != null)
+            {
+                TextMeshProUGUI playText = playButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (playText != null)
+                {
+                    playText.text = "PLAY"; // Используем английский текст
+                    playText.color = Color.black; // Черный текст для лучшего контраста
+                    playText.fontSize = 24f;
+                    playText.alignment = TextAlignmentOptions.Center;
+                }
+            }
+            
+            if (settingsButton != null)
+            {
+                TextMeshProUGUI settingsText = settingsButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (settingsText != null)
+                {
+                    settingsText.text = "SETTINGS";
+                    settingsText.color = Color.black;
+                    settingsText.fontSize = 20f;
+                    settingsText.alignment = TextAlignmentOptions.Center;
+                }
+            }
+            
+            if (creditsButton != null)
+            {
+                TextMeshProUGUI creditsText = creditsButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (creditsText != null)
+                {
+                    creditsText.text = "ABOUT";
+                    creditsText.color = Color.black;
+                    creditsText.fontSize = 20f;
+                    creditsText.alignment = TextAlignmentOptions.Center;
+                }
+            }
+            
+            if (quitButton != null)
+            {
+                TextMeshProUGUI quitText = quitButton.GetComponentInChildren<TextMeshProUGUI>();
+                if (quitText != null)
+                {
+                    quitText.text = "EXIT";
+                    quitText.color = Color.black;
+                    quitText.fontSize = 20f;
+                    quitText.alignment = TextAlignmentOptions.Center;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Настройка фонового изображения
+        /// </summary>
+        private void SetupBackground()
+        {
+            Debug.Log($"SetupBackground: backgroundImage is {(backgroundImage == null ? "null" : "assigned")}");
+            
+            if (backgroundImage != null)
+            {
+                Debug.Log($"SetupBackground: Found backgroundImage: {backgroundImage.name}");
+                
+                // Получаем RectTransform фонового изображения
+                RectTransform backgroundRect = backgroundImage.GetComponent<RectTransform>();
+                if (backgroundRect != null)
+                {
+                    Debug.Log($"SetupBackground: Setting RectTransform for {backgroundImage.name}");
+                    
+                    // Устанавливаем якоря на растяжение по всему экрану
+                    backgroundRect.anchorMin = Vector2.zero;
+                    backgroundRect.anchorMax = Vector2.one;
+                    backgroundRect.offsetMin = Vector2.zero;
+                    backgroundRect.offsetMax = Vector2.zero;
+                    
+                    // Принудительно устанавливаем размер
+                    backgroundRect.sizeDelta = Vector2.zero;
+                    
+                    // Убеждаемся, что изображение растягивается на весь экран
+                    Image backgroundImageComponent = backgroundImage.GetComponent<Image>();
+                    if (backgroundImageComponent == null)
+                    {
+                        // Добавляем Image компонент, если его нет
+                        backgroundImageComponent = backgroundImage.AddComponent<Image>();
+                        Debug.Log($"SetupBackground: Added Image component to {backgroundImage.name}");
+                    }
+                    
+                    backgroundImageComponent.type = Image.Type.Simple;
+                    backgroundImageComponent.preserveAspect = false;
+                    backgroundImageComponent.raycastTarget = false; // Отключаем raycast для фона
+                    Debug.Log($"SetupBackground: Image component configured - type: {backgroundImageComponent.type}, preserveAspect: {backgroundImageComponent.preserveAspect}");
+                    
+                    // Перемещаем фон в начало иерархии (под всеми элементами)
+                    backgroundImage.transform.SetAsFirstSibling();
+                    Debug.Log($"SetupBackground: Moved {backgroundImage.name} to first sibling");
+                }
+                else
+                {
+                    Debug.LogError($"SetupBackground: No RectTransform found on {backgroundImage.name}");
+                }
+            }
+            else
+            {
+                Debug.Log("SetupBackground: backgroundImage is null, skipping background creation");
+                // НЕ создаем фон программно - используем существующий дизайн
+            }
+        }
+        
+        /// <summary>
+        /// Создать фоновое изображение программно (отключено)
+        /// </summary>
+        private void CreateBackgroundImage()
+        {
+            Debug.Log("CreateBackgroundImage: Background creation disabled - using existing design");
+            // Метод отключен - используем существующий дизайн
         }
         
         /// <summary>
@@ -119,10 +281,17 @@ namespace ScrapArchitect.UI
         /// </summary>
         public void OnSettingsButtonClick()
         {
+            Debug.Log("OnSettingsButtonClick: Settings button clicked!");
+            
             if (uiManager != null)
             {
+                Debug.Log("OnSettingsButtonClick: UIManager found, playing sound and showing settings");
                 uiManager.PlayButtonClickSound();
                 uiManager.ShowSettings();
+            }
+            else
+            {
+                Debug.LogError("OnSettingsButtonClick: UIManager is null!");
             }
         }
         
@@ -158,8 +327,32 @@ namespace ScrapArchitect.UI
         {
             base.OnShow();
             
-            // Запускаем анимации
-            StartCoroutine(AnimateMainMenu());
+            Debug.Log($"MainMenuUI OnShow: GameObject {name} is active: {gameObject.activeInHierarchy}");
+            Debug.Log($"MainMenuUI OnShow: CanvasGroup alpha: {canvasGroup?.alpha}");
+            Debug.Log($"MainMenuUI OnShow: CanvasGroup interactable: {canvasGroup?.interactable}");
+            Debug.Log($"MainMenuUI OnShow: CanvasGroup blocksRaycasts: {canvasGroup?.blocksRaycasts}");
+            
+            // Принудительно делаем панель видимой
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 1f;
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+                Debug.Log($"MainMenuUI OnShow: Forced visibility - alpha: {canvasGroup.alpha}");
+            }
+            
+            // Принудительно настраиваем фон при каждом показе
+            SetupBackground();
+            
+            // Запускаем анимации только если GameObject активен
+            if (gameObject.activeInHierarchy)
+            {
+                StartCoroutine(AnimateMainMenu());
+            }
+            else
+            {
+                Debug.LogWarning($"MainMenuUI OnShow: GameObject {name} is not active, skipping animations");
+            }
         }
         
         /// <summary>

@@ -280,7 +280,7 @@ namespace ScrapArchitect.UI
         /// <summary>
         /// Обработчик кнопки "Назад"
         /// </summary>
-        public void OnBackButtonClick()
+        public override void OnBackButtonClick()
         {
             if (uiManager != null)
             {

@@ -26,6 +26,11 @@ namespace ScrapArchitect.UI
         protected bool isInitialized = false;
         protected bool isVisible = false;
         
+        /// <summary>
+        /// Проверка, инициализирована ли панель
+        /// </summary>
+        public bool IsInitialized => isInitialized;
+        
         // Events
         public Action OnShowStarted;
         public Action OnShowCompleted;
@@ -53,6 +58,8 @@ namespace ScrapArchitect.UI
         /// </summary>
         public virtual void Initialize(UIManager manager)
         {
+            Debug.Log($"UIBase.Initialize: Panel {name} - manager: {manager?.name ?? "null"}");
+            
             uiManager = manager;
             isInitialized = true;
             
@@ -63,18 +70,39 @@ namespace ScrapArchitect.UI
                 if (canvasGroup == null)
                 {
                     canvasGroup = gameObject.AddComponent<CanvasGroup>();
+                    Debug.Log($"UIBase.Initialize: Added CanvasGroup to {name}");
                 }
             }
             
-            // Скрываем панель по умолчанию
+            Debug.Log($"UIBase.Initialize: Panel {name} - CanvasGroup: {canvasGroup?.name ?? "null"}");
+            
+            // Скрываем панель по умолчанию только если она не должна быть видимой
             if (useAnimation)
             {
-                canvasGroup.alpha = 0f;
-                canvasGroup.interactable = false;
-                canvasGroup.blocksRaycasts = false;
+                // Проверяем, не является ли это главным меню, которое должно быть видимым
+                if (this is MainMenuUI)
+                {
+                    Debug.Log($"UIBase.Initialize: Panel {name} - MainMenuUI, keeping visible");
+                    canvasGroup.alpha = 1f;
+                    canvasGroup.interactable = true;
+                    canvasGroup.blocksRaycasts = true;
+                    isVisible = true;
+                }
+                else
+                {
+                    canvasGroup.alpha = 0f;
+                    canvasGroup.interactable = false;
+                    canvasGroup.blocksRaycasts = false;
+                    Debug.Log($"UIBase.Initialize: Panel {name} - Hidden with animation (alpha: 0)");
+                }
+            }
+            else
+            {
+                Debug.Log($"UIBase.Initialize: Panel {name} - No animation, keeping current state");
             }
             
             OnInitialize();
+            Debug.Log($"UIBase.Initialize: Panel {name} - Initialization complete");
         }
         
         /// <summary>
@@ -82,29 +110,42 @@ namespace ScrapArchitect.UI
         /// </summary>
         public virtual void Show()
         {
+            Debug.Log($"UIBase.Show: Panel {name} - initialized: {isInitialized}, visible: {isVisible}");
+            
             if (!isInitialized)
             {
                 Debug.LogWarning($"Panel {name} is not initialized!");
                 return;
             }
             
-            if (isVisible) return;
+            // Для MainMenuUI принудительно устанавливаем видимость, даже если isVisible = true
+            bool forceShow = (this is MainMenuUI);
+            
+            if (isVisible && !forceShow) 
+            {
+                Debug.Log($"UIBase.Show: Panel {name} - Already visible, skipping");
+                return;
+            }
             
             gameObject.SetActive(true);
+            Debug.Log($"UIBase.Show: Panel {name} - GameObject active: {gameObject.activeInHierarchy}");
             OnShowStarted?.Invoke();
             
             // Проверяем, что объект активен перед запуском корутины
             if (useAnimation && gameObject.activeInHierarchy)
             {
+                Debug.Log($"UIBase.Show: Panel {name} - Starting animation");
                 StartCoroutine(ShowAnimation());
             }
             else
             {
+                Debug.Log($"UIBase.Show: Panel {name} - No animation, setting visibility directly");
                 canvasGroup.alpha = 1f;
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
                 isVisible = true;
                 OnShowCompleted?.Invoke();
+                Debug.Log($"UIBase.Show: Panel {name} - Visibility set - alpha: {canvasGroup.alpha}");
             }
             
             PlayShowSound();
@@ -120,7 +161,7 @@ namespace ScrapArchitect.UI
             
             OnHideStarted?.Invoke();
             
-            if (useAnimation)
+            if (useAnimation && gameObject.activeInHierarchy)
             {
                 StartCoroutine(HideAnimation());
             }
@@ -197,14 +238,6 @@ namespace ScrapArchitect.UI
         public bool IsVisible()
         {
             return isVisible;
-        }
-        
-        /// <summary>
-        /// Проверить, инициализирована ли панель
-        /// </summary>
-        public bool IsInitialized()
-        {
-            return isInitialized;
         }
         
         #region Audio Methods

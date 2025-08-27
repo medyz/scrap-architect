@@ -448,7 +448,7 @@ namespace ScrapArchitect.UI
         }
         
         // Обработчики кнопок
-        private void OnBackButtonClick()
+        public override void OnBackButtonClick()
         {
             if (UIManager.Instance != null)
             {

@@ -1045,6 +1045,7 @@ MonoBehaviour:
   versionText: {fileID: 5648739395600323417}
   subtitleText: {fileID: 3995778724961096420}
   playButton: {fileID: 3592168423777288996}
+  worldMapButton: {fileID: 0}
   settingsButton: {fileID: 1839035727209937983}
   creditsButton: {fileID: 8120607694001901197}
   quitButton: {fileID: 4438126995992340633}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using ScrapArchitect.Gameplay;
 using ScrapArchitect.UI;
@@ -77,6 +78,9 @@ namespace ScrapArchitect.UI
         /// </summary>
         private void InitializeUIManager()
         {
+            Debug.Log("=== UIManager InitializeUIManager ===");
+            Debug.Log($"mainMenuPanel is null: {mainMenuPanel == null}");
+            
             // Инициализируем все панели
             InitializePanel(mainMenuPanel);
             InitializePanel(contractSelectionPanel);
@@ -98,8 +102,14 @@ namespace ScrapArchitect.UI
         {
             if (panel != null)
             {
+                Debug.Log($"Initializing panel: {panel.name}");
                 panel.Initialize(this);
-                panel.gameObject.SetActive(false);
+                // НЕ деактивируем панель здесь - это делает Initialize()
+                Debug.Log($"InitializePanel: {panel.name} initialized, keeping current active state");
+            }
+            else
+            {
+                Debug.Log("InitializePanel: panel is null");
             }
         }
         
@@ -108,6 +118,12 @@ namespace ScrapArchitect.UI
         /// </summary>
         public void ShowMainMenu()
         {
+            Debug.Log($"ShowMainMenu called. mainMenuPanel is null: {mainMenuPanel == null}");
+            if (mainMenuPanel == null)
+            {
+                Debug.LogError("MainMenuPanel is not assigned in UIManager!");
+                return;
+            }
             ShowPanel(mainMenuPanel);
         }
         
@@ -149,7 +165,16 @@ namespace ScrapArchitect.UI
         /// </summary>
         public void ShowSettings()
         {
-            ShowPanel(settingsPanel);
+            Debug.Log($"ShowSettings: Called, settingsPanel is {(settingsPanel == null ? "null" : "assigned")}");
+            if (settingsPanel != null)
+            {
+                Debug.Log($"ShowSettings: Showing settings panel: {settingsPanel.name}");
+                ShowPanel(settingsPanel);
+            }
+            else
+            {
+                Debug.LogError("ShowSettings: settingsPanel is null! Please assign it in the Inspector.");
+            }
         }
         
         /// <summary>
@@ -215,23 +240,136 @@ namespace ScrapArchitect.UI
             }
         }
         
-        /// <summary>
+                /// <summary>
         /// Показать панель
         /// </summary>
         public void ShowPanel(UIBase panel)
         {
-            if (panel == null) return;
-            
+            Debug.Log($"ShowPanel called with panel: {panel?.name ?? "null"}");
+            if (panel == null)
+            {
+                Debug.LogError("ShowPanel: panel is null!");
+                return;
+            }
+
+            Debug.Log($"Panel GameObject active: {panel.gameObject.activeInHierarchy}");
+
+            // Проверяем Canvas
+            Canvas canvas = panel.GetComponentInParent<Canvas>();
+            if (canvas != null)
+            {
+                Debug.Log($"ShowPanel: Found Canvas {canvas.name} - active: {canvas.gameObject.activeInHierarchy}");
+                if (!canvas.gameObject.activeInHierarchy)
+                {
+                    Debug.LogWarning($"ShowPanel: Canvas {canvas.name} is inactive! Activating...");
+                    canvas.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"ShowPanel: No Canvas found in parents of {panel.name}!");
+                
+                // Создаем Canvas если его нет
+                Debug.LogWarning($"ShowPanel: Creating Canvas for {panel.name}!");
+                GameObject canvasObj = new GameObject("UI Canvas");
+                canvas = canvasObj.AddComponent<Canvas>();
+                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                canvasObj.AddComponent<UnityEngine.UI.CanvasScaler>();
+                canvasObj.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+                
+                // Перемещаем панель под Canvas
+                panel.transform.SetParent(canvasObj.transform);
+                Debug.Log($"ShowPanel: Moved {panel.name} under Canvas {canvasObj.name}");
+            }
+
+            // Инициализируем панель, если она еще не инициализирована
+            if (!panel.IsInitialized)
+            {
+                Debug.Log($"Initializing panel: {panel.name}");
+                panel.Initialize(this);
+            }
+
             // Скрыть текущую панель
             if (currentActivePanel != null)
             {
                 currentActivePanel.Hide();
                 panelHistory.Push(currentActivePanel);
             }
+
+            // Убеждаемся, что GameObject активен перед показом
+            if (!panel.gameObject.activeInHierarchy)
+            {
+                panel.gameObject.SetActive(true);
+                Debug.Log($"Activated panel GameObject: {panel.name}");
+
+                // Даем один кадр для активации GameObject
+                StartCoroutine(ShowPanelDelayed(panel));
+            }
+            else
+            {
+                // Показать новую панель сразу
+                currentActivePanel = panel;
+                panel.Show();
+
+                Debug.Log($"Panel {panel.name} should now be visible");
+
+                OnPanelOpened?.Invoke(panel);
+                PlayPanelOpenSound();
+            }
+        }
+        
+        /// <summary>
+        /// Показать панель с задержкой в один кадр
+        /// </summary>
+        private IEnumerator ShowPanelDelayed(UIBase panel)
+        {
+            Debug.Log($"ShowPanelDelayed: Starting for panel {panel.name}");
+            
+            // Ждем один кадр, чтобы GameObject успел активироваться
+            yield return null;
+            
+            Debug.Log($"ShowPanelDelayed: After yield, panel {panel.name} active: {panel.gameObject.activeInHierarchy}");
+            
+            // Если панель стала неактивной, активируем её снова
+            if (!panel.gameObject.activeInHierarchy)
+            {
+                Debug.LogWarning($"ShowPanelDelayed: Panel {panel.name} became inactive, reactivating");
+                
+                // Проверяем всю иерархию родителей
+                Transform parent = panel.transform.parent;
+                while (parent != null)
+                {
+                    Debug.Log($"ShowPanelDelayed: Checking parent {parent.name} - active: {parent.gameObject.activeInHierarchy}");
+                    if (!parent.gameObject.activeInHierarchy)
+                    {
+                        Debug.LogWarning($"ShowPanelDelayed: Parent {parent.name} is inactive! Activating...");
+                        parent.gameObject.SetActive(true);
+                    }
+                    parent = parent.parent;
+                }
+                
+                panel.gameObject.SetActive(true);
+                yield return null; // Ждем еще один кадр
+                Debug.Log($"ShowPanelDelayed: After reactivation, panel {panel.name} active: {panel.gameObject.activeInHierarchy}");
+            }
+            
+            // Инициализируем панель, если она еще не инициализирована
+            if (!panel.IsInitialized)
+            {
+                Debug.Log($"ShowPanelDelayed: Initializing panel (delayed): {panel.name}");
+                panel.Initialize(this);
+            }
+            else
+            {
+                Debug.Log($"ShowPanelDelayed: Panel {panel.name} already initialized");
+            }
             
             // Показать новую панель
             currentActivePanel = panel;
+            Debug.Log($"ShowPanelDelayed: Calling panel.Show() for {panel.name}");
             panel.Show();
+            
+            Debug.Log($"ShowPanelDelayed: Panel {panel.name} should now be visible (delayed)");
             
             OnPanelOpened?.Invoke(panel);
             PlayPanelOpenSound();
