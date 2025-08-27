@@ -80,7 +80,7 @@ namespace ScrapArchitect.UI
             Debug.Log("Missing UI prefabs created!");
         }
         
-        private void CreateSimplePrefab(string prefabName, System.Type componentType)
+        private void CreateSimplePrefab(string prefabName, Type componentType)
         {
             // Создаем GameObject
             GameObject go = new GameObject(prefabName);

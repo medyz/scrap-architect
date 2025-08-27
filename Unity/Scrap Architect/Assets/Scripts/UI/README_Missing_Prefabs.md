@@ -14,8 +14,15 @@
 ### Вариант 1: Автоматическое создание (рекомендуется)
 
 1. Откройте Unity Editor
-2. Перейдите в меню **Scrap Architect** → **Quick Create Missing UI Prefabs**
+2. Перейдите в меню **Scrap Architect** → **Simple Create All Missing Panels**
 3. Префабы будут созданы автоматически в папке `Assets/Prefabs/UI/Panels/`
+
+**Альтернативно:** Можно создать каждый префаб отдельно:
+- **Scrap Architect** → **Simple Create WorldMap Panel**
+- **Scrap Architect** → **Simple Create Defeat Panel**
+- **Scrap Architect** → **Simple Create Settings Panel**
+- **Scrap Architect** → **Simple Create Pause Panel**
+- **Scrap Architect** → **Simple Create Loading Panel**
 
 ### Вариант 2: Ручное создание
 
@@ -108,10 +115,15 @@
 
 В проекте есть дополнительные скрипты для помощи:
 
+- **SimplePrefabCreator.cs** - простое создание префабов (рекомендуется)
 - **UIPrefabChecker.cs** - проверка недостающих префабов
 - **QuickPrefabCreator.cs** - быстрое создание префабов
 - **CreateMissingPrefabs.cs** - альтернативный способ создания
 - **TestPrefabCreation.cs** - тестирование создания префабов
+
+### Основные функции (рекомендуемые):
+- **Scrap Architect** → **Simple Create All Missing Panels** - создание всех недостающих префабов
+- **Scrap Architect** → **Simple Create [Panel Name] Panel** - создание отдельных префабов
 
 ### Тестовые функции:
 - **Scrap Architect** → **Test Create Single Prefab** - создание тестового префаба
