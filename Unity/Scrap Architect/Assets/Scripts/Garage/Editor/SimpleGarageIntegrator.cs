@@ -14,6 +14,9 @@ namespace ScrapArchitect.Garage.Editor
             // Загружаем готовую сцену
             LoadSimpleGarageScene();
             
+            // Добавляем коллизии
+            AddCollisions();
+            
             // Добавляем игрока
             AddPlayerToScene();
             
@@ -45,6 +48,64 @@ namespace ScrapArchitect.Garage.Editor
             {
                 Debug.LogError("Сцена Simple Garage не найдена!");
                 return;
+            }
+        }
+        
+        static void AddCollisions()
+        {
+            Debug.Log("Добавляем коллизии...");
+            
+            // Находим пол и добавляем коллизию
+            GameObject floor = GameObject.Find("Floor");
+            if (floor == null)
+            {
+                // Ищем другие возможные названия пола
+                floor = GameObject.Find("Carpet");
+            }
+            
+            if (floor != null)
+            {
+                if (floor.GetComponent<Collider>() == null)
+                {
+                    floor.AddComponent<BoxCollider>();
+                    Debug.Log("Добавлена коллизия к полу");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Пол не найден для добавления коллизии!");
+            }
+            
+            // Находим стены и добавляем коллизии
+            GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+            if (walls.Length == 0)
+            {
+                // Ищем стены по имени
+                walls = GameObject.FindGameObjectsWithTag("Untagged");
+                walls = System.Array.FindAll(walls, obj => obj.name.ToLower().Contains("wall") || 
+                                                          obj.name.ToLower().Contains("exterior") ||
+                                                          obj.name.ToLower().Contains("garage"));
+            }
+            
+            foreach (GameObject wall in walls)
+            {
+                if (wall.GetComponent<Collider>() == null)
+                {
+                    wall.AddComponent<BoxCollider>();
+                    Debug.Log($"Добавлена коллизия к стене: {wall.name}");
+                }
+            }
+            
+            // Добавляем коллизии к основным объектам
+            string[] objectsToCollide = { "Table", "Shelf", "Locker", "Garage door" };
+            foreach (string objName in objectsToCollide)
+            {
+                GameObject obj = GameObject.Find(objName);
+                if (obj != null && obj.GetComponent<Collider>() == null)
+                {
+                    obj.AddComponent<BoxCollider>();
+                    Debug.Log($"Добавлена коллизия к объекту: {objName}");
+                }
             }
         }
         
@@ -112,7 +173,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Создаем компьютер
             GameObject computer = new GameObject("ComputerZone");
-            computer.transform.position = new Vector3(3f, 0f, -2f);
+            computer.transform.position = new Vector3(2f, 0f, -1f); // Ближе к центру
             
             // Монитор
             GameObject monitor = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -136,6 +197,9 @@ namespace ScrapArchitect.Garage.Editor
             monitor.GetComponent<Renderer>().material = computerMaterial;
             keyboard.GetComponent<Renderer>().material = computerMaterial;
             
+            // Добавляем коллизию
+            computer.AddComponent<BoxCollider>();
+            
             Debug.Log("Компьютер создан");
         }
         
@@ -150,7 +214,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Создаем сейф
             GameObject safe = new GameObject("SafeZone");
-            safe.transform.position = new Vector3(8f, 0f, 0f);
+            safe.transform.position = new Vector3(4f, 0f, 1f); // Внутри гаража
             
             // Корпус сейфа
             GameObject body = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -166,6 +230,9 @@ namespace ScrapArchitect.Garage.Editor
             
             body.GetComponent<Renderer>().material = safeMaterial;
             
+            // Добавляем коллизию
+            safe.AddComponent<BoxCollider>();
+            
             Debug.Log("Сейф создан");
         }
         
@@ -180,7 +247,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Создаем доску объявлений
             GameObject board = new GameObject("BulletinBoardZone");
-            board.transform.position = new Vector3(-8f, 0f, 0f);
+            board.transform.position = new Vector3(-3f, 0f, 1f); // Внутри гаража, слева
             
             // Доска
             GameObject mainBoard = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -195,6 +262,9 @@ namespace ScrapArchitect.Garage.Editor
             boardMaterial.color = new Color(0.5f, 0.3f, 0.2f);
             
             mainBoard.GetComponent<Renderer>().material = boardMaterial;
+            
+            // Добавляем коллизию
+            board.AddComponent<BoxCollider>();
             
             Debug.Log("Доска объявлений создана");
         }
@@ -324,6 +394,7 @@ namespace ScrapArchitect.Garage.Editor
         [MenuItem("Scrap Architect/Garage/Add Player to Simple Garage")]
         public static void AddPlayerOnly()
         {
+            AddCollisions();
             AddPlayerToScene();
             CreateUI();
             CreateMenuManager();
@@ -336,6 +407,13 @@ namespace ScrapArchitect.Garage.Editor
             CreateMissingObjects();
             AddInteractiveZones();
             Debug.Log("Недостающие объекты добавлены в Simple Garage!");
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Fix Collisions Only")]
+        public static void FixCollisionsOnly()
+        {
+            AddCollisions();
+            Debug.Log("Коллизии исправлены!");
         }
     }
 }
