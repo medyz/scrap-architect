@@ -116,21 +116,34 @@
 - Убедитесь, что панель активна в иерархии
 - Проверьте, что Canvas настроен правильно
 
+### Проблема: Красный значок компиляции
+- **Симптом:** В Unity горит красный значок, меню не работает
+- **Решение 1:** Используйте **Scrap Architect** → **Check Compilation** для диагностики
+- **Решение 2:** Используйте **Scrap Architect** → **Force Recompile** для принудительной перекомпиляции
+- **Решение 3:** Используйте **Scrap Architect** → **Basic Create All Panels** (самый простой способ)
+- **Решение 4:** Перезапустите Unity Editor
+- **Решение 5:** Проверьте Console (Window → General → Console) на наличие ошибок
+
 ## Дополнительные скрипты
 
 В проекте есть дополнительные скрипты для помощи:
 
-- **SimplePrefabCreator.cs** - простое создание префабов (рекомендуется)
+- **BasicPrefabCreator.cs** - максимально простое создание префабов (рекомендуется)
+- **SimplePrefabCreator.cs** - простое создание префабов
 - **UIPrefabChecker.cs** - проверка недостающих префабов
 - **QuickPrefabCreator.cs** - быстрое создание префабов
 - **CreateMissingPrefabs.cs** - альтернативный способ создания
 - **TestPrefabCreation.cs** - тестирование создания префабов
+- **CompilationChecker.cs** - проверка ошибок компиляции
 
 ### Основные функции (рекомендуемые):
+- **Scrap Architect** → **Basic Create All Panels** - создание всех недостающих префабов (самый простой способ)
 - **Scrap Architect** → **Simple Create All Missing Panels** - создание всех недостающих префабов
 - **Scrap Architect** → **Simple Create [Panel Name] Panel** - создание отдельных префабов
 
 ### Тестовые функции:
+- **Scrap Architect** → **Check Compilation** - проверка ошибок компиляции
+- **Scrap Architect** → **Force Recompile** - принудительная перекомпиляция
 - **Scrap Architect** → **Test Create Single Prefab** - создание тестового префаба
 - **Scrap Architect** → **Test Check All Scripts** - проверка всех UI скриптов
 
