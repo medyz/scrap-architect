@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace ScrapArchitect.Garage.Editor
 {
@@ -67,7 +68,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Принудительно очищаем память
             Resources.UnloadUnusedAssets();
-            System.GC.Collect();
+            GC.Collect();
             
             Debug.Log("Очистка материалов завершена!");
         }
