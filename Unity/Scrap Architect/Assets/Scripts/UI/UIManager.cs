@@ -293,6 +293,29 @@ namespace ScrapArchitect.UI
             return currentActivePanel is T;
         }
         
+        /// <summary>
+        /// Скрыть все панели
+        /// </summary>
+        public void HideAllPanels()
+        {
+            // Скрываем все UI панели
+            if (mainMenuPanel != null) mainMenuPanel.gameObject.SetActive(false);
+            if (contractSelectionPanel != null) contractSelectionPanel.gameObject.SetActive(false);
+            if (worldMapPanel != null) worldMapPanel.gameObject.SetActive(false);
+            if (gameplayPanel != null) gameplayPanel.gameObject.SetActive(false);
+            if (victoryPanel != null) victoryPanel.gameObject.SetActive(false);
+            if (defeatPanel != null) defeatPanel.gameObject.SetActive(false);
+            if (settingsPanel != null) settingsPanel.gameObject.SetActive(false);
+            if (pausePanel != null) pausePanel.gameObject.SetActive(false);
+            if (loadingPanel != null) loadingPanel.gameObject.SetActive(false);
+            
+            // Скрываем режим строительства
+            if (buildingMode != null) buildingMode.gameObject.SetActive(false);
+            
+            currentActivePanel = null;
+            panelHistory.Clear();
+        }
+        
         #region Audio Methods
         
         /// <summary>
