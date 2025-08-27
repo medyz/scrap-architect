@@ -55,6 +55,49 @@ namespace ScrapArchitect.Garage.Editor
             Debug.Log("Детали интерьера добавлены!");
         }
         
+        [MenuItem("Scrap Architect/Garage/Fix Purple Materials")]
+        public static void FixPurpleMaterials()
+        {
+            Debug.Log("Исправляем фиолетовые материалы...");
+            
+            // Принудительно обновляем все материалы
+            CreateMaterials();
+            
+            // Принудительно обновляем AssetDatabase
+            AssetDatabase.Refresh();
+            
+            // Ждем завершения компиляции
+            EditorApplication.delayCall += () => {
+                AssetDatabase.Refresh();
+                Debug.Log("Материалы исправлены! Проверьте сцену.");
+            };
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Create Simple Materials")]
+        public static void CreateSimpleMaterials()
+        {
+            Debug.Log("Создаем простые материалы...");
+            
+            // Создаем папку для материалов если её нет
+            if (!AssetDatabase.IsValidFolder("Assets/Materials/Garage"))
+            {
+                AssetDatabase.CreateFolder("Assets/Materials", "Garage");
+            }
+            
+            // Создаем простые материалы с базовым шейдером
+            CreateSimpleMaterial("WallMaterial", new Color(0.8f, 0.7f, 0.6f), "Assets/Materials/Garage/WallMaterial.mat");
+            CreateSimpleMaterial("FloorMaterial", new Color(0.6f, 0.5f, 0.4f), "Assets/Materials/Garage/FloorMaterial.mat");
+            CreateSimpleMaterial("CeilingMaterial", new Color(0.9f, 0.85f, 0.8f), "Assets/Materials/Garage/CeilingMaterial.mat");
+            CreateSimpleMaterial("MetalMaterial", new Color(0.7f, 0.7f, 0.7f), "Assets/Materials/Garage/MetalMaterial.mat");
+            CreateSimpleMaterial("WoodMaterial", new Color(0.5f, 0.3f, 0.2f), "Assets/Materials/Garage/WoodMaterial.mat");
+            CreateSimpleMaterial("BlueprintMaterial", new Color(0.95f, 0.95f, 0.9f), "Assets/Materials/Garage/BlueprintMaterial.mat");
+            CreateSimpleMaterial("OilStainMaterial", new Color(0.2f, 0.2f, 0.1f), "Assets/Materials/Garage/OilStainMaterial.mat");
+            CreateSimpleMaterial("ToolMaterial", new Color(0.4f, 0.4f, 0.4f), "Assets/Materials/Garage/ToolMaterial.mat");
+            
+            AssetDatabase.Refresh();
+            Debug.Log("Простые материалы созданы!");
+        }
+        
         static void CreateNewScene()
         {
             // Создаем новую сцену
@@ -93,6 +136,34 @@ namespace ScrapArchitect.Garage.Editor
             Material material = new Material(Shader.Find("Standard"));
             material.name = name;
             material.color = color;
+            AssetDatabase.CreateAsset(material, path);
+        }
+        
+        static void CreateSimpleMaterial(string name, Color color, string path)
+        {
+            // Удаляем существующий материал если есть
+            if (AssetDatabase.LoadAssetAtPath<Material>(path) != null)
+            {
+                AssetDatabase.DeleteAsset(path);
+            }
+            
+            // Создаем новый материал с базовым шейдером
+            Material material = new Material(Shader.Find("Diffuse"));
+            if (material == null)
+            {
+                // Если Diffuse не найден, пробуем Unlit/Color
+                material = new Material(Shader.Find("Unlit/Color"));
+            }
+            if (material == null)
+            {
+                // Если и это не работает, создаем без шейдера
+                material = new Material(Shader.Find("Hidden/InternalErrorShader"));
+                Debug.LogWarning($"Используем fallback шейдер для {name}");
+            }
+            
+            material.name = name;
+            material.color = color;
+            
             AssetDatabase.CreateAsset(material, path);
         }
         
