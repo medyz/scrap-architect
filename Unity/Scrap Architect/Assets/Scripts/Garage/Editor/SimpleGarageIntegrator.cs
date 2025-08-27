@@ -189,13 +189,19 @@ namespace ScrapArchitect.Garage.Editor
             keyboard.transform.localPosition = Vector3.up * 0.8f;
             keyboard.transform.localScale = new Vector3(0.6f, 0.05f, 0.2f);
             
-            // Материал для компьютера
-            Material computerMaterial = new Material(Shader.Find("Diffuse"));
-            if (computerMaterial == null) computerMaterial = new Material(Shader.Find("Unlit/Color"));
-            computerMaterial.color = new Color(0.7f, 0.7f, 0.7f);
+            // Используем безопасный материал
+            Material computerMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Simple Garage/Materials/ComputerMaterial.mat");
+            if (computerMaterial == null)
+            {
+                // Создаем материал если не найден
+                computerMaterial = new Material(Shader.Find("Standard"));
+                if (computerMaterial == null) computerMaterial = new Material(Shader.Find("Diffuse"));
+                if (computerMaterial == null) computerMaterial = new Material(Shader.Find("Unlit/Color"));
+                computerMaterial.color = new Color(0.7f, 0.7f, 0.7f);
+            }
             
-            monitor.GetComponent<Renderer>().material = computerMaterial;
-            keyboard.GetComponent<Renderer>().material = computerMaterial;
+            monitor.GetComponent<Renderer>().sharedMaterial = computerMaterial;
+            keyboard.GetComponent<Renderer>().sharedMaterial = computerMaterial;
             
             // Добавляем коллизию
             computer.AddComponent<BoxCollider>();
@@ -223,12 +229,18 @@ namespace ScrapArchitect.Garage.Editor
             body.transform.localPosition = Vector3.up * 0.5f;
             body.transform.localScale = new Vector3(0.8f, 1f, 0.6f);
             
-            // Материал для сейфа
-            Material safeMaterial = new Material(Shader.Find("Diffuse"));
-            if (safeMaterial == null) safeMaterial = new Material(Shader.Find("Unlit/Color"));
-            safeMaterial.color = new Color(0.7f, 0.7f, 0.7f);
+            // Используем безопасный материал
+            Material safeMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Simple Garage/Materials/SafeMaterial.mat");
+            if (safeMaterial == null)
+            {
+                // Создаем материал если не найден
+                safeMaterial = new Material(Shader.Find("Standard"));
+                if (safeMaterial == null) safeMaterial = new Material(Shader.Find("Diffuse"));
+                if (safeMaterial == null) safeMaterial = new Material(Shader.Find("Unlit/Color"));
+                safeMaterial.color = new Color(0.7f, 0.7f, 0.7f);
+            }
             
-            body.GetComponent<Renderer>().material = safeMaterial;
+            body.GetComponent<Renderer>().sharedMaterial = safeMaterial;
             
             // Добавляем коллизию
             safe.AddComponent<BoxCollider>();
@@ -256,12 +268,18 @@ namespace ScrapArchitect.Garage.Editor
             mainBoard.transform.localPosition = Vector3.up * 1.5f;
             mainBoard.transform.localScale = new Vector3(1.5f, 1f, 0.05f);
             
-            // Материал для доски
-            Material boardMaterial = new Material(Shader.Find("Diffuse"));
-            if (boardMaterial == null) boardMaterial = new Material(Shader.Find("Unlit/Color"));
-            boardMaterial.color = new Color(0.5f, 0.3f, 0.2f);
+            // Используем безопасный материал
+            Material boardMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Simple Garage/Materials/BoardMaterial.mat");
+            if (boardMaterial == null)
+            {
+                // Создаем материал если не найден
+                boardMaterial = new Material(Shader.Find("Standard"));
+                if (boardMaterial == null) boardMaterial = new Material(Shader.Find("Diffuse"));
+                if (boardMaterial == null) boardMaterial = new Material(Shader.Find("Unlit/Color"));
+                boardMaterial.color = new Color(0.5f, 0.3f, 0.2f);
+            }
             
-            mainBoard.GetComponent<Renderer>().material = boardMaterial;
+            mainBoard.GetComponent<Renderer>().sharedMaterial = boardMaterial;
             
             // Добавляем коллизию
             board.AddComponent<BoxCollider>();

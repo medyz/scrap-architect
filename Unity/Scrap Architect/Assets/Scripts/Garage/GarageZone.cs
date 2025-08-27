@@ -36,7 +36,7 @@ namespace ScrapArchitect.Garage
             
             if (zoneRenderer != null)
             {
-                originalMaterial = zoneRenderer.material;
+                originalMaterial = zoneRenderer.sharedMaterial;
             }
             
             // Setup audio
@@ -61,7 +61,7 @@ namespace ScrapArchitect.Garage
         {
             if (!isHighlighted && zoneRenderer != null && highlightMaterial != null)
             {
-                zoneRenderer.material = highlightMaterial;
+                zoneRenderer.sharedMaterial = highlightMaterial;
                 isHighlighted = true;
             }
         }
@@ -70,7 +70,7 @@ namespace ScrapArchitect.Garage
         {
             if (isHighlighted && zoneRenderer != null && originalMaterial != null)
             {
-                zoneRenderer.material = originalMaterial;
+                zoneRenderer.sharedMaterial = originalMaterial;
                 isHighlighted = false;
             }
         }
