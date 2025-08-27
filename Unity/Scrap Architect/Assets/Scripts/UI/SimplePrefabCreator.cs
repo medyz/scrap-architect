@@ -44,68 +44,82 @@ namespace ScrapArchitect.UI
         {
             Debug.Log("Creating all missing UI panels...");
             
-            CreateWorldMapPanel();
-            CreateDefeatPanel();
-            CreateSettingsPanel();
-            CreatePausePanel();
-            CreateLoadingPanel();
-            
-            Debug.Log("All missing UI panels created!");
+            try
+            {
+                CreateWorldMapPanel();
+                CreateDefeatPanel();
+                CreateSettingsPanel();
+                CreatePausePanel();
+                CreateLoadingPanel();
+                
+                Debug.Log("All missing UI panels created successfully!");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error creating panels: {e.Message}");
+            }
         }
         
         private static void CreateBasicPanel(string panelName, string titleText, Color backgroundColor)
         {
-            // Создаем GameObject
-            GameObject panel = new GameObject(panelName);
-            
-            // Добавляем компоненты
-            RectTransform rectTransform = panel.AddComponent<RectTransform>();
-            panel.AddComponent<CanvasRenderer>();
-            
-            // Настраиваем RectTransform
-            rectTransform.anchorMin = Vector2.zero;
-            rectTransform.anchorMax = Vector2.one;
-            rectTransform.anchoredPosition = Vector2.zero;
-            rectTransform.sizeDelta = Vector2.zero;
-            
-            // Добавляем фон
-            UnityEngine.UI.Image image = panel.AddComponent<UnityEngine.UI.Image>();
-            image.color = backgroundColor;
-            
-            // Добавляем текст
-            GameObject textGO = new GameObject("Title");
-            textGO.transform.SetParent(panel.transform);
-            
-            RectTransform textRect = textGO.AddComponent<RectTransform>();
-            textRect.anchorMin = new Vector2(0.1f, 0.8f);
-            textRect.anchorMax = new Vector2(0.9f, 0.95f);
-            textRect.anchoredPosition = Vector2.zero;
-            textRect.sizeDelta = Vector2.zero;
-            
-            UnityEngine.UI.Text text = textGO.AddComponent<UnityEngine.UI.Text>();
-            text.text = titleText;
-            text.color = Color.white;
-            text.fontSize = 32;
-            text.fontStyle = FontStyle.Bold;
-            text.alignment = TextAnchor.MiddleCenter;
-            
-            // Создаем префаб
-            string prefabPath = $"Assets/Prefabs/UI/Panels/{panelName}.prefab";
-            
-            // Убеждаемся, что папка существует
-            string directory = Path.GetDirectoryName(prefabPath);
-            if (!Directory.Exists(directory))
+            try
             {
-                Directory.CreateDirectory(directory);
+                // Создаем GameObject
+                GameObject panel = new GameObject(panelName);
+                
+                // Добавляем компоненты
+                RectTransform rectTransform = panel.AddComponent<RectTransform>();
+                panel.AddComponent<CanvasRenderer>();
+                
+                // Настраиваем RectTransform
+                rectTransform.anchorMin = Vector2.zero;
+                rectTransform.anchorMax = Vector2.one;
+                rectTransform.anchoredPosition = Vector2.zero;
+                rectTransform.sizeDelta = Vector2.zero;
+                
+                // Добавляем фон
+                UnityEngine.UI.Image image = panel.AddComponent<UnityEngine.UI.Image>();
+                image.color = backgroundColor;
+                
+                // Добавляем текст
+                GameObject textGO = new GameObject("Title");
+                textGO.transform.SetParent(panel.transform);
+                
+                RectTransform textRect = textGO.AddComponent<RectTransform>();
+                textRect.anchorMin = new Vector2(0.1f, 0.8f);
+                textRect.anchorMax = new Vector2(0.9f, 0.95f);
+                textRect.anchoredPosition = Vector2.zero;
+                textRect.sizeDelta = Vector2.zero;
+                
+                UnityEngine.UI.Text text = textGO.AddComponent<UnityEngine.UI.Text>();
+                text.text = titleText;
+                text.color = Color.white;
+                text.fontSize = 32;
+                text.fontStyle = FontStyle.Bold;
+                text.alignment = TextAnchor.MiddleCenter;
+                
+                // Создаем префаб
+                string prefabPath = $"Assets/Prefabs/UI/Panels/{panelName}.prefab";
+                
+                // Убеждаемся, что папка существует
+                string directory = Path.GetDirectoryName(prefabPath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                
+                // Создаем префаб
+                GameObject prefab = PrefabUtility.SaveAsPrefabAsset(panel, prefabPath);
+                
+                // Удаляем временный GameObject из сцены
+                DestroyImmediate(panel);
+                
+                Debug.Log($"Created {panelName} prefab: {prefabPath}");
             }
-            
-            // Создаем префаб
-            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(panel, prefabPath);
-            
-            // Удаляем временный GameObject из сцены
-            DestroyImmediate(panel);
-            
-            Debug.Log($"Created {panelName} prefab: {prefabPath}");
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error creating {panelName}: {e.Message}");
+            }
         }
     }
 }
