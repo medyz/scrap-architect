@@ -56,6 +56,16 @@ namespace ScrapArchitect.UI
             uiManager = manager;
             isInitialized = true;
             
+            // Убеждаемся, что CanvasGroup существует
+            if (canvasGroup == null)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+                if (canvasGroup == null)
+                {
+                    canvasGroup = gameObject.AddComponent<CanvasGroup>();
+                }
+            }
+            
             // Скрываем панель по умолчанию
             if (useAnimation)
             {
