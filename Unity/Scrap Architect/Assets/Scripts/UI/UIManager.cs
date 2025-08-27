@@ -16,6 +16,7 @@ namespace ScrapArchitect.UI
         [Header("UI Panels")]
         public MainMenuUI mainMenuPanel;
         public ContractSelectionUI contractSelectionPanel;
+        public WorldMapUI worldMapPanel;
         public GameplayUI gameplayPanel;
         public VictoryScreen victoryPanel;
         public DefeatScreen defeatPanel;
@@ -72,6 +73,7 @@ namespace ScrapArchitect.UI
             // Инициализируем все панели
             InitializePanel(mainMenuPanel);
             InitializePanel(contractSelectionPanel);
+            InitializePanel(worldMapPanel);
             InitializePanel(gameplayPanel);
             InitializePanel(victoryPanel);
             InitializePanel(defeatPanel);
@@ -175,6 +177,14 @@ namespace ScrapArchitect.UI
         public void HideLoadingScreen()
         {
             HideCurrentPanel();
+        }
+        
+        /// <summary>
+        /// Показать карту мира
+        /// </summary>
+        public void ShowWorldMap()
+        {
+            ShowPanel(worldMapPanel);
         }
         
         /// <summary>

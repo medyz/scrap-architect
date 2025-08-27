@@ -98,6 +98,15 @@ namespace ScrapArchitect.Gameplay
         {
             // Добавляем конкретные контракты из плана
             List<Contract> specificContracts = SpecificContracts.GetAllSpecificContracts();
+            
+            // Применяем сложность к каждому контракту
+            foreach (var contract in specificContracts)
+            {
+                if (DifficultyManager.Instance != null)
+                {
+                    DifficultyManager.Instance.ApplyDifficultyToContract(contract);
+                }
+            }
             foreach (var contract in specificContracts)
             {
                 if (availableContracts.Count < maxAvailableContracts)
@@ -544,6 +553,13 @@ namespace ScrapArchitect.Gameplay
             contract.OnContractFailed -= OnContractFailedHandler;
             contract.OnObjectiveCompleted -= OnObjectiveCompletedHandler;
             
+            // Регистрируем завершение в системе сложности
+            if (DifficultyManager.Instance != null)
+            {
+                float completionTime = contract.GetCompletionTime();
+                DifficultyManager.Instance.RegisterContractCompletion(contract, completionTime, true);
+            }
+            
             OnContractCompleted?.Invoke(contract);
             OnActiveContractsUpdated?.Invoke(activeContracts);
             
@@ -562,6 +578,13 @@ namespace ScrapArchitect.Gameplay
             contract.OnContractCompleted -= OnContractCompletedHandler;
             contract.OnContractFailed -= OnContractFailedHandler;
             contract.OnObjectiveCompleted -= OnObjectiveCompletedHandler;
+            
+            // Регистрируем провал в системе сложности
+            if (DifficultyManager.Instance != null)
+            {
+                float completionTime = contract.GetElapsedTime();
+                DifficultyManager.Instance.RegisterContractCompletion(contract, completionTime, false);
+            }
             
             OnContractFailed?.Invoke(contract);
             OnActiveContractsUpdated?.Invoke(activeContracts);

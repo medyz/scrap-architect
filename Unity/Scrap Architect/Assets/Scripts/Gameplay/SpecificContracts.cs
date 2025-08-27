@@ -390,6 +390,14 @@ namespace ScrapArchitect.Gameplay
         }
         
         /// <summary>
+        /// Получить все контракты (алиас для GetAllSpecificContracts)
+        /// </summary>
+        public static List<Contract> GetAllContracts()
+        {
+            return GetAllSpecificContracts();
+        }
+        
+        /// <summary>
         /// Получить контракты по сложности
         /// </summary>
         public static List<Contract> GetContractsByDifficulty(ContractDifficulty difficulty)

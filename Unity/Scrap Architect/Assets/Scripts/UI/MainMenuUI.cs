@@ -18,6 +18,7 @@ namespace ScrapArchitect.UI
         
         [Header("Main Buttons")]
         public Button playButton;
+        public Button worldMapButton;
         public Button settingsButton;
         public Button creditsButton;
         public Button quitButton;
@@ -45,6 +46,11 @@ namespace ScrapArchitect.UI
             if (playButton != null)
             {
                 playButton.onClick.AddListener(OnPlayButtonClick);
+            }
+            
+            if (worldMapButton != null)
+            {
+                worldMapButton.onClick.AddListener(OnWorldMapButtonClick);
             }
             
             if (settingsButton != null)
@@ -93,6 +99,18 @@ namespace ScrapArchitect.UI
             {
                 uiManager.PlayButtonClickSound();
                 uiManager.StartNewGame();
+            }
+        }
+        
+        /// <summary>
+        /// Обработчик кнопки "Карта мира"
+        /// </summary>
+        public void OnWorldMapButtonClick()
+        {
+            if (uiManager != null)
+            {
+                uiManager.PlayButtonClickSound();
+                uiManager.ShowWorldMap();
             }
         }
         
