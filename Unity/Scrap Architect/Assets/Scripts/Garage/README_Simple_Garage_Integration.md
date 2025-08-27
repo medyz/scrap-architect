@@ -127,6 +127,52 @@ Scrap Architect → Garage → Fix Player Gravity (Floating Issue)
 - Добавляет правильные настройки физики
 - Подключает GarageManager к камере
 
+### **ЭКСТРЕННОЕ исправление: Персонаж под землей:**
+```
+Scrap Architect → Garage → EMERGENCY: Fix Player Under Ground
+```
+**Что делает:**
+- Находит пол гаража автоматически
+- Вычисляет правильную позицию игрока выше пола
+- Исправляет CharacterController и камеру
+- Создает нового игрока, если не найден
+
+### **Поиск позиции пола:**
+```
+Scrap Architect → Garage → Find and Show Floor Position
+```
+**Что делает:**
+- Находит пол в сцене
+- Показывает позицию и размер пола
+- Выбирает пол в иерархии
+
+### **Показать позицию игрока:**
+```
+Scrap Architect → Garage → Show Player Position
+```
+**Что делает:**
+- Показывает текущую позицию игрока
+- Отображает настройки CharacterController
+- Показывает позицию камеры
+
+### **Установить игрока в центр гаража:**
+```
+Scrap Architect → Garage → Set Player to Garage Center
+```
+**Что делает:**
+- Устанавливает игрока в центр (0, 2, 0)
+- Исправляет CharacterController
+- Настраивает камеру
+
+### **Сброс игрока в безопасную позицию:**
+```
+Scrap Architect → Garage → Reset Player to Safe Position
+```
+**Что делает:**
+- Перемещает игрока высоко над гаражом (0, 10, 0)
+- Исправляет все настройки
+- Безопасный способ "спасти" игрока
+
 ### **Принудительное опускание на пол:**
 ```
 Scrap Architect → Garage → Force Player to Ground
