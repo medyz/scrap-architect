@@ -93,7 +93,8 @@ namespace ScrapArchitect.UI
             gameObject.SetActive(true);
             OnShowStarted?.Invoke();
             
-            if (useAnimation)
+            // Проверяем, что объект активен перед запуском корутины
+            if (useAnimation && gameObject.activeInHierarchy)
             {
                 StartCoroutine(ShowAnimation());
             }

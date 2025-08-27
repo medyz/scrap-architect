@@ -66,7 +66,8 @@ namespace ScrapArchitect.UI
         private void Start()
         {
             // Показать главное меню при запуске
-            ShowMainMenu();
+            // Используем Invoke для отложенного вызова, чтобы все панели успели инициализироваться
+            Invoke(nameof(ShowMainMenu), 0.1f);
         }
         
         /// <summary>
