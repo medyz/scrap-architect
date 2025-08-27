@@ -401,12 +401,19 @@ namespace ScrapArchitect.UI
                     if (contractItemPrefab != null)
                     {
                         GameObject contractObj = Instantiate(contractItemPrefab, contractsListContainer);
-                        ContractItemUI contractItem = contractObj.GetComponent<ContractItemUI>();
                         
-                        if (contractItem != null)
+                        // Настраиваем текст контракта
+                        TextMeshProUGUI contractText = contractObj.GetComponentInChildren<TextMeshProUGUI>();
+                        if (contractText != null)
                         {
-                            contractItem.SetupContract(contract);
-                            contractItem.OnContractSelected += OnContractSelected;
+                            contractText.text = contract.title;
+                        }
+                        
+                        // Настраиваем кнопку
+                        Button contractButton = contractObj.GetComponent<Button>();
+                        if (contractButton != null)
+                        {
+                            contractButton.onClick.AddListener(() => OnContractSelected(contract));
                         }
                     }
                 }
