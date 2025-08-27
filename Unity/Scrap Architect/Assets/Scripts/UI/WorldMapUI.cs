@@ -442,7 +442,7 @@ namespace ScrapArchitect.UI
                 // Переходим к игровому экрану
                 if (UIManager.Instance != null)
                 {
-                    UIManager.Instance.ShowGameplay();
+                    UIManager.Instance.ShowGameplayUI();
                 }
             }
         }
