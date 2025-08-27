@@ -30,6 +30,9 @@ namespace ScrapArchitect.Garage.Editor
             // Создаем UI
             CreateUI();
             
+            // Создаем менеджер меню
+            CreateMenuManager();
+            
             Debug.Log("Гараж успешно создан! Теперь можно настроить детали.");
         }
         
@@ -205,6 +208,41 @@ namespace ScrapArchitect.Garage.Editor
             CreateLighting();
             
             Debug.Log("Гараж пересобран с рабочими материалами!");
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Add Interactive Zones")]
+        public static void AddInteractiveZones()
+        {
+            Debug.Log("Добавляем интерактивные зоны...");
+            
+            // Добавляем GarageZone к функциональным объектам
+            AddZoneToObject("WorkbenchZone", "Верстак", "Нажмите E для доступа к контрактам", ZoneType.Workbench);
+            AddZoneToObject("ComputerZone", "Компьютер", "Нажмите E для Steam Workshop", ZoneType.Computer);
+            AddZoneToObject("BulletinBoardZone", "Доска объявлений", "Нажмите E для просмотра контрактов", ZoneType.BulletinBoard);
+            AddZoneToObject("SafeZone", "Сейф", "Нажмите E для магазина деталей", ZoneType.Safe);
+            AddZoneToObject("DoorZone", "Дверь", "Нажмите E для выхода на полигон", ZoneType.Door);
+            
+            Debug.Log("Интерактивные зоны добавлены!");
+        }
+        
+        static void AddZoneToObject(string objectName, string zoneName, string interactionText, ZoneType zoneType)
+        {
+            GameObject obj = GameObject.Find(objectName);
+            if (obj != null)
+            {
+                // Добавляем GarageZone компонент
+                GarageZone zone = obj.AddComponent<GarageZone>();
+                zone.Initialize(zoneName, interactionText, zoneType);
+                
+                // Настраиваем параметры зоны
+                zone.interactionRange = 3f;
+                
+                Debug.Log($"Добавлена зона {zoneName} к объекту {objectName}");
+            }
+            else
+            {
+                Debug.LogWarning($"Объект {objectName} не найден!");
+            }
         }
         
         static void CreateNewScene()
@@ -460,6 +498,22 @@ namespace ScrapArchitect.Garage.Editor
                 garageManager.interactionUI = interactionPanel;
                 garageManager.interactionText = textComponent;
             }
+        }
+        
+        static void CreateMenuManager()
+        {
+            // Создаем менеджер меню
+            GameObject menuManagerObj = new GameObject("GarageMenuManager");
+            GarageMenuManager menuManager = menuManagerObj.AddComponent<GarageMenuManager>();
+            
+            // Подключаем к GarageManager
+            GarageManager garageManager = FindObjectOfType<GarageManager>();
+            if (garageManager != null)
+            {
+                garageManager.menuManager = menuManager;
+            }
+            
+            Debug.Log("Менеджер меню создан и подключен!");
         }
         
         static void CreateGarageStructureWithDirectMaterials()

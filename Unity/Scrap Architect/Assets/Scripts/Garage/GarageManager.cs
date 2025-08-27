@@ -23,18 +23,22 @@ namespace ScrapArchitect.Garage
         public GameObject interactionUI;
         public Text interactionText;
         
-        [Header("Audio")]
-        public AudioSource ambientAudio;
-        public AudioClip[] garageAmbientSounds;
-        
-        // Private variables
-        private float verticalRotation = 0f;
-        private CharacterController characterController;
-        private bool isInteracting = false;
-        private GarageZone currentZone = null;
-        
-        // Garage zones
-        private List<GarageZone> zones = new List<GarageZone>();
+            [Header("Audio")]
+    public AudioSource ambientAudio;
+    public AudioClip[] garageAmbientSounds;
+    
+    [Header("Menu System")]
+    public GarageMenuManager menuManager;
+    
+    // Private variables
+    private float verticalRotation = 0f;
+    private CharacterController characterController;
+    private bool isInteracting = false;
+    private bool isInMenuMode = false;
+    private GarageZone currentZone = null;
+    
+    // Garage zones
+    private List<GarageZone> zones = new List<GarageZone>();
         
         void Start()
         {
@@ -43,15 +47,21 @@ namespace ScrapArchitect.Garage
             SetupAudio();
         }
         
-        void Update()
+            void Update()
+    {
+        if (!isInteracting && !isInMenuMode)
         {
-            if (!isInteracting)
-            {
-                HandleMovement();
-                HandleMouseLook();
-                HandleInteraction();
-            }
+            HandleMovement();
+            HandleMouseLook();
+            HandleInteraction();
         }
+        
+        // Обработка закрытия меню
+        if (isInMenuMode && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseMenu();
+        }
+    }
         
         void InitializeGarage()
         {
@@ -246,37 +256,116 @@ namespace ScrapArchitect.Garage
         
         void OpenWorkbench()
         {
-            Debug.Log("Открываем верстак - доступ к контрактам");
-            // TODO: Открыть меню контрактов
+            // Находим менеджер меню если не найден
+            if (menuManager == null)
+            {
+                menuManager = FindObjectOfType<GarageMenuManager>();
+            }
+            
+            if (menuManager != null)
+            {
+                menuManager.OpenMenu(ZoneType.Workbench);
+                isInMenuMode = true;
+            }
+            else
+            {
+                Debug.Log("Открываем верстак - доступ к контрактам");
+            }
             isInteracting = false;
         }
         
         void OpenComputer()
         {
-            Debug.Log("Открываем компьютер - Steam Workshop");
-            // TODO: Открыть Steam Workshop
+            // Находим менеджер меню если не найден
+            if (menuManager == null)
+            {
+                menuManager = FindObjectOfType<GarageMenuManager>();
+            }
+            
+            if (menuManager != null)
+            {
+                menuManager.OpenMenu(ZoneType.Computer);
+                isInMenuMode = true;
+            }
+            else
+            {
+                Debug.Log("Открываем компьютер - Steam Workshop");
+            }
             isInteracting = false;
         }
         
         void OpenBulletinBoard()
         {
-            Debug.Log("Открываем доску объявлений - просмотр контрактов");
-            // TODO: Открыть список контрактов
+            // Находим менеджер меню если не найден
+            if (menuManager == null)
+            {
+                menuManager = FindObjectOfType<GarageMenuManager>();
+            }
+            
+            if (menuManager != null)
+            {
+                menuManager.OpenMenu(ZoneType.BulletinBoard);
+                isInMenuMode = true;
+            }
+            else
+            {
+                Debug.Log("Открываем доску объявлений - просмотр контрактов");
+            }
             isInteracting = false;
         }
         
         void OpenSafe()
         {
-            Debug.Log("Открываем сейф - магазин деталей");
-            // TODO: Открыть магазин
+            // Находим менеджер меню если не найден
+            if (menuManager == null)
+            {
+                menuManager = FindObjectOfType<GarageMenuManager>();
+            }
+            
+            if (menuManager != null)
+            {
+                menuManager.OpenMenu(ZoneType.Safe);
+                isInMenuMode = true;
+            }
+            else
+            {
+                Debug.Log("Открываем сейф - магазин деталей");
+            }
             isInteracting = false;
         }
         
         void OpenDoor()
         {
-            Debug.Log("Выходим на тестовый полигон");
-            // TODO: Переход на тестовый полигон
+            // Находим менеджер меню если не найден
+            if (menuManager == null)
+            {
+                menuManager = FindObjectOfType<GarageMenuManager>();
+            }
+            
+            if (menuManager != null)
+            {
+                menuManager.OpenMenu(ZoneType.Door);
+                isInMenuMode = true;
+            }
+            else
+            {
+                Debug.Log("Выходим на тестовый полигон");
+            }
             isInteracting = false;
+        }
+        
+        public void SetInteractionMode(bool inMenu)
+        {
+            isInMenuMode = inMenu;
+        }
+        
+        public void CloseMenu()
+        {
+            if (menuManager != null)
+            {
+                menuManager.CloseCurrentMenu();
+            }
+            isInMenuMode = false;
         }
         
         public void ExitInteraction()
