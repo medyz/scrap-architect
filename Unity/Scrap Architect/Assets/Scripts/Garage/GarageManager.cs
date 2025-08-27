@@ -148,6 +148,8 @@ namespace ScrapArchitect.Garage
         
         void HandleMovement()
         {
+            if (characterController == null) return;
+            
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
             
@@ -155,10 +157,18 @@ namespace ScrapArchitect.Garage
             
             Vector3 movement = transform.right * horizontal + transform.forward * vertical;
             characterController.Move(movement * speed * Time.deltaTime);
+            
+            // Debug movement
+            if (horizontal != 0 || vertical != 0)
+            {
+                Debug.Log($"Движение: H={horizontal}, V={vertical}, Speed={speed}");
+            }
         }
         
         void HandleMouseLook()
         {
+            if (playerCamera == null) return;
+            
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
             
