@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -348,9 +349,9 @@ namespace ScrapArchitect.Gameplay
         }
         
         // Events
-        public System.Action<int> OnPlayerLevelUp;
+        public Action<int> OnPlayerLevelUp;
         
-        [System.Serializable]
+        [Serializable]
         public class DifficultyStats
         {
             public int playerLevel;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ScrapArchitect.Gameplay;
@@ -52,7 +53,7 @@ namespace ScrapArchitect.UI
         private bool isDragging = false;
         private Vector2 lastMousePosition;
         
-        [System.Serializable]
+        [Serializable]
         public class WorldLocation
         {
             public string id;
@@ -65,7 +66,7 @@ namespace ScrapArchitect.UI
             public Sprite locationIcon;
         }
         
-        [System.Serializable]
+        [Serializable]
         public class LocationMarker
         {
             public WorldLocation location;

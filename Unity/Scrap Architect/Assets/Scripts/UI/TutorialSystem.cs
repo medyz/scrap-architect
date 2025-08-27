@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -35,7 +36,7 @@ namespace ScrapArchitect.UI
         private bool isTutorialActive = false;
         private bool hasCompletedTutorial = false;
         
-        [System.Serializable]
+        [Serializable]
         public class TutorialStep
         {
             public string title;

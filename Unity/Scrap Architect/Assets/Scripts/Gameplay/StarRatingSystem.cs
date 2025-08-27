@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 namespace ScrapArchitect.Gameplay
@@ -68,7 +69,7 @@ namespace ScrapArchitect.Gameplay
                     // TODO: Реализовать JSON десериализацию
                     // contractStarRatings = JsonUtility.FromJson<Dictionary<string, int>>(ratingsJson);
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
                     Debug.LogWarning($"Failed to load star ratings: {e.Message}");
                 }
@@ -87,7 +88,7 @@ namespace ScrapArchitect.Gameplay
                 // PlayerPrefs.SetString("ContractStarRatings", ratingsJson);
                 // PlayerPrefs.Save();
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 Debug.LogWarning($"Failed to save star ratings: {e.Message}");
             }
@@ -364,7 +365,7 @@ namespace ScrapArchitect.Gameplay
             PlayerPrefs.Save();
         }
         
-        [System.Serializable]
+        [Serializable]
         public class StarRating
         {
             public int stars;
@@ -375,7 +376,7 @@ namespace ScrapArchitect.Gameplay
             public float efficiencyScore;
         }
         
-        [System.Serializable]
+        [Serializable]
         public class ContractCompletionData
         {
             public float completionTime;
@@ -389,7 +390,7 @@ namespace ScrapArchitect.Gameplay
             public bool perfectTime;
         }
         
-        [System.Serializable]
+        [Serializable]
         public class StarRatingStats
         {
             public int totalContracts;
