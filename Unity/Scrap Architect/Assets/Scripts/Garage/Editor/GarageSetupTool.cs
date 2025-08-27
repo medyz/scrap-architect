@@ -33,6 +33,28 @@ namespace ScrapArchitect.Garage.Editor
             Debug.Log("Гараж успешно создан! Теперь можно настроить детали.");
         }
         
+        [MenuItem("Scrap Architect/Garage/Add Interior Details")]
+        public static void AddInteriorDetails()
+        {
+            // Создаем материалы если их нет
+            CreateMaterials();
+            
+            // Загружаем материалы
+            Material woodMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Garage/WoodMaterial.mat");
+            Material metalMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Garage/MetalMaterial.mat");
+            
+            if (woodMaterial == null || metalMaterial == null)
+            {
+                Debug.LogError("Материалы не найдены! Сначала создайте гараж.");
+                return;
+            }
+            
+            // Создаем детали интерьера
+            CreateInteriorDetails(woodMaterial, metalMaterial);
+            
+            Debug.Log("Детали интерьера добавлены!");
+        }
+        
         static void CreateNewScene()
         {
             // Создаем новую сцену
@@ -57,6 +79,11 @@ namespace ScrapArchitect.Garage.Editor
             CreateMaterial("CeilingMaterial", new Color(0.9f, 0.85f, 0.8f), "Assets/Materials/Garage/CeilingMaterial.mat");
             CreateMaterial("MetalMaterial", new Color(0.7f, 0.7f, 0.7f), "Assets/Materials/Garage/MetalMaterial.mat");
             CreateMaterial("WoodMaterial", new Color(0.5f, 0.3f, 0.2f), "Assets/Materials/Garage/WoodMaterial.mat");
+            
+            // Дополнительные материалы для деталей
+            CreateMaterial("BlueprintMaterial", new Color(0.95f, 0.95f, 0.9f), "Assets/Materials/Garage/BlueprintMaterial.mat");
+            CreateMaterial("OilStainMaterial", new Color(0.2f, 0.2f, 0.1f), "Assets/Materials/Garage/OilStainMaterial.mat");
+            CreateMaterial("ToolMaterial", new Color(0.4f, 0.4f, 0.4f), "Assets/Materials/Garage/ToolMaterial.mat");
             
             AssetDatabase.Refresh();
         }
@@ -170,6 +197,37 @@ namespace ScrapArchitect.Garage.Editor
             
             GameObject door = GarageObjectCreator.CreateDoor(new Vector3(0f, 0f, 7f), woodMaterial);
             door.name = "DoorZone";
+            
+            // Создаем детали интерьера
+            CreateInteriorDetails(woodMaterial, metalMaterial);
+        }
+        
+        static void CreateInteriorDetails(Material woodMaterial, Material metalMaterial)
+        {
+            // Загружаем дополнительные материалы
+            Material blueprintMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Garage/BlueprintMaterial.mat");
+            Material oilStainMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Garage/OilStainMaterial.mat");
+            Material toolMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/Garage/ToolMaterial.mat");
+            
+            // Полка с инструментами
+            GameObject toolShelf = GarageObjectCreator.CreateToolShelf(new Vector3(-6f, 0f, -5f), woodMaterial);
+            toolShelf.name = "ToolShelf";
+            
+            // Чертежи на стене
+            GameObject blueprintWall = GarageObjectCreator.CreateBlueprintWall(new Vector3(-9f, 0f, 0f), blueprintMaterial);
+            blueprintWall.name = "BlueprintWall";
+            
+            // Инструменты на верстаке
+            GameObject workbenchTools = GarageObjectCreator.CreateWorkbenchTools(new Vector3(-3f, 0f, -2f), toolMaterial);
+            workbenchTools.name = "WorkbenchTools";
+            
+            // Детали на полу
+            GameObject floorDetails = GarageObjectCreator.CreateFloorDetails(new Vector3(0f, 0f, 0f), oilStainMaterial);
+            floorDetails.name = "FloorDetails";
+            
+            // Светильник
+            GameObject lightFixture = GarageObjectCreator.CreateLightFixture(new Vector3(0f, 0f, 0f), metalMaterial);
+            lightFixture.name = "LightFixture";
         }
         
         static void CreateUI()

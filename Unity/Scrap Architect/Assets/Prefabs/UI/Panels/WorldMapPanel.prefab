@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7154808583520524940}
   - component: {fileID: 7603782782663846123}
   - component: {fileID: 8441414907753171113}
+  - component: {fileID: 3832335683485977042}
   m_Layer: 0
   m_Name: WorldMapPanel
   m_TagString: Untagged
@@ -244,3 +245,15 @@ MonoBehaviour:
   maxZoom: 3
   defaultZoom: 1
   zoomSpeed: 0.1
+--- !u!225 &3832335683485977042
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409765012253678409}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

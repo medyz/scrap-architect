@@ -181,5 +181,124 @@ namespace ScrapArchitect.Garage
             
             return garage;
         }
+        
+        // Новые методы для деталей интерьера
+        
+        public static GameObject CreateToolShelf(Vector3 position, Material material)
+        {
+            GameObject shelf = new GameObject("ToolShelf");
+            shelf.transform.position = position;
+            
+            // Основная полка
+            GameObject mainShelf = CreateLowPolyCube("MainShelf", position + Vector3.up * 1.8f, new Vector3(2f, 0.1f, 0.6f), material);
+            mainShelf.transform.SetParent(shelf.transform);
+            
+            // Подставки для полки
+            GameObject support1 = CreateLowPolyCube("Support1", position + new Vector3(-0.8f, 0.9f, 0), new Vector3(0.1f, 1.8f, 0.1f), material);
+            support1.transform.SetParent(shelf.transform);
+            
+            GameObject support2 = CreateLowPolyCube("Support2", position + new Vector3(0.8f, 0.9f, 0), new Vector3(0.1f, 1.8f, 0.1f), material);
+            support2.transform.SetParent(shelf.transform);
+            
+            // Инструменты на полке
+            GameObject hammer = CreateLowPolyCube("Hammer", position + Vector3.up * 1.85f + Vector3.right * 0.3f, new Vector3(0.3f, 0.05f, 0.1f), material);
+            hammer.transform.SetParent(shelf.transform);
+            
+            GameObject wrench = CreateLowPolyCube("Wrench", position + Vector3.up * 1.85f + Vector3.left * 0.3f, new Vector3(0.4f, 0.05f, 0.1f), material);
+            wrench.transform.SetParent(shelf.transform);
+            
+            GameObject screwdriver = CreateLowPolyCube("Screwdriver", position + Vector3.up * 1.85f + Vector3.right * 0.8f, new Vector3(0.2f, 0.05f, 0.05f), material);
+            screwdriver.transform.SetParent(shelf.transform);
+            
+            return shelf;
+        }
+        
+        public static GameObject CreateBlueprintWall(Vector3 position, Material material)
+        {
+            GameObject blueprintWall = new GameObject("BlueprintWall");
+            blueprintWall.transform.position = position;
+            
+            // Чертежи на стене
+            GameObject blueprint1 = CreateLowPolyCube("Blueprint1", position + Vector3.up * 2f + Vector3.right * 0.5f, new Vector3(0.8f, 0.6f, 0.02f), material);
+            blueprint1.transform.SetParent(blueprintWall.transform);
+            
+            GameObject blueprint2 = CreateLowPolyCube("Blueprint2", position + Vector3.up * 2f + Vector3.left * 0.5f, new Vector3(0.6f, 0.8f, 0.02f), material);
+            blueprint2.transform.SetParent(blueprintWall.transform);
+            
+            // Булавки для чертежей
+            GameObject pin1 = CreateLowPolyCube("Pin1", position + Vector3.up * 2.3f + Vector3.right * 0.5f + Vector3.forward * 0.01f, new Vector3(0.02f, 0.02f, 0.02f), material);
+            pin1.transform.SetParent(blueprintWall.transform);
+            
+            GameObject pin2 = CreateLowPolyCube("Pin2", position + Vector3.up * 2.4f + Vector3.left * 0.5f + Vector3.forward * 0.01f, new Vector3(0.02f, 0.02f, 0.02f), material);
+            pin2.transform.SetParent(blueprintWall.transform);
+            
+            return blueprintWall;
+        }
+        
+        public static GameObject CreateWorkbenchTools(Vector3 position, Material material)
+        {
+            GameObject tools = new GameObject("WorkbenchTools");
+            tools.transform.position = position;
+            
+            // Молоток на верстаке
+            GameObject hammer = CreateLowPolyCube("Hammer", position + Vector3.up * 0.95f + Vector3.right * 0.3f, new Vector3(0.2f, 0.05f, 0.05f), material);
+            hammer.transform.SetParent(tools.transform);
+            
+            // Отвертка
+            GameObject screwdriver = CreateLowPolyCube("Screwdriver", position + Vector3.up * 0.95f + Vector3.left * 0.2f, new Vector3(0.15f, 0.03f, 0.03f), material);
+            screwdriver.transform.SetParent(tools.transform);
+            
+            // Гаечный ключ
+            GameObject wrench = CreateLowPolyCube("Wrench", position + Vector3.up * 0.95f + Vector3.right * 0.6f, new Vector3(0.25f, 0.04f, 0.04f), material);
+            wrench.transform.SetParent(tools.transform);
+            
+            // Болты и гайки
+            GameObject bolts = CreateLowPolyCube("Bolts", position + Vector3.up * 0.95f + Vector3.left * 0.5f, new Vector3(0.1f, 0.02f, 0.1f), material);
+            bolts.transform.SetParent(tools.transform);
+            
+            return tools;
+        }
+        
+        public static GameObject CreateFloorDetails(Vector3 position, Material material)
+        {
+            GameObject floorDetails = new GameObject("FloorDetails");
+            floorDetails.transform.position = position;
+            
+            // Пятна масла
+            GameObject oilStain1 = CreateLowPolyCube("OilStain1", position + Vector3.up * 0.01f + Vector3.right * 2f, new Vector3(0.5f, 0.01f, 0.3f), material);
+            oilStain1.transform.SetParent(floorDetails.transform);
+            
+            GameObject oilStain2 = CreateLowPolyCube("OilStain2", position + Vector3.up * 0.01f + Vector3.left * 1.5f, new Vector3(0.3f, 0.01f, 0.4f), material);
+            oilStain2.transform.SetParent(floorDetails.transform);
+            
+            // Металлические обрезки
+            GameObject scrap1 = CreateLowPolyCube("Scrap1", position + Vector3.up * 0.02f + Vector3.right * 3f, new Vector3(0.2f, 0.02f, 0.1f), material);
+            scrap1.transform.SetParent(floorDetails.transform);
+            
+            GameObject scrap2 = CreateLowPolyCube("Scrap2", position + Vector3.up * 0.02f + Vector3.left * 2.5f, new Vector3(0.15f, 0.02f, 0.15f), material);
+            scrap2.transform.SetParent(floorDetails.transform);
+            
+            return floorDetails;
+        }
+        
+        public static GameObject CreateLightFixture(Vector3 position, Material material)
+        {
+            GameObject lightFixture = new GameObject("LightFixture");
+            lightFixture.transform.position = position;
+            
+            // Основание светильника
+            GameObject baseFixture = CreateLowPolyCube("Base", position + Vector3.up * 3.5f, new Vector3(0.3f, 0.1f, 0.3f), material);
+            baseFixture.transform.SetParent(lightFixture.transform);
+            
+            // Цепь для подвешивания
+            GameObject chain = CreateLowPolyCube("Chain", position + Vector3.up * 3.8f, new Vector3(0.05f, 0.3f, 0.05f), material);
+            chain.transform.SetParent(lightFixture.transform);
+            
+            // Абажур
+            GameObject lampshade = CreateLowPolyCube("Lampshade", position + Vector3.up * 4.1f, new Vector3(0.4f, 0.2f, 0.4f), material);
+            lampshade.transform.SetParent(lightFixture.transform);
+            
+            return lightFixture;
+        }
     }
 }
