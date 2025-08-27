@@ -186,7 +186,7 @@ namespace ScrapArchitect.Garage
             return menuPanel;
         }
         
-        void AddMenuButton(GameObject menuPanel, string text, System.Action onClick)
+                 void AddMenuButton(GameObject menuPanel, string text, Action onClick)
         {
             GameObject buttonObj = new GameObject("Button_" + text.Replace(" ", "_"));
             buttonObj.transform.SetParent(menuPanel.transform.Find("ButtonContainer"), false);
