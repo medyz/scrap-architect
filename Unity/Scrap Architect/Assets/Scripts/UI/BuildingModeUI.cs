@@ -34,7 +34,7 @@ namespace ScrapArchitect.UI
         private BuildingMode buildingMode;
         private List<GameObject> partButtons = new List<GameObject>();
         
-        [System.Serializable]
+        [Serializable]
         public class PartData
         {
             public string partName;
