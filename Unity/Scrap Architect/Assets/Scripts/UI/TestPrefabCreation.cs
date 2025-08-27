@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.IO;
 
 namespace ScrapArchitect.UI
 {
@@ -51,10 +52,10 @@ namespace ScrapArchitect.UI
             string prefabPath = "Assets/Prefabs/UI/Panels/TestPanel.prefab";
             
             // Убеждаемся, что папка существует
-            string directory = System.IO.Path.GetDirectoryName(prefabPath);
-            if (!System.IO.Directory.Exists(directory))
+            string directory = Path.GetDirectoryName(prefabPath);
+            if (!Directory.Exists(directory))
             {
-                System.IO.Directory.CreateDirectory(directory);
+                Directory.CreateDirectory(directory);
             }
             
             // Создаем префаб
