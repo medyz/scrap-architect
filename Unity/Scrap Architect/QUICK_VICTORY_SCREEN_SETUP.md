@@ -7,6 +7,7 @@
 Canvas → Create Empty → "VictoryPanel"
 → Add Component: VictoryScreen
 → Add Component: CanvasGroup
+→ В Inspector подключить CanvasGroup к скрипту
 ```
 
 ### 2. Основные элементы (копируйте структуру)
@@ -63,6 +64,7 @@ VictoryPanel/
 
 ### 4. Подключение к скрипту
 В VictoryScreen подключить все поля в Inspector:
+- **Canvas Group** → CanvasGroup (ВАЖНО!)
 - **Victory Title Text** → VictoryTitleText
 - **Contract Title Text** → ContractTitleText
 - **Completion Time Text** → CompletionTimeText

@@ -16,7 +16,14 @@ VictoryPanel → Add Component → VictoryScreen
 VictoryPanel → Add Component → CanvasGroup
 ```
 
-### 1.3 Настройка RectTransform
+### 1.3 Подключение CanvasGroup
+**ВАЖНО: Подключить CanvasGroup к скрипту**
+1. **Выбрать VictoryPanel** в Hierarchy
+2. **В Inspector найти компонент VictoryScreen**
+3. **Найти поле "Canvas Group"**
+4. **Перетащить CanvasGroup компонент** в это поле
+
+### 1.4 Настройка RectTransform
 - **Anchor**: Stretch (0, 0, 1, 1)
 - **Offset**: Min (0, 0), Max (0, 0)
 

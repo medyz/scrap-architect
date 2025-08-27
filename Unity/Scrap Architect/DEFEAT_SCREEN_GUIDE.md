@@ -9,6 +9,10 @@ DefeatScreen - это экран поражения, который отобра
 1. **Create Empty** → "DefeatPanel"
 2. **Добавить компонент DefeatScreen** (скрипт)
 3. **Добавить CanvasGroup** для анимаций
+4. **ВАЖНО: Подключить CanvasGroup к скрипту**
+   - В Inspector выбрать DefeatPanel
+   - В компоненте DefeatScreen найти поле "Canvas Group"
+   - Перетащить CanvasGroup компонент в это поле
 
 ## Шаг 2: Создание UI элементов
 

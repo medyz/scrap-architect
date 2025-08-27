@@ -7,6 +7,7 @@
 Canvas → Create Empty → "GameplayPanel"
 → Add Component: GameplayUI
 → Add Component: CanvasGroup
+→ В Inspector подключить CanvasGroup к скрипту
 ```
 
 ### 2. Основные элементы (копируйте структуру)
@@ -58,6 +59,7 @@ GameplayPanel/
 
 ### 4. Подключение к скрипту
 В GameplayUI подключить все поля в Inspector:
+- **Canvas Group** → CanvasGroup (ВАЖНО!)
 - **Contract Title Text** → ContractTitleText
 - **Contract Description Text** → ContractDescriptionText
 - **Time Text** → TimeText

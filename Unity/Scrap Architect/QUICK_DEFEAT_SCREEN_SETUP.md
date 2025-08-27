@@ -7,6 +7,7 @@
 Canvas → Create Empty → "DefeatPanel"
 → Add Component: DefeatScreen
 → Add Component: CanvasGroup
+→ В Inspector подключить CanvasGroup к скрипту
 ```
 
 ### 2. Основные элементы (копируйте структуру)
@@ -53,6 +54,7 @@ DefeatPanel/
 
 ### 4. Подключение к скрипту
 В DefeatScreen подключить все поля в Inspector:
+- **Canvas Group** → CanvasGroup (ВАЖНО!)
 - **Defeat Title Text** → DefeatTitleText
 - **Contract Title Text** → ContractTitleText
 - **Failure Reason Text** → FailureReasonText

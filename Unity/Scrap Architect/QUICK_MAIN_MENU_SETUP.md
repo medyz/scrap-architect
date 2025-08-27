@@ -8,6 +8,7 @@ Canvas → Create Empty → "MainMenuPanel"
 → Add Component: MainMenuUI
 → Add Component: CanvasGroup
 → Add Component: Image (для фона)
+→ В Inspector подключить CanvasGroup к скрипту
 ```
 
 ### 2. Основные элементы (копируйте структуру)
@@ -47,6 +48,7 @@ MainMenuPanel/
 
 ### 4. Подключение к скрипту
 В MainMenuUI подключить все поля в Inspector:
+- **Canvas Group** → CanvasGroup (ВАЖНО!)
 - **Game Title Text** → GameTitleText
 - **Version Text** → VersionText
 - **Subtitle Text** → SubtitleText

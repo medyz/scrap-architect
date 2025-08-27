@@ -9,6 +9,10 @@ MainMenuUI - это главное меню игры с анимированны
 1. **Create Empty** → "MainMenuPanel"
 2. **Добавить компонент MainMenuUI** (скрипт)
 3. **Добавить CanvasGroup** для анимаций
+4. **ВАЖНО: Подключить CanvasGroup к скрипту**
+   - В Inspector выбрать MainMenuPanel
+   - В компоненте MainMenuUI найти поле "Canvas Group"
+   - Перетащить CanvasGroup компонент в это поле
 4. **Добавить Image** для фона (если нужен)
 
 ## Шаг 2: Создание UI элементов

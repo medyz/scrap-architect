@@ -91,6 +91,10 @@
 1. **Create Empty** → "MainMenuPanel"
 2. **Добавить компонент MainMenuUI**
 3. **Добавить CanvasGroup** для анимаций
+4. **ВАЖНО: Подключить CanvasGroup к скрипту**
+   - В Inspector выбрать MainMenuPanel
+   - В компоненте MainMenuUI найти поле "Canvas Group"
+   - Перетащить CanvasGroup компонент в это поле
 
 ### Создать дочерние элементы:
 

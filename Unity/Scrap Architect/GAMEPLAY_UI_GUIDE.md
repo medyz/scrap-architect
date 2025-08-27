@@ -9,6 +9,10 @@ GameplayUI - это игровой интерфейс, который отобр
 1. **Create Empty** → "GameplayPanel"
 2. **Добавить компонент GameplayUI** (скрипт)
 3. **Добавить CanvasGroup** для анимаций
+4. **ВАЖНО: Подключить CanvasGroup к скрипту**
+   - В Inspector выбрать GameplayPanel
+   - В компоненте GameplayUI найти поле "Canvas Group"
+   - Перетащить CanvasGroup компонент в это поле
 
 ## Шаг 2: Создание UI элементов
 
