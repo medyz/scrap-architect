@@ -54,6 +54,8 @@ namespace ScrapArchitect.UI
             if (Instance == null)
             {
                 Instance = this;
+                // Перемещаем в корень сцены перед DontDestroyOnLoad
+                transform.SetParent(null);
                 DontDestroyOnLoad(gameObject);
                 InitializeUIManager();
             }
