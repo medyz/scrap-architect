@@ -85,9 +85,15 @@
 
 ## Устранение неполадок
 
+### Проблема: Ошибка компиляции CS0234
+- **Ошибка:** `The type or namespace name 'Type' does not exist in the namespace 'ScrapArchitect.System'`
+- **Решение:** Добавьте `using System;` в начало скрипта
+- **Статус:** ✅ Исправлено
+
 ### Проблема: Префаб не создается
 - Убедитесь, что папка `Assets/Prefabs/UI/Panels/` существует
 - Проверьте, что скрипт не содержит ошибок компиляции
+- Используйте **Scrap Architect** → **Test Create Single Prefab** для тестирования
 
 ### Проблема: Префаб не назначается в UIManager
 - Убедитесь, что префаб содержит правильный скрипт
@@ -105,6 +111,11 @@
 - **UIPrefabChecker.cs** - проверка недостающих префабов
 - **QuickPrefabCreator.cs** - быстрое создание префабов
 - **CreateMissingPrefabs.cs** - альтернативный способ создания
+- **TestPrefabCreation.cs** - тестирование создания префабов
+
+### Тестовые функции:
+- **Scrap Architect** → **Test Create Single Prefab** - создание тестового префаба
+- **Scrap Architect** → **Test Check All Scripts** - проверка всех UI скриптов
 
 ## Контакты
 
