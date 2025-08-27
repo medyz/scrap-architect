@@ -71,6 +71,169 @@ namespace ScrapArchitect.Garage.Editor
             Debug.Log("✅ Исправление завершено! Персонаж должен быть на полу.");
         }
         
+        [MenuItem("Scrap Architect/Garage/ULTIMATE: Force Player Above Ground")]
+        public static void UltimateForcePlayerAboveGround()
+        {
+            Debug.Log("💥 УЛЬТИМАТИВНОЕ ИСПРАВЛЕНИЕ: Принудительное поднятие игрока!");
+            
+            // Находим игрока
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Принудительно устанавливаем игрока высоко над землей
+            player.transform.position = new Vector3(0, 5f, 0);
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+                controller.slopeLimit = 45f;
+                controller.stepOffset = 0.3f;
+                controller.skinWidth = 0.08f;
+                controller.minMoveDistance = 0.001f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+                playerCamera.transform.localRotation = Quaternion.identity;
+            }
+            
+            // Блокируем курсор
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            Debug.Log("✅ Игрок принудительно поднят на высоту 5 метров!");
+            Selection.activeGameObject = player;
+        }
+        
+        [MenuItem("Scrap Architect/Garage/DESTROY and RECREATE Player")]
+        public static void DestroyAndRecreatePlayer()
+        {
+            Debug.Log("🔥 УНИЧТОЖЕНИЕ И ПЕРЕСОЗДАНИЕ ИГРОКА!");
+            
+            // Находим и уничтожаем старого игрока
+            GameObject oldPlayer = GameObject.Find("Player");
+            if (oldPlayer != null)
+            {
+                Debug.Log("🗑️ Уничтожаем старого игрока...");
+                DestroyImmediate(oldPlayer);
+            }
+            
+            // Создаем нового игрока
+            Debug.Log("🔧 Создаем нового игрока...");
+            CreateNewPlayer();
+            
+            Debug.Log("✅ Игрок пересоздан с нуля!");
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Find Garage Structure")]
+        public static void FindGarageStructure()
+        {
+            Debug.Log("🔍 Поиск структуры гаража...");
+            
+            GameObject[] allObjects = FindObjectsOfType<GameObject>();
+            
+            foreach (GameObject obj in allObjects)
+            {
+                string name = obj.name.ToLower();
+                if (name.Contains("garage") || name.Contains("floor") || 
+                    name.Contains("wall") || name.Contains("ceiling") ||
+                    name.Contains("carpet") || name.Contains("ground"))
+                {
+                    Vector3 position = obj.transform.position;
+                    Vector3 scale = obj.transform.localScale;
+                    
+                    Debug.Log($"🏗️ Найден объект: {obj.name}");
+                    Debug.Log($"📍 Позиция: {position}");
+                    Debug.Log($"📏 Размер: {scale}");
+                    
+                    // Выбираем объект в иерархии
+                    Selection.activeGameObject = obj;
+                    break;
+                }
+            }
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Set Player to Garage Roof")]
+        public static void SetPlayerToGarageRoof()
+        {
+            Debug.Log("🏠 Устанавливаем игрока на крышу гаража...");
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Устанавливаем игрока на крышу гаража
+            player.transform.position = new Vector3(0, 8f, 0);
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            }
+            
+            Debug.Log("✅ Игрок установлен на крышу гаража (0, 8, 0)");
+            Selection.activeGameObject = player;
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Teleport Player to Garage Entrance")]
+        public static void TeleportPlayerToGarageEntrance()
+        {
+            Debug.Log("🚪 Телепортация игрока к входу в гараж...");
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Телепортируем игрока к входу в гараж
+            player.transform.position = new Vector3(0, 2f, 10f);
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            }
+            
+            Debug.Log("✅ Игрок телепортирован к входу в гараж (0, 2, 10)");
+            Selection.activeGameObject = player;
+        }
+        
         static GameObject FindGarageFloor()
         {
             // Ищем пол по разным именам
@@ -128,7 +291,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Создаем игрока
             GameObject player = new GameObject("Player");
-            player.transform.position = new Vector3(0, 2f, 0);
+            player.transform.position = new Vector3(0, 5f, 0); // Высоко над землей
             
             // Добавляем CharacterController
             CharacterController controller = player.AddComponent<CharacterController>();
@@ -159,7 +322,7 @@ namespace ScrapArchitect.Garage.Editor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             
-            Debug.Log("✅ Новый игрок создан!");
+            Debug.Log("✅ Новый игрок создан на высоте 5 метров!");
             Selection.activeGameObject = player;
         }
         
