@@ -452,5 +452,168 @@ namespace ScrapArchitect.Garage.Editor
             Debug.Log("✅ Игрок сброшен в безопасную позицию (0, 10, 0)");
             Selection.activeGameObject = player;
         }
+        
+        [MenuItem("Scrap Architect/Garage/Set Player Inside Garage (Correct Height)")]
+        public static void SetPlayerInsideGarageCorrectHeight()
+        {
+            Debug.Log("🏠 Устанавливаем игрока внутри гаража на правильной высоте...");
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Устанавливаем игрока внутри гаража на уровне пола
+            player.transform.position = new Vector3(0, 1f, 0); // 1 метр от пола
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+                controller.slopeLimit = 45f;
+                controller.stepOffset = 0.3f;
+                controller.skinWidth = 0.08f;
+                controller.minMoveDistance = 0.001f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+                playerCamera.transform.localRotation = Quaternion.identity;
+            }
+            
+            // Блокируем курсор
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            Debug.Log("✅ Игрок установлен внутри гаража на высоте 1 метр от пола!");
+            Selection.activeGameObject = player;
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Set Player on Table Level")]
+        public static void SetPlayerOnTableLevel()
+        {
+            Debug.Log("🪑 Устанавливаем игрока на уровне стола...");
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Устанавливаем игрока на уровне стола (примерно 0.8 метра от пола)
+            player.transform.position = new Vector3(0, 0.8f, 0);
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            }
+            
+            Debug.Log("✅ Игрок установлен на уровне стола (0, 0.8, 0)");
+            Selection.activeGameObject = player;
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Set Player Very Low (Ground Level)")]
+        public static void SetPlayerVeryLow()
+        {
+            Debug.Log("🦎 Устанавливаем игрока очень низко (уровень пола)...");
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Устанавливаем игрока очень низко, почти на полу
+            player.transform.position = new Vector3(0, 0.1f, 0);
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            }
+            
+            Debug.Log("✅ Игрок установлен очень низко (0, 0.1, 0) - почти на полу");
+            Selection.activeGameObject = player;
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Find Table and Set Player Near It")]
+        public static void FindTableAndSetPlayerNearIt()
+        {
+            Debug.Log("🔍 Ищем стол и устанавливаем игрока рядом...");
+            
+            // Ищем стол
+            GameObject table = GameObject.Find("Table");
+            if (table == null)
+            {
+                Debug.LogWarning("⚠️ Стол не найден! Используем стандартную позицию.");
+                SetPlayerInsideGarageCorrectHeight();
+                return;
+            }
+            
+            Vector3 tablePosition = table.transform.position;
+            Debug.Log($"✅ Стол найден на позиции: {tablePosition}");
+            
+            // Устанавливаем игрока рядом со столом
+            Vector3 playerPosition = new Vector3(tablePosition.x + 1f, 1f, tablePosition.z);
+            
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            player.transform.position = playerPosition;
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.center = new Vector3(0, 1f, 0);
+                controller.height = 2f;
+                controller.radius = 0.5f;
+            }
+            
+            // Исправляем камеру
+            Camera playerCamera = player.GetComponentInChildren<Camera>();
+            if (playerCamera != null)
+            {
+                playerCamera.transform.localPosition = new Vector3(0, 1.8f, 0);
+            }
+            
+            Debug.Log($"✅ Игрок установлен рядом со столом: {playerPosition}");
+            Selection.activeGameObject = player;
+        }
     }
 }
