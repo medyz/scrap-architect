@@ -5,6 +5,116 @@ namespace ScrapArchitect.Garage.Editor
 {
     public class PlayerDebugger : EditorWindow
     {
+        [MenuItem("Scrap Architect/Garage/Fix Player Gravity (Floating Issue)")]
+        public static void FixPlayerGravity()
+        {
+            Debug.Log("=== ИСПРАВЛЕНИЕ ГРАВИТАЦИИ ПЕРСОНАЖА ===");
+            
+            // Находим игрока
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                Debug.Log("💡 Создаем игрока...");
+                CreatePlayerInCurrentScene();
+                return;
+            }
+            
+            // Исправляем позицию игрока - ставим на пол
+            player.transform.position = new Vector3(0, 0.1f, 0);
+            Debug.Log("✅ Позиция игрока исправлена: (0, 0.1, 0) - почти на полу");
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller == null)
+            {
+                controller = player.AddComponent<CharacterController>();
+            }
+            
+            // Настройки для правильной работы с гравитацией
+            controller.height = 2f;
+            controller.radius = 0.5f;
+            controller.center = new Vector3(0, 1f, 0); // Центр на уровне груди
+            controller.slopeLimit = 45f;
+            controller.stepOffset = 0.3f;
+            controller.skinWidth = 0.08f;
+            controller.minMoveDistance = 0.001f;
+            
+            Debug.Log("✅ CharacterController исправлен:");
+            Debug.Log($"   - Height: {controller.height}");
+            Debug.Log($"   - Radius: {controller.radius}");
+            Debug.Log($"   - Center: {controller.center}");
+            
+            // Исправляем камеру
+            Camera camera = player.GetComponentInChildren<Camera>();
+            if (camera != null)
+            {
+                camera.transform.localPosition = new Vector3(0, 1.8f, 0);
+                camera.transform.localRotation = Quaternion.identity;
+                Debug.Log("✅ Позиция камеры исправлена: (0, 1.8, 0)");
+            }
+            
+            // Проверяем GarageManager
+            GarageManager garageManager = player.GetComponent<GarageManager>();
+            if (garageManager != null)
+            {
+                garageManager.playerCamera = camera;
+                Debug.Log("✅ GarageManager подключен к камере");
+            }
+            
+            // Блокируем курсор
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            Debug.Log("=== ИСПРАВЛЕНИЕ ЗАВЕРШЕНО ===");
+            Debug.Log("🎮 Теперь персонаж должен стоять на полу!");
+        }
+        
+        [MenuItem("Scrap Architect/Garage/Force Player to Ground")]
+        public static void ForcePlayerToGround()
+        {
+            Debug.Log("=== ПРИНУДИТЕЛЬНОЕ ОПУСКАНИЕ НА ПОЛ ===");
+            
+            // Находим игрока
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                return;
+            }
+            
+            // Находим пол
+            GameObject floor = GameObject.Find("Floor");
+            if (floor == null)
+            {
+                floor = GameObject.Find("Carpet");
+            }
+            
+            if (floor != null)
+            {
+                // Получаем позицию пола
+                Vector3 floorPosition = floor.transform.position;
+                Vector3 floorSize = floor.GetComponent<Renderer>()?.bounds.size ?? Vector3.one;
+                
+                // Устанавливаем игрока точно на пол
+                Vector3 newPlayerPosition = new Vector3(0, floorPosition.y + floorSize.y/2 + 1f, 0);
+                player.transform.position = newPlayerPosition;
+                
+                Debug.Log($"✅ Игрок опущен на пол:");
+                Debug.Log($"   - Позиция пола: {floorPosition}");
+                Debug.Log($"   - Размер пола: {floorSize}");
+                Debug.Log($"   - Новая позиция игрока: {newPlayerPosition}");
+            }
+            else
+            {
+                // Если пол не найден, ставим на минимальную высоту
+                player.transform.position = new Vector3(0, 0.1f, 0);
+                Debug.Log("⚠️ Пол не найден, игрок поставлен на минимальную высоту");
+            }
+            
+            Debug.Log("=== ОПУСКАНИЕ ЗАВЕРШЕНО ===");
+        }
+        
         [MenuItem("Scrap Architect/Garage/Fix Player Position (Walking on Ceiling)")]
         public static void FixPlayerPosition()
         {
@@ -85,7 +195,7 @@ namespace ScrapArchitect.Garage.Editor
             
             // Создаем игрока
             GameObject player = new GameObject("Player");
-            player.transform.position = new Vector3(0, 1f, 0);
+            player.transform.position = new Vector3(0, 0.1f, 0); // Почти на полу
             
             // Добавляем CharacterController с правильными настройками
             CharacterController controller = player.AddComponent<CharacterController>();

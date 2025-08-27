@@ -156,12 +156,25 @@ namespace ScrapArchitect.Garage
             float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
             
             Vector3 movement = transform.right * horizontal + transform.forward * vertical;
+            
+            // Добавляем гравитацию
+            if (characterController.isGrounded)
+            {
+                // Если на земле, применяем гравитацию для прижатия к полу
+                movement.y = -9.81f * Time.deltaTime;
+            }
+            else
+            {
+                // Если в воздухе, применяем гравитацию для падения
+                movement.y -= 9.81f * Time.deltaTime;
+            }
+            
             characterController.Move(movement * speed * Time.deltaTime);
             
             // Debug movement
             if (horizontal != 0 || vertical != 0)
             {
-                Debug.Log($"Движение: H={horizontal}, V={vertical}, Speed={speed}");
+                Debug.Log($"Движение: H={horizontal}, V={vertical}, Speed={speed}, Grounded={characterController.isGrounded}");
             }
         }
         
