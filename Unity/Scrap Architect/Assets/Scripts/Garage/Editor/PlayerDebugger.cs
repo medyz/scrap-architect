@@ -5,6 +5,71 @@ namespace ScrapArchitect.Garage.Editor
 {
     public class PlayerDebugger : EditorWindow
     {
+        [MenuItem("Scrap Architect/Garage/Fix Player Position (Walking on Ceiling)")]
+        public static void FixPlayerPosition()
+        {
+            Debug.Log("=== ИСПРАВЛЕНИЕ ПОЗИЦИИ ПЕРСОНАЖА ===");
+            
+            // Находим игрока
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.LogError("❌ Игрок не найден!");
+                Debug.Log("💡 Создаем игрока...");
+                CreatePlayerInCurrentScene();
+                return;
+            }
+            
+            // Исправляем позицию игрока
+            player.transform.position = new Vector3(0, 1f, 0);
+            Debug.Log("✅ Позиция игрока исправлена: (0, 1, 0)");
+            
+            // Исправляем CharacterController
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller == null)
+            {
+                controller = player.AddComponent<CharacterController>();
+            }
+            
+            // Правильные настройки для ходьбы по полу
+            controller.height = 2f;
+            controller.radius = 0.5f;
+            controller.center = new Vector3(0, 1f, 0); // Центр на уровне груди
+            controller.slopeLimit = 45f;
+            controller.stepOffset = 0.3f;
+            controller.skinWidth = 0.08f;
+            controller.minMoveDistance = 0.001f;
+            
+            Debug.Log("✅ CharacterController исправлен:");
+            Debug.Log($"   - Height: {controller.height}");
+            Debug.Log($"   - Radius: {controller.radius}");
+            Debug.Log($"   - Center: {controller.center}");
+            
+            // Исправляем камеру
+            Camera camera = player.GetComponentInChildren<Camera>();
+            if (camera != null)
+            {
+                camera.transform.localPosition = new Vector3(0, 1.8f, 0);
+                camera.transform.localRotation = Quaternion.identity;
+                Debug.Log("✅ Позиция камеры исправлена: (0, 1.8, 0)");
+            }
+            
+            // Проверяем GarageManager
+            GarageManager garageManager = player.GetComponent<GarageManager>();
+            if (garageManager != null)
+            {
+                garageManager.playerCamera = camera;
+                Debug.Log("✅ GarageManager подключен к камере");
+            }
+            
+            // Блокируем курсор
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            
+            Debug.Log("=== ИСПРАВЛЕНИЕ ЗАВЕРШЕНО ===");
+            Debug.Log("🎮 Теперь персонаж должен ходить по полу!");
+        }
+        
         [MenuItem("Scrap Architect/Garage/Create Player in Current Scene")]
         public static void CreatePlayerInCurrentScene()
         {
@@ -22,11 +87,15 @@ namespace ScrapArchitect.Garage.Editor
             GameObject player = new GameObject("Player");
             player.transform.position = new Vector3(0, 1f, 0);
             
-            // Добавляем CharacterController
+            // Добавляем CharacterController с правильными настройками
             CharacterController controller = player.AddComponent<CharacterController>();
             controller.height = 2f;
             controller.radius = 0.5f;
-            controller.center = Vector3.zero;
+            controller.center = new Vector3(0, 1f, 0); // Центр на уровне груди
+            controller.slopeLimit = 45f;
+            controller.stepOffset = 0.3f;
+            controller.skinWidth = 0.08f;
+            controller.minMoveDistance = 0.001f;
             
             // Добавляем камеру
             GameObject camera = new GameObject("PlayerCamera");
@@ -55,7 +124,7 @@ namespace ScrapArchitect.Garage.Editor
             Selection.activeGameObject = player;
             
             Debug.Log("✅ Игрок успешно создан в текущей сцене!");
-            Debug.Log("✅ CharacterController добавлен");
+            Debug.Log("✅ CharacterController добавлен с правильными настройками");
             Debug.Log("✅ Камера создана и настроена");
             Debug.Log("✅ GarageManager добавлен");
             Debug.Log("✅ Курсор заблокирован");
@@ -77,6 +146,7 @@ namespace ScrapArchitect.Garage.Editor
             }
             
             Debug.Log($"✅ Игрок найден: {player.name}");
+            Debug.Log($"✅ Позиция игрока: {player.transform.position}");
             
             // Проверяем CharacterController
             CharacterController controller = player.GetComponent<CharacterController>();
@@ -88,7 +158,11 @@ namespace ScrapArchitect.Garage.Editor
             }
             else
             {
-                Debug.Log($"✅ CharacterController найден: Height={controller.height}, Radius={controller.radius}");
+                Debug.Log($"✅ CharacterController найден:");
+                Debug.Log($"   - Height: {controller.height}");
+                Debug.Log($"   - Radius: {controller.radius}");
+                Debug.Log($"   - Center: {controller.center}");
+                Debug.Log($"   - Position: {controller.transform.position}");
             }
             
             // Проверяем GarageManager
@@ -114,6 +188,7 @@ namespace ScrapArchitect.Garage.Editor
             else
             {
                 Debug.Log($"✅ Камера найдена: {camera.name}");
+                Debug.Log($"✅ Позиция камеры: {camera.transform.localPosition}");
                 garageManager.playerCamera = camera;
             }
             
@@ -147,7 +222,7 @@ namespace ScrapArchitect.Garage.Editor
             }
             controller.height = 2f;
             controller.radius = 0.5f;
-            controller.center = Vector3.zero;
+            controller.center = new Vector3(0, 1f, 0);
             Debug.Log("✅ CharacterController исправлен");
             
             // Исправляем GarageManager
