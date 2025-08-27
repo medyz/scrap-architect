@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using ScrapArchitect.Gameplay;
+using ScrapArchitect.UI;
 
 namespace ScrapArchitect.UI
 {
@@ -23,6 +24,9 @@ namespace ScrapArchitect.UI
         public SettingsUI settingsPanel;
         public PauseMenu pausePanel;
         public LoadingScreen loadingPanel;
+        
+        [Header("Game Modes")]
+        public BuildingMode buildingMode;
         
         [Header("Audio")]
         public AudioClip buttonClickSound;
@@ -188,6 +192,27 @@ namespace ScrapArchitect.UI
         }
         
         /// <summary>
+        /// Показать режим строительства
+        /// </summary>
+        public void ShowBuildingMode()
+        {
+            // Скрываем все UI панели
+            HideAllPanels();
+            
+            // Активируем режим строительства
+            if (buildingMode != null)
+            {
+                buildingMode.gameObject.SetActive(true);
+                currentActivePanel = null; // Режим строительства не является UI панелью
+            }
+            else
+            {
+                Debug.LogWarning("BuildingMode не найден! Переходим к выбору контрактов.");
+                ShowContractSelection();
+            }
+        }
+        
+        /// <summary>
         /// Показать панель
         /// </summary>
         public void ShowPanel(UIBase panel)
@@ -345,7 +370,8 @@ namespace ScrapArchitect.UI
         private void LoadGame()
         {
             HideLoadingScreen();
-            ShowContractSelection();
+            // Переходим к режиму строительства вместо выбора контрактов
+            ShowBuildingMode();
         }
         
         /// <summary>
